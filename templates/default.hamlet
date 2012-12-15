@@ -1,0 +1,31 @@
+!!!
+<html>
+    <head>
+        <meta charset="utf-8">
+        <title>Lambda Fairy &ndash; #{title}
+        <link rel="stylesheet" href="/styles/styles.css">
+        <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic">
+    <body>
+        <div #topbit>
+            <header>
+                <h1>
+                    <a href="/">Lambda Fairy
+
+            <nav>
+                <ul>
+                    <li>
+                        <a href="/" .current>Home
+                    <li>
+                        <a href="/cv">CV
+                    <li>
+                        <a href="/projects">Projects
+                    <li>
+                        <a href="/blog">Blog
+
+        <div #main>
+            <h1>#{title}
+
+            #{body}
+
+        <footer>
+            <p>&copy; and stuff goes here. Proudly generated with <a href="http://www.jaspervdj.be/hakyll/">Hakyll</a>.

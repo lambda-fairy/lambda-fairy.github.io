@@ -1,0 +1,141 @@
+$light: #ad7fa8
+$medium: #75507b
+$dark: #5c3566
+$active: #3465a4
+
+$primary: lighten($dark, 55%)
+$secondary: darken($light, 5%)
+
+// Ripped from <http://compass-style.org/reference/compass/utilities/general/clearfix/>
+=pie-clearfix
+  &:after
+    content: ""
+    display: table
+    clear: both
+
+html
+  min-height: 100%
+  background: $dark
+
+body
+  font: 100%/150% Cabin, "DejaVu Sans", "Bitstream Vera Sans", Verdana
+
+body > *
+  max-width: 48em
+  margin: -1px auto  // -1px patches up rounding errors
+  padding: 0 1em
+
+h1, h2, h3, h4, h5, h6
+  text-transform: lowercase
+
+a[href]
+  text-decoration: none
+
+#topbit
+  +pie-clearfix
+  margin-top: 5em
+
+header
+  float: left
+
+  h1
+    margin: 0
+    font-size: 420%
+    line-height: 42%
+
+    a[href]
+      position: relative
+      z-index: 11  // under #main
+      color: white
+
+      &:hover, &:active
+        // When hovering over the header, make it pop up
+        top: -0.13em
+
+nav
+  float: right
+  font-size: 75%
+
+  ul
+    margin: 0
+    padding: -0.5em
+
+    li
+      float: left
+      list-style: none
+
+      a[href]
+        display: block
+        margin: 0 2px
+        padding: 2px 8px
+        color: $light
+        border: 1px solid $dark
+        border-bottom-width: 0
+        text-transform: lowercase
+
+        &:hover, &:active, &.current
+          color: white
+          border-color: white
+          background: $dark
+
+        &.current
+          position: relative
+          z-index: 42
+
+#main, footer
+  a[href]
+    color: $dark
+    border-bottom: 1px dashed $dark
+
+    &:visited
+      color: $medium
+      border-bottom-color: $medium
+
+    &:hover
+      background-color: $dark
+      border-bottom-style: none
+      color: white
+
+    &:active
+      background-color: $active
+      border-bottom-style: none
+      color: white
+
+#main
+  position: relative
+  z-index: 23  // above the header
+  background: $primary
+  border: 1px solid white
+
+  h1
+    margin: 0 -0.5em 0
+    padding: 0 0.5em 0
+    font-size: 200%
+    line-height: 75%
+    border-top: 4px solid $dark
+
+  h2
+    margin: 1.5em -0.6em 0
+    padding: 0 0.6em 0
+    font-size: 175%
+    line-height: 75%
+    border-top: 2px solid $dark
+
+  h3
+    margin: 1em 0 -0.4em
+    font-size: 125%
+    font-weight: normal
+
+  blockquote
+    border-left: 5px solid $light
+    margin-left: 1em
+    padding-left: 1em
+
+footer
+  background: $secondary
+  border: 1px solid $secondary
+  color: $dark
+
+  p
+    margin: 0.1em 0
+    font-size: 75%
