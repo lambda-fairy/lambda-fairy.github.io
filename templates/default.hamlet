@@ -28,4 +28,4 @@
             #{body}
 
         <footer>
-            <p>&copy; and stuff goes here. Proudly generated with <a href="http://www.jaspervdj.be/hakyll/">Hakyll</a>.
+            <p>&copy; 2012 Chris Wong. <a href="http://creativecommons.org/licenses/by-sa/3.0/">Some rights reserved</a>. Proudly generated with <a href="http://www.jaspervdj.be/hakyll/">Hakyll</a>.
