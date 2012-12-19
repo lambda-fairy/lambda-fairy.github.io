@@ -1,0 +1,115 @@
+---
+title: Curriculum Vitae
+---
+
+Name
+  : Chris Wong
+Location
+  : Christchurch, New Zealand
+Email
+  : *lambda* dot *fairy* at *gmail* dot *com*
+Website
+  : <http://lfairy.github.com/>
+Favorite animal
+  : Ducks
+
+
+Education
+=========
+
+* **NZOI computer programming camp** at Auckland; 2010, 2012, 2013.
+* **Computer Science** at the **University of Canterbury**; 2012--present.
+    + Entered as part of a [secondary school program][STAR].
+* **NCEA Level 1 with Excellence**, Burnside High School.
+
+[STAR]: http://www.canterbury.ac.nz/aqua/star/
+
+
+Achievements
+============
+
+* First Place in the 2012 New Zealand Programming Competition.
+
+
+Highlights
+==========
+
+* Perfectionist approach to design, both in interface and code.
+* Conveys complex concepts with clarity, conciseness and cadence.
+* Proficient in C, C++, Haskell, C#, Java, Python, Ruby, Scala, PHP.
+* Configuring GNU/Linux systems: writing shell scripts, package management (APT), web servers (Apache and lighttpd), Vim.
+* Thorough understanding of security issues and how to prevent them.
+    + I once found out my friend's database password through a [shared hosting exploit][confused deputy]. He learned about the importance of proper sandboxing, and I learned about the importance of keeping my mouth shut.
+* Web design and development: HTML, CSS, JavaScript
+
+[confused deputy]: https://mattmccutchen.net/shared-hosting/index.html
+
+
+Projects & Contributions
+========================
+
+As a hobbyist programmer, I spend my free time making cool things. All my projects are on [GitHub][]; below are a few of the more relevant ones:
+
+[GitHub]: https://github.com/lfairy
+
+
+pycode
+------
+
+*The automatic marking system behind the University of Canterbury computer science course*
+
+I helped finish the implementation of the mock file object ([#3][]). I like to joke that I never got 100% in the quizzes -- not because I did not understand the material, but because I kept triggering bugs in pycode.
+
+[#3]: https://github.com/trampgeek/pycode/pull/3
+
+
+http-conduit
+------------
+
+*A HTTP client library, written in the Haskell programming language*
+
+I refactored the redirect handling code to handle relative URLs ([#30][]). The resulting code was shorter, better leveraged existing libraries and was easier to read.
+
+[#30]: https://github.com/snoyberg/http-conduit/pull/30
+
+The maintainer of the library, Michael Snoyman, writes:
+
+> I like the approach. A few people in the past have brought up using Network.URI for parsing, but I was hesitant to do so. Now that I've seen your code, I see that they were right. Well done :)
+
+
+Treasure Chest
+--------------
+
+*An obsessively designed implementation of a board game*
+
+I wrote this for an assignment at the University of Canterbury. It was probably above what they were expecting at that level, but was fun to write nonetheless.
+
+The experience I had with previous projects really came through -- I was able to harness advanced functional programming techniques such as [trampolining][], [memoizing combinators][] and [currying][] to write code that is elegant and readable.
+
+[trampolining]: https://github.com/lfairy/treasure-chest/blob/master/treasurelib/gui/__init__.py#L127
+[memoizing combinators]: https://github.com/lfairy/treasure-chest/blob/master/treasurelib/gui/resources.py#L18
+[currying]: https://github.com/lfairy/treasure-chest/blob/master/treasurelib/model.py#L57
+
+
+honk
+----
+
+*PC speaker interface for Haskell*
+
+You remember that annoying *beep* sound your ol' beige used to make? Funnily enough, modern computers still have the venerable device, and even more funnily enough, you can control it through software! Cool, huh?
+
+I created this as a toy project, just to get some experience using Haskell with C. Writing Linux and FreeBSD versions of this library taught me how to use ioctl and the POSIX API.
+
+
+Referees
+========
+
+John Creighton
+--------------
+
+Head of Department Digital Technologies, Burnside High School
+
+Phone
+  : +64 3 358 8383
+Email
+  : *cz* at *burnside* dot *school* dot *nz*
