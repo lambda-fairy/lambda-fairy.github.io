@@ -21,11 +21,11 @@ body
   font: 100%/150% Cabin, "DejaVu Sans", "Bitstream Vera Sans", Verdana
 
 body > *
-  max-width: 48em
+  max-width: 47em
   margin: -1px auto  // -1px patches up rounding errors
-  padding: 0 1em
+  padding: 0 1.5em
 
-h1, h2, h3, h4, h5, h6
+h1, h2
   text-transform: lowercase
 
 a[href]
@@ -85,45 +85,42 @@ nav
 #main, footer
   a[href]
     color: $dark
-    border-bottom: 1px dashed $dark
 
     &:visited
       color: $medium
-      border-bottom-color: $medium
 
     &:hover
       background-color: $dark
-      border-bottom-style: none
       color: white
 
     &:active
       background-color: $active
-      border-bottom-style: none
       color: white
 
 #main
   position: relative
   z-index: 23  // above the header
   min-height: 20em
+  padding-bottom: 2em
   background: $primary
   border: 1px solid white
 
   h1
-    margin: 0 -0.5em 0
-    padding: 0 0.5em 0
-    font-size: 200%
+    margin: 0 -0.67em 0
+    padding: 0 0.67em 0
+    font-size: 225%
     line-height: 75%
     border-top: 4px solid $dark
 
   h2
-    margin: 1.5em -0.6em 0
-    padding: 0 0.6em 0
+    margin: 2.25em -0.86em 0
+    padding: 0 0.86em 0
     font-size: 175%
     line-height: 75%
     border-top: 2px solid $dark
 
   h3
-    margin: 1em 0 -0.4em
+    margin: 1.75em 0 -0.4em
     font-size: 125%
     font-weight: normal
 
@@ -131,6 +128,10 @@ nav
     border-left: 5px solid $light
     margin-left: 1em
     padding-left: 1em
+
+  dl
+    dt
+      font-style: italic
 
 footer
   background: $secondary

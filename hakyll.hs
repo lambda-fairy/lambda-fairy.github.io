@@ -32,6 +32,8 @@ main = (getConfig >>=) . flip hakyllWith $ do
     -- Read in templates
     match "templates/*" $ compile templateCompiler
 
+    -- TODO: Add updating navigation bar: see .current in styles.sass
+
     -- Static pages
     forM_ pages $ \p ->
         match p $ do
