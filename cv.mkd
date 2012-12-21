@@ -48,7 +48,7 @@ Highlights
 Projects & Contributions
 ========================
 
-As a hobbyist programmer, I spend my free time making cool things. All my projects are on [GitHub][]; below are a few of the more relevant ones:
+As a hobbyist programmer, I spend my free time making cool things and contributing to the open source community. All my work is on [GitHub][] and my [code](/code) page; below are a few of the more relevant ones:
 
 [GitHub]: https://github.com/lfairy
 
@@ -91,14 +91,16 @@ The experience I had with previous projects really came through -- I was able to
 [currying]: https://github.com/lfairy/treasure-chest/blob/master/treasurelib/model.py#L57
 
 
-honk
-----
+[honk][]
+--------
 
 *PC speaker interface for Haskell*
 
-You remember that annoying *beep* sound your ol' beige used to make? Funnily enough, modern computers still have the venerable device, and even more funnily enough, you can control it through software! Cool, huh?
+You know that annoying "beep" old computers make when they boot up? Funnily enough, modern computers still have the venerable *PC speaker*, and even more funnily enough, you can control it through software! Cool, huh?
 
 I created this as a toy project, just to get some experience using Haskell with C. Writing Linux and FreeBSD versions of this library taught me how to use ioctl and the POSIX API.
+
+[honk]: /honk
 
 
 Referees

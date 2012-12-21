@@ -49,9 +49,8 @@ main = (getConfig >>=) . flip hakyllWith $ do
     pages :: [Pattern a]
     pages =
         [ "index.mkd"
-        , "about.mkd"
-        , "contact.mkd"
         , "cv.mkd"
+        , "code.mkd"
         ]
 
     defaultCompiler = pageCompilerWithTransformer (headerShift 1)
