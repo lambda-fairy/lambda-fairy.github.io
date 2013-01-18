@@ -45,10 +45,10 @@ defaultTemplate = BlazeTemplate $ \metadata ->
 
 defaultLinks :: [Link]
 defaultLinks
-    = Link "/index.html" "Home"
-    : Link "/cv" "CV"
-    : Link "/code" "Code"
-    : Link "/blog" "Blog"
+    = link' "/index.html" "/" "Home"
+    : link "/cv" "CV"
+    : link "/code" "Code"
+    : link "/blog" "Blog"
     : []
 
 stylesheet :: String -> Html

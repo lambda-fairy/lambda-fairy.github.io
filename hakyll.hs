@@ -34,13 +34,15 @@ main = (getConfig >>=) . flip hakyllWith $ do
     -- Static pages
     forM_ pages $ \p ->
         match p $ do
-            route   $ prettyUrlRoute
-            compile $ defaultCompiler >>= relativizeUrls
+            route   prettyUrlRoute
+            compile defaultCompiler
 
-    -- Don't relativize the 404 page
+{-
+    -- 404 page
     match "404.html" $ do
         route   idRoute
         compile defaultCompiler
+-}
 
   where
     pages :: [Pattern]
