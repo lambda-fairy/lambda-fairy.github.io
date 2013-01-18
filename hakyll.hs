@@ -11,6 +11,8 @@ import Hakyll
 import Text.Pandoc.Definition (Pandoc())
 import Text.Pandoc.Shared (headerShift)
 
+import Templates.Default
+
 main :: IO ()
 main = (getConfig >>=) . flip hakyllWith $ do
     match "images/*" $ do
@@ -26,19 +28,14 @@ main = (getConfig >>=) . flip hakyllWith $ do
     match "styles/*.sass" $ do
         route   $ setExtension ".css"
         compile $ getResourceString
-                    >>> unixFilter "sass" ["-s"]
-                    >>^ compressCss
-
-    -- Read in templates
-    match "templates/*" $ compile templateCompiler
-
-    -- TODO: Add updating navigation bar: see .current in styles.sass
+                    >>= withItemBody (unixFilter "sass" ["-s"])
+                    >>= return . fmap compressCss
 
     -- Static pages
     forM_ pages $ \p ->
         match p $ do
             route   $ prettyUrlRoute
-            compile $ defaultCompiler >>> relativizeUrlsCompiler
+            compile $ defaultCompiler >>= relativizeUrls
 
     -- Don't relativize the 404 page
     match "404.html" $ do
@@ -46,21 +43,22 @@ main = (getConfig >>=) . flip hakyllWith $ do
         compile defaultCompiler
 
   where
-    pages :: [Pattern a]
+    pages :: [Pattern]
     pages =
         [ "index.mkd"
         , "cv.mkd"
         , "code.mkd"
         ]
 
-    defaultCompiler = pageCompilerWithTransformer (headerShift 1)
-        >>> applyTemplateCompiler "templates/default.hamlet"
+    defaultCompiler
+        = pandocCompilerWith' (headerShift 1)
+            >>= applyBlazeTemplate defaultTemplate defaultContext
 
-getConfig :: IO HakyllConfiguration
+getConfig :: IO Configuration
 getConfig = do
     homeDirectory <- fromMaybe (error "$HOME not defined") . lookup "HOME"
                     <$> getEnvironment
-    return defaultHakyllConfiguration
+    return defaultConfiguration
         { destinationDirectory = "../master"
         , storeDirectory = homeDirectory </> ".cache/hakyll"
         }
@@ -78,6 +76,6 @@ prettyUrlRoute = customRoute $ prettify . toFilePath
 
     indexSynonyms = ["index", "default"]
 
-pageCompilerWithTransformer :: (Pandoc -> Pandoc) -> Compiler Resource (Page String)
-pageCompilerWithTransformer
-    = pageCompilerWithPandoc defaultHakyllParserState defaultHakyllWriterOptions
+pandocCompilerWith' :: (Pandoc -> Pandoc) -> Compiler (Item String)
+pandocCompilerWith'
+    = pandocCompilerWithTransform defaultHakyllParserState defaultHakyllWriterOptions
