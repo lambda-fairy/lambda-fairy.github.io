@@ -1,5 +1,6 @@
 ---
 title: Home
+home: true
 ---
 
 Hello!

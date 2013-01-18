@@ -14,13 +14,15 @@ import Templates
 
 defaultTemplate :: BlazeTemplate
 defaultTemplate = BlazeTemplate $ \metadata ->
-    page <$> metadata "title" <*> metadata "body" <*> metadata "url"
+    page <$> (metadata "home" <|> pure "false") <*> metadata "title" <*> metadata "body" <*> metadata "url"
   where
-    page title body url = H.docTypeHtml $ do
+    page home title body url = H.docTypeHtml $ do
 
         H.head $ do
             H.meta ! A.charset "utf-8"
-            H.title $ toHtml title
+            H.title $ if home == "true"
+                        then "Lambda Fairy"
+                        else toHtml title
             stylesheet "/styles/styles.css"
             stylesheet "http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic"
 
