@@ -41,12 +41,12 @@ header
   h1
     margin: 0
     font-size: 420%
-    line-height: 42%
 
     a[href]
       position: relative
-      z-index: 11  // under #main
+      z-index: 11  // Under #main
       color: white
+      line-height: 42%
 
       &:hover, &:active
         // When hovering over the header, make it pop up
@@ -55,6 +55,10 @@ header
 nav
   float: right
   font-size: 75%
+  position: relative
+  // If header and nav collide, nav will always end up on top.
+  // Oh yeah, you like that, don't you?
+  z-index: 42
 
   ul
     margin: 0
@@ -69,7 +73,7 @@ nav
         margin: 0 2px
         padding: 2px 8px
         color: $light
-        border: 1px solid $dark
+        border: 1px solid transparent
         border-bottom-width: 0
         text-transform: lowercase
 
@@ -77,10 +81,6 @@ nav
           color: white
           border-color: white
           background: $dark
-
-        &.current
-          position: relative
-          z-index: 42
 
 #main, footer
   a[href]
@@ -99,7 +99,7 @@ nav
 
 #main
   position: relative
-  z-index: 23  // above the header
+  z-index: 23  // Above the header
   min-height: 20em
   padding-bottom: 2em
   background: $primary
