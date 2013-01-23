@@ -7,10 +7,10 @@ Hello!
 
 This is the personal website of Chris Wong, a computer science student in Christchurch, New Zealand.
 
-He likes ducks, [turning code into butterflies][GitHub], [drawing things][DeviantArt], [writing things][Blog], and talking about himself in the third person. Not all at the same time, of course. That would be silly.
+He likes [ducks][], [turning code into butterflies][], [writing things][], and talking about himself in the third person. Not all at the same time, of course. That would be silly.
 
-[GitHub]: https://github.com/lfairy
-[DeviantArt]: http://lambdafairy.deviantart.com/
-[Blog]: blog
+[ducks]: http://upload.wikimedia.org/wikipedia/commons/b/bf/Anas_platyrhynchos_male_female_quadrat.jpg
+[turning code into butterflies]: code
+[writing things]: blog
 
 Feel free to look around. It won't bite, unless you provoke it.
