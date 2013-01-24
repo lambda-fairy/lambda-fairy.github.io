@@ -96,8 +96,6 @@ The experience I had with previous projects really came through -- I was able to
 
 *PC speaker interface for Haskell*
 
-You know that annoying "beep" old computers make when they boot up? Funnily enough, modern computers still have the venerable *PC speaker*, and even more funnily enough, you can control it through software! Cool, huh?
-
 I created this as a toy project, just to get some experience using Haskell with C. Writing Linux and FreeBSD versions of this library taught me how to use ioctl and the POSIX API.
 
 [honk]: /honk

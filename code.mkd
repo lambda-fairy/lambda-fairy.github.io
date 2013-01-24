@@ -1,0 +1,42 @@
+---
+title: Code
+---
+
+Here's a few projects I've contributed to or started in the last few years.
+
+Most can be found on my [GitHub][] page.
+
+[GitHub]: https://github.com/lfairy
+
+
+Fun and Games
+=============
+
+[Manchot](https://github.com/lfairy/manchot)
+  : Award-winning Python adapter for *Hey, That's My Fish!* AI challenge
+[Treasure Chest](https://github.com/lfairy/treasure-chest)
+  : An obsessively designed implementation of a board game
+[Honk](http://lfairy.github.com/honk/)
+  : PC speaker interface written in Haskell
+[Sylvia](https://github.com/lfairy/sylvia)
+  : Logic puzzle game based on the lambda calculus
+
+
+Utilities
+=========
+
+[calc](https://github.com/lfairy/calc)
+  : Simple scientific calculator in Python
+[`fixext.py`](https://gist.github.com/986211)
+  : Recursively rename UPPERCASE filename extensions to lowercase
+[`power.sh`](https://gist.github.com/988104)
+  : Suspend, hibernate, restart or shut down the computer without sudo
+
+
+Things other people wrote, and I helped with
+============================================
+
+[`http-conduit`](https://github.com/snoyberg/http-conduit/pull/30)
+  : Efficient HTTP/HTTPS client code with both streaming and non-streaming interfaces
+[pycode](https://github.com/trampgeek/pycode/pull/3)
+  : The automatic marking system behind the University of Canterbury computer science course
