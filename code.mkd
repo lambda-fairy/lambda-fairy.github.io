@@ -19,7 +19,7 @@ Fun and Games
 [Honk](http://lfairy.github.com/honk/)
   : PC speaker interface written in Haskell
 [Sylvia](https://github.com/lfairy/sylvia)
-  : Logic puzzle game based on the lambda calculus
+  : Lambda calculus visualizer
 
 
 Utilities
