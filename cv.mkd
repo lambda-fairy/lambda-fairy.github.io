@@ -20,7 +20,6 @@ Education
 * **NZOI computer programming camp** at Auckland; 2010, 2012, 2013.
 * **Computer Science** at the **University of Canterbury**; 2012--present.
     + Entered as part of a [secondary school program][STAR].
-* **NCEA Level 1 with Excellence**, Burnside High School.
 
 [STAR]: http://www.canterbury.ac.nz/aqua/star/
 
@@ -39,8 +38,8 @@ Highlights
 * Proficient in C, C++, Haskell, C#, Java, Python, Ruby, Scala, PHP.
 * Configuring GNU/Linux systems: writing shell scripts, package management (APT), web servers (Apache and lighttpd), Vim.
 * Thorough understanding of security issues and how to prevent them.
-    + I once found out my friend's database password through a [shared hosting exploit][confused deputy]. He learned about the importance of proper sandboxing, and I learned about the importance of keeping my mouth shut.
-* Web design and development: HTML, CSS, JavaScript
+    + I once found out my friend's database password through a [shared hosting exploit][confused deputy]. We both learned much about security that day.
+* Web design and development: HTML, CSS, JavaScript.
 
 [confused deputy]: https://mattmccutchen.net/shared-hosting/index.html
 
@@ -58,7 +57,7 @@ pycode
 
 *The automatic marking system behind the University of Canterbury computer science course*
 
-I helped finish the implementation of the mock file object ([#3][]). I like to joke that I never got 100% in the quizzes -- not because I did not understand the material, but because I kept triggering bugs in pycode.
+I helped finish the implementation of the mock file object ([#3][]). I like to joke that I never got 100% in the quizzes -- not because I did not understand the material, but because I kept triggering bugs in pycode ;)
 
 [#3]: https://github.com/trampgeek/pycode/pull/3
 
@@ -113,3 +112,12 @@ Phone
   : +64 3 358 8383
 Email
   : *cz* at *burnside* dot *school* dot *nz*
+
+
+Margot Phillipps
+----------------
+
+New Zealand Delegation Leader, International Olympiad in Informatics
+
+Email
+  : *margot.phillipps* at *gmail* dot *com*
