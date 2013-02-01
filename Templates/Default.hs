@@ -37,13 +37,13 @@ defaultTemplate = BlazeTemplate $ \metadata ->
                 H.h1 $ toHtml title
                 preEscapedToHtml body
 
-        H.footer $ do
-            H.p $ do
-                "© 2012 Chris Wong. "
-                H.a ! A.href "http://creativecommons.org/licenses/by-sa/3.0/" $ "Some rights reserved"
-                ". Proudly generated with "
-                H.a ! A.href "http://www.jaspervdj.be/hakyll/" $ "Hakyll"
-                "."
+            H.footer $ do
+                H.p $ do
+                    "© 2012 Chris Wong. "
+                    H.a ! A.href "http://creativecommons.org/licenses/by-sa/3.0/" $ "Some rights reserved"
+                    ". Proudly generated with "
+                    H.a ! A.href "http://www.jaspervdj.be/hakyll/" $ "Hakyll"
+                    "."
 
 defaultLinks :: [Link]
 defaultLinks
