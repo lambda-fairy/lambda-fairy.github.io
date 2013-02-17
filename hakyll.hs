@@ -80,4 +80,4 @@ prettyUrlRoute = customRoute $ prettify . toFilePath
 
 pandocCompilerWith' :: (Pandoc -> Pandoc) -> Compiler (Item String)
 pandocCompilerWith'
-    = pandocCompilerWithTransform defaultHakyllParserState defaultHakyllWriterOptions
+    = pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions
