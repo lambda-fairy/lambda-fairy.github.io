@@ -4,12 +4,19 @@ title: Code
 
 Here's a few projects I've contributed to or started in the last few years.
 
-Most can be found on my [GitHub][] page.
+This is just a summary; a full list of contributions can be found on my [GitHub][] page.
 
 [GitHub]: https://github.com/lfairy
 
 
-Fun and Games
+In progress
+===========
+
+[Sparkle](https://github.com/lfairy/sparkle)
+  : An online planning tool designed for high school technology students
+
+
+Fun and games
 =============
 
 [Manchot](https://github.com/lfairy/manchot)
@@ -29,8 +36,13 @@ Utilities
   : Simple scientific calculator in Python
 [`fixext.py`](https://gist.github.com/986211)
   : Recursively rename UPPERCASE filename extensions to lowercase
+[lilyvim](https://github.com/lfairy/lilyvim)
+  : Extra juicy [LilyPond][] bits for [Vim][]
 [`power.sh`](https://gist.github.com/988104)
   : Suspend, hibernate, restart or shut down the computer without sudo
+
+[LilyPond]: http://lilypond.org/
+[Vim]: http://www.vim.org/
 
 
 Things other people wrote, and I helped with
