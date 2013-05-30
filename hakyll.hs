@@ -8,8 +8,6 @@ import System.Environment (getEnvironment)
 import System.FilePath
 
 import Hakyll
-import Text.Pandoc.Definition (Pandoc())
-import Text.Pandoc.Shared (headerShift)
 
 import Templates.Default
 
@@ -53,7 +51,8 @@ main = (getConfig >>=) . flip hakyllWith $ do
         ]
 
     defaultCompiler
-        = pandocCompilerWith' (headerShift 1)
+        = pandocCompiler
+            >>= return . fmap demoteHeaders
             >>= applyBlazeTemplate defaultTemplate defaultContext
 
 getConfig :: IO Configuration
@@ -69,15 +68,11 @@ prettyUrlRoute :: Routes
 prettyUrlRoute = customRoute $ prettify . toFilePath
   where
     prettify p
-      | name `elem` indexSynonyms = frobnicate directory
-      | otherwise = frobnicate $ directory </> name
+      | name `elem` indexSynonyms = appendIndexHtml directory
+      | otherwise = appendIndexHtml $ directory </> name
       where
         (directory, (name, _)) = second splitExtension $ splitFileName p
 
-    frobnicate = (</> "index.html") . dropExtension
+    appendIndexHtml = (</> "index.html") . dropExtension
 
     indexSynonyms = ["index", "default"]
-
-pandocCompilerWith' :: (Pandoc -> Pandoc) -> Compiler (Item String)
-pandocCompilerWith'
-    = pandocCompilerWithTransform defaultHakyllReaderOptions defaultHakyllWriterOptions
