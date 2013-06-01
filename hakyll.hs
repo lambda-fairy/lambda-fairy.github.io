@@ -2,7 +2,6 @@
 
 import Control.Applicative
 import Control.Arrow
-import Control.Monad
 import Data.Maybe (fromMaybe)
 import System.Environment (getEnvironment)
 import System.FilePath
@@ -17,12 +16,6 @@ main = (getConfig >>=) . flip hakyllWith $ do
         route   idRoute
         compile copyFileCompiler
 
-{-
-    match "favicon.ico" $ do
-        route   idRoute
-        compile copyFileCompiler
--}
-
     match "styles/*.sass" $ do
         route   $ setExtension ".css"
         compile $ getResourceString
@@ -30,20 +23,11 @@ main = (getConfig >>=) . flip hakyllWith $ do
                     >>= return . fmap compressCss
 
     -- Static pages
-    forM_ pages $ \p ->
-        match p $ do
-            route   prettyUrlRoute
-            compile defaultCompiler
-
-{-
-    -- 404 page
-    match "404.html" $ do
-        route   idRoute
+    match (fromList pages) $ do
+        route   prettyUrlRoute
         compile defaultCompiler
--}
 
   where
-    pages :: [Pattern]
     pages =
         [ "index.mkd"
         , "cv.mkd"
