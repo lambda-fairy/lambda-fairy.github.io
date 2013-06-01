@@ -9,7 +9,7 @@ Location
 Email
   : *lambda* dot *fairy* at *gmail* dot *com*
 Website
-  : <http://lfairy.github.com/>
+  : <http://lfairy.github.io/>
 Favorite animal
   : Ducks
 
