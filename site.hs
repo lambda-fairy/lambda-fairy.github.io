@@ -8,7 +8,8 @@ import System.FilePath
 
 import Hakyll
 
-import Templates.Default
+import Templates
+
 
 main :: IO ()
 main = (getConfig >>=) . flip hakyllWith $ do
@@ -39,6 +40,7 @@ main = (getConfig >>=) . flip hakyllWith $ do
             >>= return . fmap demoteHeaders
             >>= applyBlazeTemplate defaultTemplate defaultContext
 
+
 getConfig :: IO Configuration
 getConfig = do
     homeDirectory <- fromMaybe (error "$HOME not defined") . lookup "HOME"
@@ -47,6 +49,7 @@ getConfig = do
         { destinationDirectory = "../master"
         , storeDirectory = homeDirectory </> ".cache/hakyll"
         }
+
 
 prettyUrlRoute :: Routes
 prettyUrlRoute = customRoute $ prettify . toFilePath

@@ -1,8 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 
 module Templates.Default
-    ( module Templates
-    , defaultTemplate
+    ( defaultTemplate
     ) where
 
 import Control.Applicative
@@ -10,8 +9,10 @@ import Text.Blaze.Html (Html, (!), preEscapedToHtml, toHtml, toValue)
 import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as A
 
-import Templates
+import Templates.Core
 
+
+-- | The main page template.
 defaultTemplate :: BlazeTemplate
 defaultTemplate = BlazeTemplate $ \metadata ->
     page <$> (metadata "home" <|> pure "false") <*> metadata "title" <*> metadata "body" <*> metadata "url"
@@ -45,6 +46,7 @@ defaultTemplate = BlazeTemplate $ \metadata ->
                     H.a ! A.href "http://www.jaspervdj.be/hakyll/" $ "Hakyll"
                     "."
 
+
 defaultLinks :: [Link]
 defaultLinks
     = link' "/index.html" "/" "Home"
@@ -52,6 +54,7 @@ defaultLinks
     : link "/code" "Code"
     : link "/blog" "Blog"
     : []
+
 
 stylesheet :: String -> Html
 stylesheet url = H.link ! A.rel "stylesheet" ! A.href (toValue url)
