@@ -5,6 +5,7 @@
 module Templates.Core
     ( BlazeTemplate(..)
     , applyBlazeTemplate
+    , applyBlazeTemplateList
     , Link()
     , link
     , link'
