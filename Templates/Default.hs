@@ -14,8 +14,8 @@ import Templates.Core
 
 -- | The main page template.
 defaultTemplate :: BlazeTemplate
-defaultTemplate = BlazeTemplate $ \metadata ->
-    page <$> (metadata "home" <|> pure "false") <*> metadata "title" <*> metadata "body" <*> metadata "url"
+defaultTemplate = BlazeTemplate $ \get ->
+    page <$> (get "home" <|> pure "false") <*> get "title" <*> get "body" <*> get "url"
   where
     page home title body url = H.docTypeHtml $ do
 

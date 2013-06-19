@@ -15,25 +15,20 @@ import Templates.Core
 
 
 blogPostTemplate :: BlazeTemplate
-blogPostTemplate = BlazeTemplate $ \metadata ->
-    build <$> metadata "date"
-        <*> metadata "body"
+blogPostTemplate = BlazeTemplate $ \get ->
+    build <$> get "date" <*> get "body" <*> get "url"
   where
-    build date body = do
+    build date body url = do
         H.p ! A.id "post-date" $ do
-            "(Posted on "
-            H.time $ toHtml date
-            ")"
+            H.a ! A.href (toValue url) ! A.title "link to this post" $ do
+                H.time $ toHtml date
         preEscapedToHtml body
 
 
 -- | A single entry on the archive page.
 postItemTemplate :: BlazeTemplate
-postItemTemplate = BlazeTemplate $ \metadata ->
-    build <$> metadata "title"
-        <*> metadata "date"
-        <*> metadata "description"
-        <*> metadata "url"
+postItemTemplate = BlazeTemplate $ \get ->
+    build <$> get "title" <*> get "date" <*> get "description" <*> get "url"
   where
     build title date description url = do
         H.dt $ do
@@ -47,7 +42,7 @@ postItemTemplate = BlazeTemplate $ \metadata ->
 
 
 postListTemplate :: BlazeTemplate
-postListTemplate = BlazeTemplate $ \metadata ->
-    build <$> metadata "posts"
+postListTemplate = BlazeTemplate $ \get ->
+    build <$> get "posts"
   where
     build posts = H.dl ! A.id "posts" $ preEscapedToHtml posts
