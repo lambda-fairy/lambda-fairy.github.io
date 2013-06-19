@@ -14,7 +14,6 @@ import qualified Text.Blaze.Html5.Attributes as A
 import Templates.Core
 
 
-blogPostTemplate :: BlazeTemplate
 blogPostTemplate = BlazeTemplate $ \get ->
     build <$> get "date" <*> get "body" <*> get "url"
   where
@@ -26,7 +25,6 @@ blogPostTemplate = BlazeTemplate $ \get ->
 
 
 -- | A single entry on the archive page.
-postItemTemplate :: BlazeTemplate
 postItemTemplate = BlazeTemplate $ \get ->
     build <$> get "title" <*> get "date" <*> get "description" <*> get "url"
   where
@@ -41,7 +39,6 @@ postItemTemplate = BlazeTemplate $ \get ->
             preEscapedToHtml description
 
 
-postListTemplate :: BlazeTemplate
 postListTemplate = BlazeTemplate $ \get ->
     build <$> get "posts"
   where

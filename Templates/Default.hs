@@ -5,7 +5,7 @@ module Templates.Default
     ) where
 
 import Control.Applicative
-import Text.Blaze.Html (Html, (!), preEscapedToHtml, toHtml, toValue)
+import Text.Blaze.Html ((!), preEscapedToHtml, toHtml)
 import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as A
 
@@ -13,7 +13,6 @@ import Templates.Core
 
 
 -- | The main page template.
-defaultTemplate :: BlazeTemplate
 defaultTemplate = BlazeTemplate $ \get ->
     page <$> (get "home" <|> pure "false") <*> get "title" <*> get "body" <*> get "url"
   where
@@ -54,7 +53,3 @@ defaultLinks
     : link "/code" "Code"
     : link "/blog" "Blog"
     : []
-
-
-stylesheet :: String -> Html
-stylesheet url = H.link ! A.rel "stylesheet" ! A.href (toValue url)

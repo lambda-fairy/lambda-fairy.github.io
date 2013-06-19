@@ -3,14 +3,21 @@
 -- | Utilities for rendering Blaze templates and the navigation bar.
 
 module Templates.Core
-    ( BlazeTemplate(..)
+    (
+    -- * Templates
+      BlazeTemplate(..)
     , applyBlazeTemplate
     , applyBlazeTemplateList
+
+    -- * Navigation bar
     , Link()
     , link
     , link'
     , matchLink
     , renderNavigation
+
+    -- * Everything else
+    , stylesheet
     ) where
 
 import Control.Applicative
@@ -94,3 +101,8 @@ renderNavigation links current = H.ul $ foldMap process links
               | matchLink l current = (! A.class_ "current")
               | otherwise = id
         in H.li $ addClass $ H.a ! A.href (toValue href) $ toHtml label
+
+
+-- | Insert a stylesheet.
+stylesheet :: String -> Html
+stylesheet url = H.link ! A.rel "stylesheet" ! A.href (toValue url)
