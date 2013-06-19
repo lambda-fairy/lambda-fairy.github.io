@@ -13,4 +13,4 @@ He likes [ducks][], [turning code into butterflies][], [writing things][], and t
 [turning code into butterflies]: code
 [writing things]: blog
 
-Feel free to look around. It won't bite, unless you provoke it.
+Feel free to look around. It won't bite, I promise.
