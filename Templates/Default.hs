@@ -41,7 +41,7 @@ defaultTemplate = BlazeTemplate $ \get ->
 
             H.footer $ do
                 H.p . buildFooter $
-                    [ "© 2012 Chris Wong."
+                    [ "© 2013 Chris Wong."
                     , H.a ! A.href "http://creativecommons.org/licenses/by-sa/3.0/" $ "Some rights reserved."
                     , do
                         "Proudly generated with "
