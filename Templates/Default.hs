@@ -5,6 +5,8 @@ module Templates.Default
     ) where
 
 import Control.Applicative
+import Data.List (intersperse)
+import Data.Monoid (mconcat)
 import Text.Blaze.Html ((!), preEscapedToHtml, toHtml)
 import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as A
@@ -38,12 +40,20 @@ defaultTemplate = BlazeTemplate $ \get ->
                 preEscapedToHtml body
 
             H.footer $ do
-                H.p $ do
-                    "© 2012 Chris Wong. "
-                    H.a ! A.href "http://creativecommons.org/licenses/by-sa/3.0/" $ "Some rights reserved"
-                    ". Proudly generated with "
-                    H.a ! A.href "http://www.jaspervdj.be/hakyll/" $ "Hakyll"
-                    "."
+                H.p . buildFooter $
+                    [ "© 2012 Chris Wong."
+                    , H.a ! A.href "http://creativecommons.org/licenses/by-sa/3.0/" $ "Some rights reserved."
+                    , do
+                        "Proudly generated with "
+                        H.a ! A.href "http://www.jaspervdj.be/hakyll/" $ "Hakyll"
+                        "."
+                    , do
+                        "Bitcoin:\xA0"
+                        H.a ! A.href "http://blockchain.info/fb/12ondc" $ "12oNDcYKQgH3QTMm2rChMC4a6FdQC65wLb"
+                        "."
+                    ]
+
+    buildFooter = mconcat . intersperse "\n" . map (H.span ! A.class_ "block")
 
 
 defaultLinks :: [Link]

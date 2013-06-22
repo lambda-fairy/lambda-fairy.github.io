@@ -39,6 +39,12 @@ h1, h2
 a:link
   text-decoration: none
 
+.block
+  display: inline-block
+
+* + .block
+  margin-left: 1em
+
 #topbit
   +pie-clearfix
   margin-top: 5em
@@ -94,27 +100,28 @@ nav
           background: $dark
           +t
 
-#main, footer
-  a
+#main a
+  &:link
+    color: $dark
+  &:visited
+    color: $medium
+
+footer a
+  &:link, &:visited
+    color: $dark
+    border-bottom: 1px dotted $dark
+
+#main a, footer a
+  &:link, &:visited, &:hover, &:focus, &:active
     +t
 
-    &:link
-      color: $dark
-      +t
+  &:hover, &:focus
+    background-color: $dark
+    color: white
 
-    &:visited
-      color: $medium
-      +t
-
-    &:hover, &:focus
-      background-color: $dark
-      color: white
-      +t
-
-    &:active
-      background-color: $active
-      color: white
-      +t
+  &:active
+    background-color: $active
+    color: white
 
 #main
   position: relative
