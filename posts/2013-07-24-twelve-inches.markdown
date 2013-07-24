@@ -25,7 +25,7 @@ You shoot many feet, all at the same time, very, very, quickly.
 Haskell
 -------
 
-You try to shoot yourself in the foot, but can't figure out why. So you post your problem on StackOverflow.
+You try to shoot yourself in the foot, but can't figure out how. So you post your problem on StackOverflow.
 
 A few minutes later, you receive five replies: all of them different, none of which you understand, and at least one of which uses a library Edward Kmett wrote last week.
 
