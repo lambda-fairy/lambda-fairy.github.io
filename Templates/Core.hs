@@ -37,9 +37,13 @@ newtype BlazeTemplate = BlazeTemplate { runBlazeTemplate :: (String -> Compiler 
 
 applyBlazeTemplate :: BlazeTemplate -> Context a -> Item a -> Compiler (Item String)
 applyBlazeTemplate tpl context item = do
-    let metadata k = unContext context k item
-    body <- renderHtml <$> runBlazeTemplate tpl metadata
+    body <- renderHtml <$> runBlazeTemplate tpl lookupMeta
     return $ itemSetBody body item
+  where
+    lookupMeta key = unContext context key item >>= \result ->
+        case result of
+            StringField s -> return s
+            ListField{} -> error $ "Field '" ++ key ++ "' is a list. I don't like lists."
 
 
 applyBlazeTemplateList :: BlazeTemplate -> Context a -> [Item a] -> Compiler String

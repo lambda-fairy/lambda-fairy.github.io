@@ -1,10 +1,9 @@
-$light: #ad7fa8
-$medium: #75507b
-$dark: #5c3566
-$active: #3465a4
-
-$primary: lighten($dark, 55%)
-$secondary: darken($light, 5%)
+$primary: #5c3566
+$primary-medium: lighten($primary, 30)
+$primary-light: #ad7fa8
+$secondary: #3465a4
+$white: #fff
+$black: #101
 
 // Ripped from <http://compass-style.org/reference/compass/utilities/general/clearfix/>
 =pie-clearfix
@@ -13,172 +12,145 @@ $secondary: darken($light, 5%)
     display: table
     clear: both
 
-=transition($property: all, $duration: 1s, $timing-function: ease, $delay: 0s)
-  $result: $property $duration $timing-function $delay
-  -webkit-transition: $result
-  transition: $result
-
-=t
-  +transition(all, 0.2s)
-
-html
-  min-height: 100%
-  background: $dark
+=block
+  margin:
+    left: auto
+    right: auto
+  max-width: 720px
+  padding: 0 24px
 
 body
+  margin: 0
+  background: $primary
+  color: $black
   font: 100%/150% Cabin, "DejaVu Sans", "Bitstream Vera Sans", Verdana
-
-body > *
-  max-width: 47em
-  margin: -1px auto  // -1px patches up rounding errors
-  padding: 0 1.5em
-
-h1, h2
-  text-transform: lowercase
 
 a:link
   text-decoration: none
 
-.block
-  display: inline-block
-
-* + .block
-  margin-left: 1em
-
-#topbit
-  +pie-clearfix
-  margin-top: 5em
-
 header
-  float: left
-
   h1
-    margin: 0
-    font-size: 420%
+    +block
+    margin:
+      top: -0.25em
+      bottom: 0
+    font-size: 500%
+    line-height: 100%
 
     a
       position: relative
-      z-index: 11  // Under #main
-      color: white
-      line-height: 42%
-      top: 0
-      +transition(top, 0.25s, linear)
+      top: 0.4em
+      color: $white
+      text-decoration: none
+      transition: top 0.15s linear
 
-      &:hover, &:active
-        // When hovering over the header, make it pop up
-        top: -0.13em
-        +transition(top, 0.25s, linear)
+      &:active, &:hover, &:focus
+        top: 0.2em
+        transition: top 0.25s ease-out
+
+html[purty]
+  body
+    font-family: "Comic Sans MS"
+
+  // Activate epic drop shadow effect to annoy Gus
+  header h1 a
+    &
+      text-shadow: 0 0 0 rgba(51, 0, 51, 0)
+      transition: top 0.15s linear, text-shadow 0.2s linear
+
+    &:active, &:hover, &:focus
+      z-index: 23  // above midriff
+      text-shadow: 3px 3px 0 rgba(51, 0, 51, .75), -1px -1px 0 $primary, -1px 1px 0 $primary, 1px -1px 0 $primary, 1px 1px 0 $primary
+      transition: top 0.25s ease-out, text-shadow 0.2s linear
+
+#midriff
+  position: relative
+  // When header and midriff collide, midriff will always end up on top.
+  // Oh yeah, you like that, don't you?
+  z-index: 11
+
+  padding-bottom: 3em
+
+  background: $white
+  border: 1px solid $white
 
 nav
-  float: right
-  font-size: 75%
-  position: relative
-  // If header and nav collide, nav will always end up on top.
-  // Oh yeah, you like that, don't you?
-  z-index: 42
-
   ul
-    margin: 0
+    +block
+    +pie-clearfix
+
+    margin-top: 0
 
     li
       float: left
+      margin: 0.75em 0.25em
       list-style: none
+
+      font-size: 75%
+      letter-spacing: 1px
+      text-transform: uppercase
 
       a
         display: block
-        margin: 0 2px
-        padding: 2px 8px
-        color: $light
-        border: 1px solid transparent
-        border-bottom-width: 0
-        text-transform: lowercase
-        +t
+        line-height: 100%
+        padding: 1em
 
-        &:hover, &:active, &.current
-          color: white
-          border-color: white
-          background: $dark
-          +t
+      &:first-child
+        margin-left: 0
+      &:last-child
+        margin-right: 0
 
-#main a
-  &:link
-    color: $dark
-  &:visited
-    color: $medium
+section, nav
+  a
+    transition: all 0.2s
 
-footer a
-  &:link, &:visited
-    color: $dark
-    border-bottom: 1px dotted $dark
+    &:link
+      color: $primary
 
-#main a, footer a
-  &:link, &:visited, &:hover, &:focus, &:active
-    +t
+    &:hover, &:focus
+      border-color: $primary
+      background-color: $primary
+      color: $white
 
-  &:hover, &:focus
-    background-color: $dark
-    color: white
+    &:active
+      border-color: $secondary
+      background-color: $secondary
+      color: $white
+      transition: none
 
-  &:active
-    background-color: $active
-    color: white
+section
+  +block
 
-#main
   position: relative
-  z-index: 23  // Above the header
-  min-height: 20em
-  padding-bottom: 2em
-  background: $primary
-  border: 1px solid white
+  z-index: 11  // Above the header
+  margin-top: 1em
 
   h1
-    margin: 0 -0.67em 0
-    padding: 0 0.67em 0
-    font-size: 225%
-    line-height: 75%
-    border-top: 4px solid $dark
+    background: $primary
+    color: $white
+    font-size: 250%
+    line-height: 125%
+    margin: 0 -24px 0
+    padding: 0 24px
 
   h2
-    margin: 2.25em -0.86em 0
-    padding: 0 0.86em 0
+    border-top: 4px solid $primary
+    color: $primary
     font-size: 175%
     line-height: 75%
-    border-top: 2px solid $dark
+    margin: 1.57em -24px 0
+    padding: 0 24px
 
-  h3
-    margin: 1.75em 0 -0.4em
-    font-size: 125%
-    font-weight: normal
-
-  blockquote
-    border-left: 5px solid $light
-    margin: 1.5em 0 1.5em 0.1em
-    padding-left: 1em
-
-  dl
-    dt
-      margin-top: 0.5em
-      font-size: 112.5%
-
-  #posts dt .date-thing
-    font:
-      style: italic
-      size: 90%
-
-  #post-date
-    margin-top: 0.25em
-    font-size: 75%
-    line-height: 100%
-    text-indent: 1em
-
-    a
-      background: $primary
+  a:visited
+    color: $primary-medium
 
 footer
-  background: $secondary
-  border: 1px solid $secondary
-  color: $dark
+  color: $primary-light
+  font-size: 75%
+  line-height: 150%
+  text-align: center
 
   p
-    margin: 0.1em 0
-    font-size: 75%
+    +block
+    a
+      color: lighten($primary-light, 20)

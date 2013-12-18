@@ -105,8 +105,8 @@ postCtx = mconcat
     ]
 
 
-postList :: Pattern -> ([Item String] -> [Item String])
+postList :: Pattern -> ([Item String] -> Compiler [Item String])
          -> Compiler String
 postList pattern scramble = do
-    posts <- scramble <$> loadAll pattern
+    posts <- scramble =<< loadAll pattern
     applyBlazeTemplateList postItemTemplate postCtx posts

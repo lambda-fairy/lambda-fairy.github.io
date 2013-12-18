@@ -1,11 +1,9 @@
 ---
-title: Home
+title: Welcome
 home: true
 ---
 
-Hello!
-
-This is the personal website of Chris Wong, a computer science student in Christchurch, New Zealand.
+This is the personal website of Chris Wong, a student of mathematics and computer science living in Christchurch, New Zealand.
 
 He likes [ducks][], [turning code into butterflies][], [writing things][], and talking about himself in the third person. Not all at the same time, of course. That would be silly.
 
