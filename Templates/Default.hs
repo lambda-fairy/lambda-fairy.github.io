@@ -5,6 +5,7 @@ module Templates.Default
     ) where
 
 import Control.Applicative
+import Data.Monoid
 import Text.Blaze.Html ((!), preEscapedToHtml, toHtml)
 import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as A
@@ -20,9 +21,11 @@ defaultTemplate = BlazeTemplate $ \get ->
 
         H.head $ do
             H.meta ! A.charset "utf-8"
-            H.title $ if home == "true"
-                        then "lambda fairy"
-                        else toHtml title
+            H.title $ do
+                if home == "true"
+                    then mempty
+                    else toHtml title <> " | "
+                "lambda fairy"
             stylesheet "/styles/styles.css"
             stylesheet "http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic"
 
