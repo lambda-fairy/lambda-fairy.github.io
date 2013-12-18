@@ -27,7 +27,9 @@ Haskell
 
 You try to shoot yourself in the foot, but can't figure out how. So you post your problem on StackOverflow.
 
-A few minutes later, you receive five replies: all of them different, none of which you understand, and at least one of which uses a library Edward Kmett wrote last week.
+A few minutes later, you receive five replies: all of them different, none of which you understand, and at least one of which uses a library [Edward Kmett][] wrote last week.
+
+[Edward Kmett]: http://cokmett.github.io/cokmett/
 
 
 PHP
@@ -53,11 +55,13 @@ No, Rasmus, don't you see? Accidents happen only when people point their gun *aw
 
 <i>You've lost me now. Go on.</i>
 
-Rasmus, I want every gun made from now on changed... *to fire backwards.*
+Rasmus, I want every gun made from now on changed... *to [fire backwards][lolphp].*
 
 ---
 
 You aim the gun at your foot, and pull the trigger. Your head explodes.
+
+[lolphp]: http://en.wikipedia.org/wiki/Magic_quotes
 
 
 Agda
