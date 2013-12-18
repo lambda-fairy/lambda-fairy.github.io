@@ -100,12 +100,16 @@ nav
       &:last-child
         margin-right: 0
 
-section, nav
+=link-styles($show-visited: true)
   a
     transition: all 0.2s
 
     &:link
       color: $primary
+
+    @if $show-visited
+      &:visited
+        color: $primary-medium
 
     &:hover, &:focus
       border-color: $primary
@@ -117,6 +121,11 @@ section, nav
       background-color: $secondary
       color: $white
       transition: none
+
+nav
+  +link-styles($show-visited: false)
+section
+  +link-styles($show-visited: true)
 
 section
   +block
@@ -140,9 +149,6 @@ section
     line-height: 75%
     margin: 1.57em -24px 0
     padding: 0 24px
-
-  a:visited
-    color: $primary-medium
 
 footer
   color: $primary-light
