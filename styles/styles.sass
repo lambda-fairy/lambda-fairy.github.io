@@ -1,9 +1,8 @@
 $primary: #5c3566
-$primary-medium: lighten($primary, 30)
 $primary-light: #ad7fa8
 $secondary: #3465a4
 $white: #fff
-$black: #101
+$black: #111
 
 // Ripped from <http://compass-style.org/reference/compass/utilities/general/clearfix/>
 =pie-clearfix
@@ -100,16 +99,12 @@ nav
       &:last-child
         margin-right: 0
 
-=link-styles($show-visited: true)
+nav, section
   a
     transition: all 0.2s
 
     &:link
-      color: $primary
-
-    @if $show-visited
-      &:visited
-        color: $primary-medium
+      color: lighten($primary, 20)
 
     &:hover, &:focus
       border-color: $primary
@@ -121,11 +116,6 @@ nav
       background-color: $secondary
       color: $white
       transition: none
-
-nav
-  +link-styles($show-visited: false)
-section
-  +link-styles($show-visited: true)
 
 section
   +block
