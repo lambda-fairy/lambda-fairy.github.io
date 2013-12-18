@@ -18,7 +18,7 @@ Education
 =========
 
 * **NZOI computer programming camp** at Auckland; 2010, 2012, 2013.
-* **Computer Science** at the **University of Canterbury**; 2012--present.
+* **Computer Science** at the **University of Canterbury**; 2012.
     + Entered as part of a [secondary school program][STAR].
 
 [STAR]: http://www.canterbury.ac.nz/aqua/star/
@@ -27,7 +27,7 @@ Education
 Achievements
 ============
 
-* First Place in the 2012 New Zealand Programming Competition.
+* First Place in the New Zealand Programming Competition, 2012 and 2013.
 
 
 Highlights
