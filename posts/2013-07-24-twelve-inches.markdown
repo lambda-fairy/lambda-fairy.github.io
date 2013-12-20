@@ -22,6 +22,18 @@ You take out your gun, aim it at your foot, and pull the trigger. It creates a p
 You pat yourself on the back and limp out of the office, proud of a job well done.
 
 
+Eiffel
+------
+
+You can't.
+
+
+OCaml
+-----
+
+You create a new foot that is already shot, and treat that as the original.  Your old foot gradually fades away.
+
+
 Haskell
 -------
 
