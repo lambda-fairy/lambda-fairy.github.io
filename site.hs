@@ -25,7 +25,8 @@ main = (getConfig >>=) . flip hakyllWith $ do
                     >>= return . fmap compressCss
 
     match "posts/*" $ do
-        route $ gsubRoute "^posts" (const "blog") `composeRoutes` prettyUrlRoute
+        route $ gsubRoute "^posts/[[:digit:]]+-[[:digit:]]+-[[:digit:]]+-" (const "blog/")
+                    `composeRoutes` prettyUrlRoute
         compile $ do
             defaultCompiler
                 >>= applyBlazeTemplate blogPostTemplate postCtx
