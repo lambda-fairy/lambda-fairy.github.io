@@ -1,5 +1,6 @@
 ---
 title: On Pokémon: the color of science
+description: Eevee!
 ---
 
 Yesterday I hatched an Eevee.  It was *shiny*, which in Poké-parlance means it had a rare mutation that changed its color.  In this case, its fur was snow-white instead of brown.
