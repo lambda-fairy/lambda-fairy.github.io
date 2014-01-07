@@ -4,7 +4,7 @@ title: On Pokémon: the color of science
 
 Yesterday I hatched an Eevee.  It was *shiny*, which in Poké-parlance means it had a rare mutation that changed its color.  In this case, its fur was snow-white instead of brown.
 
-IMAGE
+![Eevee](/images/2014-01-08-eevee.jpg)
 
 (I named him Edam, after the cheese.  I like cheese.)
 
