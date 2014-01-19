@@ -1,5 +1,5 @@
 ---
-title: On Pokémon: the color of science
+title: The Color of Science
 description: Eevee!
 ---
 
