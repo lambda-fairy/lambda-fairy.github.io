@@ -1,24 +1,24 @@
 ---
 title: Curriculum Vitae
+page-title: Chris Wong
 ---
 
-Name
-  : Chris Wong
-Location
-  : Christchurch, New Zealand
-Email
-  : *lambda* dot *fairy* at *gmail* dot *com*
-Website
-  : <http://lfairy.github.io/>
-Favorite animal
-  : Ducks
+
+<lambda.fairy@gmail.com>  
+<http://lfairy.github.io>
+
+
+Summary
+=======
+
+TODO
 
 
 Education
 =========
 
 * **NZOI computer programming camp** at Auckland; 2010, 2012, 2013.
-* **Computer Science** at the **University of Canterbury**; 2012.
+* **BSc** at the **University of Canterbury**; 2012--present.
     + Entered as part of a [secondary school program][STAR].
 
 [STAR]: http://www.canterbury.ac.nz/aqua/star/
@@ -30,20 +30,6 @@ Achievements
 * First Place in the New Zealand Programming Competition, 2012 and 2013.
 
 
-Highlights
-==========
-
-* Perfectionist approach to design, both in interface and code.
-* Conveys complex concepts with clarity, conciseness and cadence.
-* Proficient in C, C++, Haskell, C#, Java, Python, Ruby, Scala, PHP.
-* Configuring GNU/Linux systems: writing shell scripts, package management (APT), web servers (Apache and lighttpd), Vim.
-* Thorough understanding of security issues and how to prevent them.
-    + I once found out my friend's database password through a [shared hosting exploit][confused deputy]. We both learned much about security that day.
-* Web design and development: HTML, CSS, JavaScript.
-
-[confused deputy]: https://mattmccutchen.net/shared-hosting/index.html
-
-
 Projects & Contributions
 ========================
 
@@ -51,53 +37,17 @@ As a hobbyist programmer, I spend my free time making cool things and contributi
 
 [GitHub]: https://github.com/lfairy
 
+[Sparkle](/sparkle)
+  : A project planning tool, structured around the New Zealand secondary curriculum. Although technologically simple, vague requirements and tight deadlines made the project difficult to pull off.
 
-pycode
-------
+[Rust](http://rust-lang.org/)
+  : A new systems programming language designed by Mozilla. I made a [small modification](https://github.com/mozilla/rust/pull/11790) to its standard library.
 
-*The automatic marking system behind the University of Canterbury computer science course*
+[honk](/honk)
+  : PC speaker interface for Haskell. This toy project gave me a taste of low-level programming, working with the Linux ioctl interface directly.
 
-I helped finish the implementation of the mock file object ([#3][]). I like to joke that I never got 100% in the quizzes -- not because I did not understand the material, but because I kept triggering bugs in pycode ;)
-
-[#3]: https://github.com/trampgeek/pycode/pull/3
-
-
-http-conduit
-------------
-
-*A HTTP client library, written in the Haskell programming language*
-
-I refactored the redirect handling code to handle relative URLs ([#30][]). The resulting code was shorter, better leveraged existing libraries and was easier to read.
-
-[#30]: https://github.com/snoyberg/http-conduit/pull/30
-
-The maintainer of the library, Michael Snoyman, writes:
-
-> I like the approach. A few people in the past have brought up using Network.URI for parsing, but I was hesitant to do so. Now that I've seen your code, I see that they were right. Well done :)
-
-
-Treasure Chest
---------------
-
-*An obsessively designed implementation of a board game*
-
-I wrote this for an assignment at the University of Canterbury. It was probably above what they were expecting at that level, but was fun to write nonetheless.
-
-The experience I had with previous projects really came through -- I was able to harness advanced functional programming techniques such as [trampolining][], [memoizing combinators][] and [currying][] to write code that is elegant and readable.
-
-[trampolining]: https://github.com/lfairy/treasure-chest/blob/master/treasurelib/gui/__init__.py#L127
-[memoizing combinators]: https://github.com/lfairy/treasure-chest/blob/master/treasurelib/gui/resources.py#L18
-[currying]: https://github.com/lfairy/treasure-chest/blob/master/treasurelib/model.py#L57
-
-
-[honk][]
---------
-
-*PC speaker interface for Haskell*
-
-I created this as a toy project, just to get some experience using Haskell with C. Writing Linux and FreeBSD versions of this library taught me how to use ioctl and the POSIX API.
-
-[honk]: /honk
+[pycode](https://github.com/trampgeek/pycode)
+  : An automatic marking system, used for grading first-year CS assignments at the University of Canterbury. I [fixed a few bugs](https://github.com/trampgeek/pycode/pull/3) in the handling of files.
 
 
 Referees

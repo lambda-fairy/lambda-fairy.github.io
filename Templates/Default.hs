@@ -15,9 +15,9 @@ import Templates.Core
 
 -- | The main page template.
 defaultTemplate = BlazeTemplate $ \get ->
-    page <$> (get "home" <|> pure "false") <*> get "title" <*> get "body" <*> get "url"
+    page <$> (get "home" <|> pure "false") <*> get "title" <*> (get "page-title" <|> get "title") <*> get "body" <*> get "url"
   where
-    page home title body url = H.docTypeHtml $ do
+    page home title pageTitle body url = H.docTypeHtml $ do
 
         H.head $ do
             H.meta ! A.charset "utf-8"
@@ -38,7 +38,7 @@ defaultTemplate = BlazeTemplate $ \get ->
                 H.nav $ renderNavigation defaultLinks url
 
                 H.section $ do
-                    H.h1 $ toHtml title
+                    H.h1 $ toHtml pageTitle
                     preEscapedToHtml body
 
             H.footer $ do
