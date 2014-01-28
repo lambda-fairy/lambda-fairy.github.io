@@ -11,7 +11,11 @@ page-title: Chris Wong
 Summary
 =======
 
-TODO
+I am a programmer, with broad experience in both the theoretical (type theory, algorithms, paradigms) and practical (security, usability, architecture) aspects of programming.
+
+I read widely; this gives me broad, critical understanding of different tools and paradigms. Note that I don't list individual tools here, only projects -- a useful outcome is more convincing than a laundry list.
+
+I also participate in the open source community, where I continue to develop my skills in collaboration and design.
 
 
 Education
@@ -40,8 +44,11 @@ As a hobbyist programmer, I spend my free time making cool things and contributi
 [Sparkle](/sparkle)
   : A project planning tool, structured around the New Zealand secondary curriculum. Although technologically simple, vague requirements and tight deadlines made the project difficult to pull off.
 
+[Rose](https://github.com/lfairy/rose)
+  : Regular expression engine. By incorporating ideas from automata theory, I keep the implementation simple and fast.
+
 [Rust](http://rust-lang.org/)
-  : A new systems programming language designed by Mozilla. I made a [small modification](https://github.com/mozilla/rust/pull/11790) to its standard library.
+  : A new systems programming language designed by Mozilla. I made a [small modification](https://github.com/mozilla/rust/pull/11790) to its standard library, and plan to contribute more in the future.
 
 [honk](/honk)
   : PC speaker interface for Haskell. This toy project gave me a taste of low-level programming, working with the Linux ioctl interface directly.
