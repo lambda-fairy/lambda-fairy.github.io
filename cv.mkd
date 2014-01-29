@@ -11,11 +11,11 @@ page-title: Chris Wong
 Summary
 =======
 
-I am a programmer, with broad experience in both the theoretical (type theory, algorithms, paradigms) and practical (security, usability, architecture) aspects of programming.
+I have experience in many aspects of computing, both experimental and mainstream. The former includes Haskell and its powerful type system; the latter more mundane topics such as web development and Linux administration.
 
-I read widely; this gives me broad, critical understanding of different tools and paradigms. Note that I don't list individual tools here, only projects -- a useful outcome is more convincing than a laundry list.
+My work is defined by beauty and simplicity, with a focus on security and ease of use.
 
-I also participate in the open source community, where I continue to develop my skills in collaboration and design.
+I participate avidly in the open source community, where I continue to develop my skills in collaboration and design.
 
 
 Education
