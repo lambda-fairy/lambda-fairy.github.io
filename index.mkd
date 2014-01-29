@@ -11,4 +11,8 @@ He likes [ducks][], [turning code into butterflies][], [writing things][], and t
 [turning code into butterflies]: code
 [writing things]: blog
 
+As for the name: "Lambda" represents the *lambda calculus*, a cornerstone of computer science and logic. "Fairy" represents a magical creature with wings. The product is [very Googleable][] and frankly kind of cute.
+
+[very Googleable]: http://google.com/search?q=lambda+fairy
+
 Feel free to look around. It won't bite, I promise.
