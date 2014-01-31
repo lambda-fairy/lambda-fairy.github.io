@@ -26,20 +26,16 @@ blogPostTemplate = BlazeTemplate $ \get ->
 
 -- | A single entry on the archive page.
 postItemTemplate = BlazeTemplate $ \get ->
-    build <$> get "title" <*> get "date" <*> get "description" <*> get "url"
+    build <$> get "title" <*> get "date" <*> get "url"
   where
-    build title date description url = do
-        H.dt $ do
+    build title date url = do
+        H.li $ do
             H.a ! A.href (toValue url) $ toHtml title
-            H.span ! A.class_ "date-thing" $ do
-                -- keep en-dash and date together across newline
-                " –\x2060\xA0"
-                H.time $ toHtml date
-        H.dd $ do
-            preEscapedToHtml description
+            " "
+            H.time $ toHtml date
 
 
 postListTemplate = BlazeTemplate $ \get ->
     build <$> get "posts"
   where
-    build posts = H.dl ! A.id "posts" $ preEscapedToHtml posts
+    build posts = H.ul ! A.id "posts" $ preEscapedToHtml posts

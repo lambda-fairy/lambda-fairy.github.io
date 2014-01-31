@@ -99,7 +99,7 @@ removeIndexHtml = uncurry combine . second frobnicate . splitFileName
 postCtx :: Context String
 postCtx = mconcat
     [ modificationTimeField "mtime" "%U"
-    , dateField "date" "%B %e, %Y"
+    , dateField "date" "%b %e, %Y"
     , shortUrlField "url"
     --, tagsField "tags" tags
     , defaultContext
