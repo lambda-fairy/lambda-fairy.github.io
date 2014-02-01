@@ -122,7 +122,6 @@ section
 
   position: relative
   z-index: 11  // Above the header
-  margin-top: 1em
 
   h1
     background: $primary
@@ -160,3 +159,15 @@ footer
     color: #aaa
     font-size: 75%
     text-transform: uppercase
+
+@media (max-width: 500px)
+  // Responsive design yay
+  header h1
+    font-size: 300%
+  nav ul
+    margin-bottom: 0
+  section
+    h1
+      font-size: 200%
+    h2
+      font-size: 150%
