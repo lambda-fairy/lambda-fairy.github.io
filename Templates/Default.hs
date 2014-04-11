@@ -58,6 +58,6 @@ defaultLinks :: [Link]
 defaultLinks
     = link' "/index.html" "/" "Home"
     : link "/cv" "CV"
-    : link "/code" "Code"
     : link "/blog" "Blog"
+    : link "https://github.com/lfairy" "GitHub"
     : []

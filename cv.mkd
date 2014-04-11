@@ -22,8 +22,9 @@ Education
 =========
 
 * **NZOI computer programming camp** at Auckland; 2010, 2012, 2013.
-* **BSc** at the **University of Canterbury**; 2012--present.
+* **BSc in Mathematics** at the **University of Canterbury**; 2012, 2014.
     + Entered as part of a [secondary school program][STAR].
+    + Planning to graduate end of 2015 or 2016.
 
 [STAR]: http://www.canterbury.ac.nz/aqua/star/
 
@@ -32,13 +33,14 @@ Achievements
 ============
 
 * First Place in the New Zealand Programming Competition, 2012 and 2013.
+* Reserve member of the New Zealand team, International Olympiad in Informatics, 2013.
 * New Zealand Scholarship, 2013.
 
 
 Projects & Contributions
 ========================
 
-As a hobbyist programmer, I spend my free time making cool things and contributing to the open source community. All my work is on [GitHub][] and my [code](/code) page; below are a few of the more relevant ones:
+Most of this work can also be found on [GitHub][].
 
 [GitHub]: https://github.com/lfairy
 
@@ -46,7 +48,7 @@ As a hobbyist programmer, I spend my free time making cool things and contributi
   : A project planning tool, structured around the New Zealand secondary curriculum. Although technologically simple, vague requirements and tight deadlines made the project difficult to pull off.
 
 [Rose](https://github.com/lfairy/rose)
-  : Regular expression engine. By incorporating ideas from automata theory, I keep the implementation simple and fast.
+  : Regular expression engine. By incorporating ideas from automata theory, I avoid the exponential blowup that plagues other engines.
 
 [Rust](http://rust-lang.org/)
   : A new systems programming language designed by Mozilla. I made a [small modification](https://github.com/mozilla/rust/pull/11790) to its standard library, and plan to contribute more in the future.
@@ -55,7 +57,7 @@ As a hobbyist programmer, I spend my free time making cool things and contributi
   : PC speaker interface for Haskell. This toy project gave me a taste of low-level programming, working with the Linux ioctl interface directly.
 
 [pycode](https://github.com/trampgeek/pycode)
-  : An automatic marking system, used for grading first-year CS assignments at the University of Canterbury. I [fixed a few bugs](https://github.com/trampgeek/pycode/pull/3) in the handling of files.
+  : An automatic marking system, used for grading CS assignments at the University of Canterbury. I [fixed a few bugs](https://github.com/trampgeek/pycode/pull/3) in the handling of files.
 
 
 Referees

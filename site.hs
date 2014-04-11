@@ -54,7 +54,6 @@ main = (getConfig >>=) . flip hakyllWith $ do
     pages =
         [ "index.mkd"
         , "cv.mkd"
-        , "code.mkd"
         ]
 
     defaultCompiler
