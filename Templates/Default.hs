@@ -24,7 +24,7 @@ defaultTemplate = BlazeTemplate $ \get ->
             H.title $ do
                 if home == "true"
                     then mempty
-                    else toHtml title <> " | "
+                    else toHtml title <> " « "
                 "lambda fairy"
             stylesheet "/styles/styles.css"
             stylesheet "http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic"
