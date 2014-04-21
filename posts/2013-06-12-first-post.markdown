@@ -1,5 +1,6 @@
 ---
 title: First post
+tags: fluff
 ---
 
 This is the first post! On this blog! It's so exciting! Lots of exclamation points! Yay!

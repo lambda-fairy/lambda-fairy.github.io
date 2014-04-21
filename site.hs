@@ -24,33 +24,50 @@ main = (getConfig >>=) . flip hakyllWith $ do
                     >>= withItemBody (unixFilter "sass" ["-s"])
                     >>= return . fmap compressCss
 
+    tags <- buildTags "posts/*" (fromCapture "tags/*")
+
     match "posts/*" $ do
         route $ gsubRoute "^posts/[[:digit:]]+-[[:digit:]]+-[[:digit:]]+-" (const "blog/")
                     `composeRoutes` prettyUrlRoute
         compile $ do
             defaultCompiler
-                >>= applyBlazeTemplate blogPostTemplate postCtx
+                >>= applyBlazeTemplate blogPostTemplate (postCtx tags)
                 >>= saveSnapshot "content"  -- used in atom.xml
-                >>= applyBlazeTemplate defaultTemplate postCtx
+                >>= applyBlazeTemplate defaultTemplate defaultContext
 
-    create ["blog"] $ do
-        route prettyUrlRoute
-        compile $ do
-            list <- postList "posts/*" recentFirst
-            let ctx = constField "title" "Blog"
-                    <> constField "posts" list
+    let buildPostList title pattern = do
+            posts <- recentFirst =<< loadAll pattern
+            postList <- applyBlazeTemplateList postItemTemplate (postCtx tags) posts
+            let ctx = constField "title" title
+                    <> constField "posts" postList
                     <> defaultContext
             makeItem ""
                 >>= applyBlazeTemplate postListTemplate ctx
                 >>= applyBlazeTemplate defaultTemplate ctx
 
+    let buildAtomFeed title pattern = do
+        let feedCtx = bodyField "description" <> defaultContext
+        posts <- fmap (take 10) . recentFirst =<<
+            loadAllSnapshots pattern "content"
+        renderAtom (feedConfiguration title) feedCtx posts
+
+    create ["blog"] $ do
+        route prettyUrlRoute
+        compile $ buildPostList "Blog" "posts/*"
+
+    tagsRules tags $ \tag pattern -> do
+        let title = "Posts tagged ‘" ++ tag ++ "’"
+
+        route prettyUrlRoute
+        compile $ buildPostList title pattern
+
+        version "atom" $ do
+            route $ setExtension "xml"
+            compile $ buildAtomFeed (Just title) pattern
+
     create ["atom.xml"] $ do
         route idRoute
-        compile $ do
-            let feedCtx = postCtx <> bodyField "description"
-            posts <- fmap (take 10) . recentFirst =<<
-                loadAllSnapshots "posts/*" "content"
-            renderAtom feedConfiguration feedCtx posts
+        compile $ buildAtomFeed Nothing "posts/*"
 
     -- Static pages
     match (fromList pages) $ do
@@ -104,26 +121,19 @@ removeIndexHtml = uncurry combine . second frobnicate . splitFileName
       | otherwise = name
 
 
-postCtx :: Context String
-postCtx = mconcat
+postCtx :: Tags -> Context String
+postCtx tags = mconcat
     [ modificationTimeField "mtime" "%U"
     , dateField "date" "%b %e, %Y"
     , shortUrlField "url"
-    --, tagsField "tags" tags
+    , tagsField "tags" tags
     , defaultContext
     ]
 
 
-postList :: Pattern -> ([Item String] -> Compiler [Item String])
-         -> Compiler String
-postList pattern scramble = do
-    posts <- scramble =<< loadAll pattern
-    applyBlazeTemplateList postItemTemplate postCtx posts
-
-
-feedConfiguration :: FeedConfiguration
-feedConfiguration = FeedConfiguration
-    { feedTitle = "lambda fairy's blog"
+feedConfiguration :: Maybe String -> FeedConfiguration
+feedConfiguration title = FeedConfiguration
+    { feedTitle = fromMaybe "lambda fairy's blog" title
     , feedDescription = "inane ramblings"
     , feedAuthorName = "lambda fairy"
     , feedAuthorEmail = "lambda.fairy@gmail.com"

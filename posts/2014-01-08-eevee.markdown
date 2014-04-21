@@ -1,5 +1,6 @@
 ---
 title: The Color of Science
+tags: fluff
 ---
 
 Yesterday I hatched an Eevee.  It was *shiny*, which in Poké-parlance means it had a rare mutation that changed its color.  In this case, its fur was snow-white instead of brown.

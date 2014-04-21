@@ -1,5 +1,6 @@
 ---
 title: Shooting yourself in the foot
+tags: fluff
 ---
 
 I've come up with a few ["shooting yourself in the foot"][m5p] jokes over the years. I hope you can get a decent chuckle out of these ☺
