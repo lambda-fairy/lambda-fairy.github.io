@@ -30,6 +30,7 @@ main = (getConfig >>=) . flip hakyllWith $ do
         compile $ do
             defaultCompiler
                 >>= applyBlazeTemplate blogPostTemplate postCtx
+                >>= saveSnapshot "content"  -- used in atom.xml
                 >>= applyBlazeTemplate defaultTemplate postCtx
 
     create ["blog"] $ do
@@ -42,6 +43,14 @@ main = (getConfig >>=) . flip hakyllWith $ do
             makeItem ""
                 >>= applyBlazeTemplate postListTemplate ctx
                 >>= applyBlazeTemplate defaultTemplate ctx
+
+    create ["atom.xml"] $ do
+        route idRoute
+        compile $ do
+            let feedCtx = postCtx <> bodyField "description"
+            posts <- fmap (take 10) . recentFirst =<<
+                loadAllSnapshots "posts/*" "content"
+            renderAtom feedConfiguration feedCtx posts
 
     -- Static pages
     match (fromList pages) $ do
@@ -110,3 +119,13 @@ postList :: Pattern -> ([Item String] -> Compiler [Item String])
 postList pattern scramble = do
     posts <- scramble =<< loadAll pattern
     applyBlazeTemplateList postItemTemplate postCtx posts
+
+
+feedConfiguration :: FeedConfiguration
+feedConfiguration = FeedConfiguration
+    { feedTitle = "lambda fairy's blog"
+    , feedDescription = "inane ramblings"
+    , feedAuthorName = "lambda fairy"
+    , feedAuthorEmail = "lambda.fairy@gmail.com"
+    , feedRoot = "http://lfairy.github.io"
+    }
