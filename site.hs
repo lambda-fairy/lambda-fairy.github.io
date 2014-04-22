@@ -31,8 +31,8 @@ main = (getConfig >>=) . flip hakyllWith $ do
                     `composeRoutes` prettyUrlRoute
         compile $ do
             defaultCompiler
-                >>= applyBlazeTemplate blogPostTemplate (postCtx tags)
                 >>= saveSnapshot "content"  -- used in atom.xml
+                >>= applyBlazeTemplate blogPostTemplate (postCtx tags)
                 >>= applyBlazeTemplate defaultTemplate defaultContext
 
     let buildPostList title pattern = do
