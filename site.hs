@@ -14,24 +14,29 @@ import Templates
 
 main :: IO ()
 main = (getConfig >>=) . flip hakyllWith $ do
+    -- Copy images unmodified
     match "images/*" $ do
         route   idRoute
         compile copyFileCompiler
 
+    -- Compile styles using Sass
     match "styles/*.sass" $ do
         route   $ setExtension ".css"
         compile $ getResourceString
                     >>= withItemBody (unixFilter "sass" ["-s"])
                     >>= return . fmap compressCss
 
+    -- Build tags
     tags <- buildTags "posts/*" (fromCapture "tags/*")
 
+    -- Render each and every post
     match "posts/*" $ do
         route $ gsubRoute "^posts/[[:digit:]]+-[[:digit:]]+-[[:digit:]]+-" (const "blog/")
                     `composeRoutes` prettyUrlRoute
         compile $ do
-            defaultCompiler
+            pandocCompiler
                 >>= saveSnapshot "content"  -- used in atom.xml
+                >>= return . fmap demoteHeaders
                 >>= applyBlazeTemplate blogPostTemplate (postCtx tags)
                 >>= applyBlazeTemplate defaultTemplate defaultContext
 
@@ -51,40 +56,35 @@ main = (getConfig >>=) . flip hakyllWith $ do
             loadAllSnapshots pattern "content"
         renderAtom (feedConfiguration title) feedCtx posts
 
+    -- Post list
     create ["blog"] $ do
         route prettyUrlRoute
         compile $ buildPostList "Blog" "posts/*"
 
+    -- Create a page for each tag
     tagsRules tags $ \tag pattern -> do
         let title = "Posts tagged ‘" ++ tag ++ "’"
 
         route prettyUrlRoute
         compile $ buildPostList title pattern
 
+        -- Atom feed, for Planet Haskell
         version "atom" $ do
             route $ setExtension "xml"
             compile $ buildAtomFeed (Just title) pattern
 
+    -- Atom feed
     create ["atom.xml"] $ do
         route idRoute
         compile $ buildAtomFeed Nothing "posts/*"
 
     -- Static pages
-    match (fromList pages) $ do
+    match ("index.mkd" .||. "cv.mkd") $ do
         route prettyUrlRoute
         compile $ do
-            defaultCompiler
+            pandocCompiler
+                >>= return . fmap demoteHeaders
                 >>= applyBlazeTemplate defaultTemplate defaultContext
-
-  where
-    pages =
-        [ "index.mkd"
-        , "cv.mkd"
-        ]
-
-    defaultCompiler
-        = pandocCompiler
-            >>= return . fmap demoteHeaders
 
 
 getConfig :: IO Configuration
@@ -123,8 +123,7 @@ removeIndexHtml = uncurry combine . second frobnicate . splitFileName
 
 postCtx :: Tags -> Context String
 postCtx tags = mconcat
-    [ modificationTimeField "mtime" "%U"
-    , dateField "date" "%b %e, %Y"
+    [ dateField "date" "%b %e, %Y"
     , shortUrlField "url"
     , tagsField "tags" tags
     , defaultContext
