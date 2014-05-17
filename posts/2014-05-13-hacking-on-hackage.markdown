@@ -21,10 +21,10 @@ Building and running the Hackage server went mostly without a hitch. Here are th
 
 * When I uploaded a package, the documentation did not appear. This is because building packages is handled by a separate program, `hackage-build`. Running it solved the problem:
 
-        dist/build/hackage-build/hackage-build init http://localhost:8080
-        dist/build/hackage-build/hackage-build build
+    >     dist/build/hackage-build/hackage-build init http://localhost:8080
+    >     dist/build/hackage-build/hackage-build build
 
-  Alternatively, one could upload documentation manually, which is what I tried first.
+    Alternatively, one could upload documentation manually, which is what I tried first.
 
 [Here's what it looks like.][Screenshot] Beautiful, isn't it?
 
