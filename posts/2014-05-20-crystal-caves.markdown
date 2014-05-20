@@ -3,6 +3,8 @@ title: The Crystal Caves
 tags: fiction
 ---
 
+*One day I decided to write a story about ponies and plants. This was the result.*
+
 Not many ponies know this, but right below the city of Canterlot is a vast, winding network of crystal caves. They were dug out by the ponies who first came to the mountain, seeking their fortunes in gems. Over the years the caves have been picked clean of stones, but its expansiveness and isolation makes it a great place for secret, or dangerous, experiments.
 
 You see, after the plunderseed invasion, the Celestial administration was shocked to find close to no existing literature on the plant. So it came to us, the Universities of Equestria. We, a loose federation of researchers from Vanhoover to Baltimare, were tasked with finding out all we could about this seed of chaos, in return for vast amounts of money. If you noticed a tenfold leap in funding to the Research Council a few moons ago, now you know why.
