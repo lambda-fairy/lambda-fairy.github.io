@@ -13,5 +13,5 @@ I'll post updates semi-regularly to [this very blog][blog], so stay tuned!
 
 [GSoC]: https://www.google-melange.com/gsoc/homepage/google/gsoc2014
 [proposal]: https://docs.google.com/document/d/1bcDiudULtaz3NFCqTHXD2WU6Ighsm199D7ojfS8quVI/edit
-[blog]: http://lfairy.github.io/blog
+[blog]: http://lambda.xyz/blog/
 [squee]: http://www.youtube.com/watch?v=csO8_NCaYFI

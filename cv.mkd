@@ -5,7 +5,7 @@ page-title: Chris Wong
 
 
 <lambda.fairy@gmail.com>  
-<http://lfairy.github.io>
+<http://lambda.xyz>
 
 
 Summary
