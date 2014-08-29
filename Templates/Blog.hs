@@ -18,7 +18,7 @@ blogPostTemplate = BlazeTemplate $ \get ->
     build <$> get "date" <*> get "body" <*> get "url"
   where
     build date body url = do
-        H.p ! A.id "post-date" $ do
+        H.p ! A.class_ "timestamp" $ do
             H.a ! A.href (toValue url) ! A.title "link to this post" $ do
                 H.time $ toHtml date
         preEscapedToHtml body
@@ -32,7 +32,7 @@ postItemTemplate = BlazeTemplate $ \get ->
         H.li $ do
             H.a ! A.href (toValue url) $ toHtml title
             " "
-            H.time $ toHtml date
+            H.time ! A.class_ "timestamp" $ toHtml date
 
 
 postListTemplate = BlazeTemplate $ \get ->

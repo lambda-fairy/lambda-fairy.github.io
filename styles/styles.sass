@@ -139,6 +139,18 @@ section
     margin: 1.5em -24px 0
     padding: 0.1em 24px 0
 
+  .timestamp
+    font-size: 75%
+    text-transform: uppercase
+
+  #posts
+    list-style: none
+    padding-left: 0
+
+    time
+      margin-left: 0.25em
+      color: #aaa
+
 footer
   color: $primary-light
   font-size: 75%
@@ -149,16 +161,6 @@ footer
     +block
     a
       color: lighten($primary-light, 20)
-
-#posts
-  list-style: none
-  padding-left: 0
-
-  time
-    margin-left: 0.25em
-    color: #aaa
-    font-size: 75%
-    text-transform: uppercase
 
 @media (max-width: 500px)
   // Responsive design yay
