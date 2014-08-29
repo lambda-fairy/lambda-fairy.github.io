@@ -49,23 +49,23 @@ PHP
 
 I was just thinking... you know about gun accidents?
 
-<i>Yeah, what about them&mdash;</i>
+> Yeah, what about them---
 
-So many people get hurt &mdash;killed, even&mdash; by guns, every single day. And you know how they get hurt? Because SOMEONE ELSE IS POINTING THE GUN AT THEM.
+So many people get hurt ---killed, even--- by guns, every single day. And you know how they get hurt? Because SOMEONE ELSE IS POINTING THE GUN AT THEM.
 
-<i>Obviously&mdash;</i>
+> Obviously---
 
 Don't interrupt, Rasmus. You're breaking my flow.
 
-<i>Sorry.</i>
+> Sorry.
 
 Anyway, I was thinking -- why not fix the problem right at the beginning? Why don't we plug the hole *right at its source*?
 
-<i>You mean, like improved education, tougher licensing laws&mdash;</i>
+> You mean, like improved education, tougher licensing laws---
 
 No, Rasmus, don't you see? Accidents happen only when people point their gun *away* from themselves.
 
-<i>You've lost me now. Go on.</i>
+> You've lost me now. Go on.
 
 Rasmus, I want every gun made from now on changed... *to [fire backwards][lolphp].*
 
