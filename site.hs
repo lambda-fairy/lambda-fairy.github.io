@@ -94,6 +94,10 @@ getConfig = do
     return defaultConfiguration
         { destinationDirectory = "../master"
         , storeDirectory = homeDirectory </> ".cache/hakyll"
+        , ignoreFile = \path ->
+            let name = takeFileName path
+            in  ignoreFile defaultConfiguration name
+                || name == "4913"  -- Vim
         }
 
 
