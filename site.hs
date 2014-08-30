@@ -79,7 +79,7 @@ main = (getConfig >>=) . flip hakyllWith $ do
         compile $ buildAtomFeed Nothing "posts/*"
 
     -- Static pages
-    match ("index.mkd" .||. "cv.mkd") $ do
+    match ("index.md" .||. "cv.md") $ do
         route prettyUrlRoute
         compile $ do
             pandocCompiler

@@ -1,5 +1,5 @@
 ---
-title: Hacking on Hackage
+title: Hacking on Hackage, part 2
 tags: haskell
 ---
 
