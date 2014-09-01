@@ -59,7 +59,7 @@ Don't interrupt, Rasmus. You're breaking my flow.
 
 > Sorry.
 
-Anyway, I was thinking -- why not fix the problem right at the beginning? Why don't we plug the hole *right at its source*?
+Anyway, I was thinking --- why not fix the problem right at the beginning? Why don't we plug the hole *right at its source*?
 
 > You mean, like improved education, tougher licensing laws---
 

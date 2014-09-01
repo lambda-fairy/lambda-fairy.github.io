@@ -55,4 +55,4 @@ Though the Summer of Code has ended, my work with Hackage has not. There are sti
 
 [candidates bugs]: https://github.com/haskell/hackage-server/labels/component:%20candidates
 
-And lest I forget---many thanks to my mentor Duncan Coutts for his guidance throughout this project! Time zone issues aside, I had plenty of fun this summer, and learned just as much.
+And lest I forget --- many thanks to my mentor Duncan Coutts for his guidance throughout this project! Time zone issues aside, I had plenty of fun this summer, and learned just as much.
