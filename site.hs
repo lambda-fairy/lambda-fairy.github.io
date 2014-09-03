@@ -37,12 +37,12 @@ main = (getConfig >>=) . flip hakyllWith $ do
             pandocCompiler
                 >>= saveSnapshot "content"  -- used in atom.xml
                 >>= return . fmap demoteHeaders
-                >>= applyBlazeTemplate blogPostTemplate (postCtx tags)
+                >>= applyBlazeTemplate blogPostTemplate (postContext tags)
                 >>= applyBlazeTemplate defaultTemplate defaultContext
 
     let buildPostList title pattern = do
             posts <- recentFirst =<< loadAll pattern
-            postList <- applyBlazeTemplateList postItemTemplate (postCtx tags) posts
+            postList <- applyBlazeTemplateList postItemTemplate (postContext tags) posts
             let ctx = constField "title" title
                     <> constField "posts" postList
                     <> defaultContext
@@ -125,8 +125,8 @@ removeIndexHtml = uncurry combine . second frobnicate . splitFileName
       | otherwise = name
 
 
-postCtx :: Tags -> Context String
-postCtx tags = mconcat
+postContext :: Tags -> Context String
+postContext tags = mconcat
     [ dateField "date" "%b %e, %Y"
     , shortUrlField "url"
     , tagsField "tags" tags
