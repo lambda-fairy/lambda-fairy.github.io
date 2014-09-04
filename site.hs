@@ -38,20 +38,20 @@ main = (getConfig >>=) . flip hakyllWith $ do
                 >>= saveSnapshot "content"  -- used in atom.xml
                 >>= return . fmap demoteHeaders
                 >>= applyBlazeTemplate blogPostTemplate (postContext tags)
-                >>= applyBlazeTemplate defaultTemplate defaultContext
+                >>= applyBlazeTemplate defaultTemplate myContext
 
     let buildPostList title pattern = do
             posts <- recentFirst =<< loadAll pattern
             postList <- applyBlazeTemplateList postItemTemplate (postContext tags) posts
             let ctx = constField "title" title
                     <> constField "posts" postList
-                    <> defaultContext
+                    <> myContext
             makeItem ""
                 >>= applyBlazeTemplate postListTemplate ctx
                 >>= applyBlazeTemplate defaultTemplate ctx
 
     let buildAtomFeed title pattern = do
-        let feedCtx = bodyField "description" <> defaultContext
+        let feedCtx = bodyField "description" <> myContext
         posts <- fmap (take 10) . recentFirst =<<
             loadAllSnapshots pattern "content"
         renderAtom (feedConfiguration title) feedCtx posts
@@ -84,7 +84,7 @@ main = (getConfig >>=) . flip hakyllWith $ do
         compile $ do
             pandocCompiler
                 >>= return . fmap demoteHeaders
-                >>= applyBlazeTemplate defaultTemplate defaultContext
+                >>= applyBlazeTemplate defaultTemplate myContext
 
 
 getConfig :: IO Configuration
@@ -128,10 +128,13 @@ removeIndexHtml = uncurry combine . second frobnicate . splitFileName
 postContext :: Tags -> Context String
 postContext tags = mconcat
     [ dateField "date" "%b %e, %Y"
-    , shortUrlField "url"
     , tagsField "tags" tags
-    , defaultContext
+    , myContext
     ]
+
+
+myContext :: Context String
+myContext = shortUrlField "url" <> defaultContext
 
 
 feedConfiguration :: Maybe String -> FeedConfiguration
