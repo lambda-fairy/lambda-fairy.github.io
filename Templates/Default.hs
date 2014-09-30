@@ -27,7 +27,7 @@ defaultTemplate = BlazeTemplate $ \get ->
                     else toHtml title <> " « "
                 "lambda fairy"
             stylesheet "/styles/styles.css"
-            stylesheet "http://fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic"
+            stylesheet "//fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic"
             H.meta ! A.name "viewport" ! A.content "width=device-width"
 
         H.body $ do
