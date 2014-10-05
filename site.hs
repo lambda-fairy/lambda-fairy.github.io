@@ -143,5 +143,5 @@ feedConfiguration title = FeedConfiguration
     , feedDescription = "inane ramblings"
     , feedAuthorName = "lambda fairy"
     , feedAuthorEmail = "lambda.fairy@gmail.com"
-    , feedRoot = "http://lambda.xyz"
+    , feedRoot = "https://lambda.xyz"
     }

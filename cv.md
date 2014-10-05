@@ -5,7 +5,7 @@ page-title: Chris Wong
 
 
 <lambda.fairy@gmail.com>  
-<http://lambda.xyz>
+<https://lambda.xyz>
 
 
 Summary
@@ -45,7 +45,7 @@ Most of this work can also be found on [GitHub][].
 [GitHub]: https://github.com/lfairy
 
 [Hackage](https://github.com/haskell/hackage-server/wiki/GSoC-2014) (ongoing)
-  : A central repository for Haskell software. I'm currently working on this project as part of the [Google Summer of Code](http://code.google.com/soc).
+  : A central repository for Haskell software. I'm currently working on this project as part of the [Google Summer of Code](https://developers.google.com/open-source/soc/).
 [Rose](https://github.com/lfairy/rose) (2013--2014)
   : Regular expression engine. By incorporating ideas from automata theory, I avoid the exponential blowup that plagues other engines.
 [Sparkle](/sparkle) (2013)

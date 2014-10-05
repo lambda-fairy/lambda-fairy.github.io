@@ -15,7 +15,7 @@ Since my project covered a few obscure parts of Hackage and Cabal, I think it's 
 
 If you've uploaded a library to [Hackage][] before, you may have noticed that the Haddock documentation does not appear straight away. Since building a package can be quite resource intensive, the job is handled by a dedicated *build bot*. This bot continually polls for new packages, invokes `cabal install` on them (with some special flags, which I'll go into later), and uploads the result.
 
-[Hackage]: http://hackage.haskell.org/
+[Hackage]: https://hackage.haskell.org/
 
 Of course, this process does not always succeed. If a package fails to compile, then it will not have any documentation either. This is clearly very inconvenient.
 

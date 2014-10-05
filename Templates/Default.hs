@@ -45,7 +45,7 @@ defaultTemplate = BlazeTemplate $ \get ->
             H.footer $ do
                 H.p $ do
                     "Licensed under "
-                    H.a ! A.href "http://creativecommons.org/licenses/by-sa/4.0/" $
+                    H.a ! A.href "https://creativecommons.org/licenses/by-sa/4.0/" $
                         "CC BY-SA 4.0"
                     "."
                     H.br

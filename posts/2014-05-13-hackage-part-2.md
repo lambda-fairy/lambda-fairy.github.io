@@ -29,4 +29,4 @@ Building and running the Hackage server went mostly without a hitch. Here are th
 [Here's what it looks like.][Screenshot] Beautiful, isn't it?
 
 [Hi Dr Nick!]: https://www.youtube.com/watch?v=YlmECL2ED2I
-[Screenshot]: http://imgur.com/iYz3962
+[Screenshot]: https://imgur.com/iYz3962
