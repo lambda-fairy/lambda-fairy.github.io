@@ -40,7 +40,7 @@ applyBlazeTemplate tpl context item = do
     body <- renderHtml <$> runBlazeTemplate tpl lookupMeta
     return $ itemSetBody body item
   where
-    lookupMeta key = unContext context key item >>= \result ->
+    lookupMeta key = unContext context key [] item >>= \result ->
         case result of
             StringField s -> return s
             ListField{} -> error $ "Field '" ++ key ++ "' is a list. I don't like lists."
