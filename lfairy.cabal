@@ -1,0 +1,15 @@
+name: lfairy
+version: 0
+build-type: Simple
+extra-source-files: README.md
+cabal-version: >= 1.8
+
+executable lfairy
+    main-is: site.hs
+    ghc-options: -Wall -fno-warn-unused-do-bind -fno-warn-missing-signatures
+
+    build-depends:
+        base == 4.*,
+        blaze-html,
+        filepath,
+        hakyll == 4.6.*
