@@ -22,6 +22,12 @@ You take out your gun, aim it at your foot, and pull the trigger. It creates a p
 You pat yourself on the back and limp out of the office, proud of a job well done.
 
 
+COBOL
+-----
+
+You try to shoot yourself in the foot, but the compiler notices you're already dead inside and optimizes it away.
+
+
 Eiffel
 ------
 
@@ -31,7 +37,7 @@ You can't.
 OCaml
 -----
 
-You create a new foot that is already shot, and treat that as the original.  Your old foot gradually fades away.
+You create a new foot that is already shot, and treat that as the original. Your old foot gradually fades away.
 
 
 Haskell
@@ -76,7 +82,7 @@ You aim the gun at your foot, and pull the trigger. Your head explodes.
 [lolphp]: https://en.wikipedia.org/wiki/Magic_quotes
 
 
-Agda
-----
+Coq
+---
 
 What's a foot?
