@@ -37,7 +37,7 @@ You can't.
 OCaml
 -----
 
-You create a new foot that is already shot, and treat that as the original. Your old foot gradually fades away.
+You create a new foot that is already shot, and treat that as the original. Your old foot eventually disappears.
 
 
 Haskell
