@@ -1,10 +1,13 @@
-language: haskell
+language: ruby
+rvm: 2.2
 
 env:
   - GHCVER=7.10.1
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_c9db806b2ed5_key -iv $encrypted_c9db806b2ed5_iv -in .travis/deploy_key.enc -out .travis/deploy_key -d
+  - gem install sass --no-rdoc --no-ri
+  - sass --version
   - |
     travis_retry sudo add-apt-repository -y ppa:hvr/ghc
     travis_retry sudo apt-get update
