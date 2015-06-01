@@ -4,7 +4,7 @@ import Control.Applicative
 import Control.Arrow
 import Data.Maybe
 import Data.Monoid
-import System.Environment (getEnvironment)
+import System.Environment
 import System.FilePath.Posix
 
 import Hakyll
@@ -89,10 +89,12 @@ main = (getConfig >>=) . flip hakyllWith $ do
 
 getConfig :: IO Configuration
 getConfig = do
-    homeDirectory <- fromMaybe (error "$HOME not defined") . lookup "HOME"
-                    <$> getEnvironment
+    homeDirectory <- getEnv "HOME"
+    destinationDirectory' <-
+        fromMaybe (destinationDirectory defaultConfiguration) <$>
+        lookupEnv "OUTPUT"
     return defaultConfiguration
-        { destinationDirectory = "../master"
+        { destinationDirectory = destinationDirectory'
         , storeDirectory = homeDirectory </> ".cache/hakyll"
         , ignoreFile = \path ->
             let name = takeFileName path
