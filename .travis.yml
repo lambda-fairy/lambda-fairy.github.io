@@ -28,3 +28,6 @@ after_success:
     git commit -m 'Deploy'
     git remote add deploy git@aloe.lambda.xyz:lfairy.github.io.git
     git push -f -u deploy master
+
+addons:
+  ssh_known_hosts: aloe.lambda.xyz
