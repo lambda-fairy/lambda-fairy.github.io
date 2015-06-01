@@ -1,0 +1,30 @@
+language: haskell
+
+env:
+  - GHCVER=7.10.1
+
+before_install:
+  - openssl aes-256-cbc -K $encrypted_c9db806b2ed5_key -iv $encrypted_c9db806b2ed5_iv -in .travis/deploy_key.enc -out .travis/deploy_key -d
+  - |
+    travis_retry sudo add-apt-repository -y ppa:hvr/ghc
+    travis_retry sudo apt-get update
+    travis_retry sudo apt-get install cabal-install-1.22 ghc-$GHCVER
+    export PATH=/opt/ghc/$GHCVER/bin:/opt/cabal/1.22/bin:$PATH
+  - travis_retry cabal update
+
+install:
+  - cabal install --only-dependencies
+
+script:
+  - cabal run -- rebuild
+
+after_success:
+  - chmod 600 .travis/deploy_key
+  - ssh-add .travis/deploy_key
+  - |
+    cd _site
+    git init
+    git add .
+    git commit -m 'Deploy'
+    git remote add deploy git@aloe.lambda.xyz:lfairy.github.io.git
+    git push -f -u deploy master
