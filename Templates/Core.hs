@@ -20,8 +20,6 @@ module Templates.Core
     , stylesheet
     ) where
 
-import Control.Applicative
-import Data.Foldable (foldMap)
 import Data.List (isPrefixOf)
 import System.FilePath.Posix
 import Text.Blaze.Html.Renderer.String (renderHtml)

@@ -6,7 +6,6 @@ module Templates.Blog
     , postListTemplate
     ) where
 
-import Control.Applicative
 import Text.Blaze.Html ((!), preEscapedToHtml, toHtml, toValue)
 import qualified Text.Blaze.Html5 as H
 import qualified Text.Blaze.Html5.Attributes as A

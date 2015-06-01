@@ -2,8 +2,8 @@
 
 import Control.Applicative
 import Control.Arrow
-import Data.Maybe (fromMaybe)
-import Data.Monoid ((<>), mconcat)
+import Data.Maybe
+import Data.Monoid
 import System.Environment (getEnvironment)
 import System.FilePath.Posix
 
