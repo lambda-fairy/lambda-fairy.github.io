@@ -17,7 +17,7 @@ before_install:
   - travis_retry cabal update
 
 install:
-  - cabal install --only-dependencies
+  - cabal install --only-dependencies -O0
 
 script:
   - cabal run -- rebuild
