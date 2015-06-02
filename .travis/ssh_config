@@ -1,5 +1,4 @@
 Host aloe.lambda.xyz
     Port 443
-    User git
     StrictHostKeyChecking no
     UserKnownHostsFile /dev/null
