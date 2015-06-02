@@ -36,4 +36,6 @@ after_success:
     git add .
     git commit -m 'Deploy'
     git remote add aloe git@aloe.lambda.xyz:lfairy.github.io.git
-    git push -f -u aloe master
+    git push -f aloe master
+    git remote add github git@github.com:lfairy/lfairy.github.io.git
+    git push -f github master
