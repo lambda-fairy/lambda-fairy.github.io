@@ -22,15 +22,20 @@ script:
   - cabal run -- rebuild
 
 after_success:
-  - chmod 600 .travis/deploy_key
-  - ssh-add .travis/deploy_key
+  - |
+    eval "$(ssh-agent -s)"
+    chmod 600 .travis/deploy_key
+    ssh-add .travis/deploy_key
+  - |
+    git config --global user.email 'nobody@example.com'
+    git config --global user.name 'Travis CI'
   - |
     cd _site
     git init
     git add .
     git commit -m 'Deploy'
-    git remote add deploy git@aloe.lambda.xyz:lfairy.github.io.git
+    git remote add deploy ssh://git@aloe.lambda.xyz:443/lfairy.github.io.git
     git push -f -u deploy master
 
 addons:
-  ssh_known_hosts: aloe.lambda.xyz
+  ssh_known_hosts: aloe.lambda.xyz:443
