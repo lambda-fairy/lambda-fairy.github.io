@@ -6,7 +6,7 @@ env:
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_c9db806b2ed5_key -iv $encrypted_c9db806b2ed5_iv -in .travis/deploy_key.enc -out .travis/deploy_key -d
-  - ssh-keyscan -p 443 -H aloe.lambda.xyz 2>&1 | tee -a $HOME/.ssh/known_hosts
+  - cat .travis/known_hosts >> $HOME/.ssh/known_hosts
   - gem install sass --no-rdoc --no-ri
   - sass --version
   - |
