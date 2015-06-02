@@ -6,7 +6,7 @@ env:
 
 before_install:
   - openssl aes-256-cbc -K $encrypted_c9db806b2ed5_key -iv $encrypted_c9db806b2ed5_iv -in .travis/deploy_key.enc -out .travis/deploy_key -d
-  - cat .travis/known_hosts >> $HOME/.ssh/known_hosts
+  - cat .travis/ssh_config >> $HOME/.ssh/config
   - gem install sass --no-rdoc --no-ri
   - sass --version
   - |
@@ -35,5 +35,5 @@ after_success:
     git init
     git add .
     git commit -m 'Deploy'
-    git remote add deploy ssh://git@aloe.lambda.xyz:443/lfairy.github.io.git
+    git remote add deploy aloe.lambda.xyz:lfairy.github.io.git
     git push -f -u deploy master
