@@ -15,7 +15,7 @@ import Templates
 main :: IO ()
 main = (getConfig >>=) . flip hakyllWith $ do
     -- Copy static files unmodified
-    match ("CNAME" .||. ("images/**" .&&. complement "*.xcf")) $ do
+    match ("CNAME" .||. "circle.yml" .||. ("images/**" .&&. complement "*.xcf")) $ do
         route   idRoute
         compile copyFileCompiler
 

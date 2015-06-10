@@ -1,0 +1,37 @@
+general:
+  branches:
+    ignore:
+      - master
+
+machine:
+  ghc:
+    version: 7.10.1
+  ruby:
+    version: 2.2.0
+
+dependencies:
+  override:
+    - gem install sass --no-rdoc --no-ri
+    - cabal update
+    - cabal install --only-dependencies -O0 -j
+
+test:
+  override:
+    - cabal run -- rebuild
+
+deployment:
+  push:
+    branch: source
+    commands:
+      - |
+        cat .travis/ssh_config >> $HOME/.ssh/config
+        git config --global user.email 'nobody@example.com'
+        git config --global user.name 'Circle CI'
+        cd _site
+        git init
+        git add .
+        git commit -m 'Deploy'
+        git remote add aloe git@aloe.lambda.xyz:lfairy.github.io.git
+        git push -f aloe master
+        git remote add github git@github.com:lfairy/lfairy.github.io.git
+        git push -f github master
