@@ -17,7 +17,7 @@ dependencies:
 
 test:
   override:
-    - cabal run -- rebuild
+    - cabal configure -O0 && cabal run -- rebuild
 
 deployment:
   push:
