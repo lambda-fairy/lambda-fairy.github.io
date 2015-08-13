@@ -35,7 +35,7 @@ Volunteer contributor, February -- March 2015
 
 ## University of Canterbury
 
-Casual Python developer, November 2014 -- present
+Casual Python developer, November 2014 -- June 2015
 
 * Extended the online quiz system for the 200-level course "Formal Languages and Compilers".
 * Implemented a pushdown automaton simulator, with documentation and tests.
