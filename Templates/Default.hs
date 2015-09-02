@@ -6,7 +6,6 @@ module Templates.Default (defaultTemplate) where
 import Control.Applicative
 import Control.Monad
 import Data.Monoid
-import System.IO.Unsafe
 
 import Templates.Core
 
@@ -29,7 +28,6 @@ defaultTemplate = LucidTemplate $ \ask -> do
             stylesheet "/styles/styles.css"
             stylesheet "//fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic"
             meta_ [name_ "viewport", content_ "width=device-width"]
-            toHtmlRaw mixpanel
 
         body_ $ do
             header_ $ h1_ $ a_ [href_ "/"] "lambda fairy"
@@ -60,8 +58,3 @@ defaultLinks
     : link "/blog" "Blog"
     : link "https://github.com/lfairy" "GitHub"
     : []
-
-
-mixpanel :: String
-mixpanel = unsafePerformIO $ readFile "mixpanel.html"
-{-# NOINLINE mixpanel #-}
