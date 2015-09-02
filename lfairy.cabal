@@ -10,6 +10,8 @@ executable lfairy
 
     build-depends:
         base == 4.*,
-        blaze-html,
         filepath,
-        hakyll == 4.7.*
+        hakyll == 4.7.*,
+        lucid,
+        text,
+        transformers

@@ -1,13 +1,13 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE FlexibleContexts, OverloadedStrings #-}
 
--- | Utilities for rendering Blaze templates and the navigation bar.
+-- | Utilities for rendering Lucid templates and the navigation bar.
 
 module Templates.Core
     (
     -- * Templates
-      BlazeTemplate(..)
-    , applyBlazeTemplate
-    , applyBlazeTemplateList
+      LucidTemplate(..)
+    , applyLucidTemplate
+    , applyLucidTemplateList
 
     -- * Navigation bar
     , Link()
@@ -18,35 +18,37 @@ module Templates.Core
 
     -- * Everything else
     , stylesheet
+
+    -- * Re-exports
+    , module Control.Monad.Trans.Class
+    , module Hakyll
+    , module Lucid
     ) where
 
+import Control.Monad.Trans.Class
 import Data.List (isPrefixOf)
+import qualified Data.Text as Text
+import qualified Data.Text.Lazy as LText
 import System.FilePath.Posix
-import Text.Blaze.Html.Renderer.String (renderHtml)
-import Text.Blaze.Html (Html, (!), toHtml, toValue)
-import qualified Text.Blaze.Html5 as H
-import qualified Text.Blaze.Html5.Attributes as A
 
 import Hakyll
+import Lucid
 
 
-newtype BlazeTemplate = BlazeTemplate { runBlazeTemplate :: (String -> Compiler String) -> Compiler Html }
+newtype LucidTemplate = LucidTemplate { runLucidTemplate :: (String -> Compiler ContextField) -> HtmlT Compiler () }
 
 
-applyBlazeTemplate :: BlazeTemplate -> Context a -> Item a -> Compiler (Item String)
-applyBlazeTemplate tpl context item = do
-    body <- renderHtml <$> runBlazeTemplate tpl lookupMeta
+applyLucidTemplate :: LucidTemplate -> Context a -> Item a -> Compiler (Item String)
+applyLucidTemplate tpl context item = do
+    body <- fmap LText.unpack . renderTextT $ runLucidTemplate tpl lookupMeta
     return $ itemSetBody body item
   where
-    lookupMeta key = unContext context key [] item >>= \result ->
-        case result of
-            StringField s -> return s
-            ListField{} -> error $ "Field '" ++ key ++ "' is a list. I don't like lists."
+    lookupMeta key = unContext context key [] item
 
 
-applyBlazeTemplateList :: BlazeTemplate -> Context a -> [Item a] -> Compiler String
-applyBlazeTemplateList tpl context items = do
-    items' <- mapM (applyBlazeTemplate tpl context) items
+applyLucidTemplateList :: LucidTemplate -> Context a -> [Item a] -> Compiler String
+applyLucidTemplateList tpl context items = do
+    items' <- mapM (applyLucidTemplate tpl context) items
     return $ concatMap itemBody items'
 
 
@@ -95,16 +97,15 @@ matchLink (Link pattern _ _) current
 
 
 -- | Render the navigation bar.
-renderNavigation :: [Link] -> FilePath -> Html
-renderNavigation links current = H.ul $ foldMap process links
+renderNavigation :: Monad m => [Link] -> FilePath -> HtmlT m ()
+renderNavigation links current = ul_ $ foldMap process links
   where
+    process :: Monad m => Link -> HtmlT m ()
     process l@(Link _ href label) =
-        let addClass
-              | matchLink l current = (! A.class_ "current")
-              | otherwise = id
-        in H.li $ addClass $ H.a ! A.href (toValue href) $ toHtml label
+        li_ [class_ "current" | matchLink l current] $
+            a_ [href_ (Text.pack href)] (toHtml label)
 
 
 -- | Insert a stylesheet.
-stylesheet :: String -> Html
-stylesheet url = H.link ! A.rel "stylesheet" ! A.href (toValue url)
+stylesheet :: Monad m => String -> HtmlT m ()
+stylesheet url = link_ [rel_ "stylesheet", href_ (Text.pack url)]

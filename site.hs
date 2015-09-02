@@ -37,18 +37,18 @@ main = (getConfig >>=) . flip hakyllWith $ do
             pandocCompiler
                 >>= saveSnapshot "content"  -- used in atom.xml
                 >>= return . fmap demoteHeaders
-                >>= applyBlazeTemplate blogPostTemplate (postContext tags)
-                >>= applyBlazeTemplate defaultTemplate myContext
+                >>= applyLucidTemplate blogPostTemplate (postContext tags)
+                >>= applyLucidTemplate defaultTemplate myContext
 
     let buildPostList title pattern = do
             posts <- recentFirst =<< loadAll pattern
-            postList <- applyBlazeTemplateList postItemTemplate (postContext tags) posts
+            postList <- applyLucidTemplateList postItemTemplate (postContext tags) posts
             let ctx = constField "title" title
                     <> constField "posts" postList
                     <> myContext
             makeItem ""
-                >>= applyBlazeTemplate postListTemplate ctx
-                >>= applyBlazeTemplate defaultTemplate ctx
+                >>= applyLucidTemplate postListTemplate ctx
+                >>= applyLucidTemplate defaultTemplate ctx
 
     let buildAtomFeed title pattern = do
         let feedCtx = bodyField "description" <> myContext
@@ -84,7 +84,7 @@ main = (getConfig >>=) . flip hakyllWith $ do
         compile $ do
             pandocCompiler
                 >>= return . fmap demoteHeaders
-                >>= applyBlazeTemplate defaultTemplate myContext
+                >>= applyLucidTemplate defaultTemplate myContext
 
 
 getConfig :: IO Configuration

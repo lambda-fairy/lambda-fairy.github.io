@@ -1,40 +1,38 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Templates.Blog
-    ( blogPostTemplate
-    , postItemTemplate
-    , postListTemplate
-    ) where
+module Templates.Blog where
 
-import Text.Blaze.Html ((!), preEscapedToHtml, toHtml, toValue)
-import qualified Text.Blaze.Html5 as H
-import qualified Text.Blaze.Html5.Attributes as A
+
+import qualified Data.Text as Text
 
 import Templates.Core
 
 
-blogPostTemplate = BlazeTemplate $ \get ->
-    build <$> get "date" <*> get "body" <*> get "url"
-  where
-    build date body url = do
-        H.p ! A.class_ "timestamp" $ do
-            H.a ! A.href (toValue url) ! A.title "link to this post" $ do
-                H.time $ toHtml date
-        preEscapedToHtml body
+blogPostTemplate = LucidTemplate $ \ask -> do
+    StringField date <- lift $ ask "date"
+    StringField body <- lift $ ask "body"
+    StringField url <- lift $ ask "url"
+
+    p_ [class_ "timestamp"] $
+        a_ [href_ (Text.pack url), title_ "link to this post"] $
+            time_ $ toHtml date
+
+    toHtmlRaw body
 
 
 -- | A single entry on the archive page.
-postItemTemplate = BlazeTemplate $ \get ->
-    build <$> get "title" <*> get "date" <*> get "url"
-  where
-    build title date url = do
-        H.li $ do
-            H.a ! A.href (toValue url) $ toHtml title
-            " "
-            H.time ! A.class_ "timestamp" $ toHtml date
+postItemTemplate = LucidTemplate $ \ask -> do
+    StringField title <- lift $ ask "title"
+    StringField date <- lift $ ask "date"
+    StringField url <- lift $ ask "url"
+
+    li_ $ do
+        a_ [href_ (Text.pack url)] $ toHtml title
+        " "
+        time_ [class_ "timestamp"] $ toHtml date
 
 
-postListTemplate = BlazeTemplate $ \get ->
-    build <$> get "posts"
-  where
-    build posts = H.ul ! A.id "posts" $ preEscapedToHtml posts
+postListTemplate = LucidTemplate $ \ask -> do
+    StringField posts <- lift $ ask "posts"
+
+    ul_ [id_ "posts"] $ toHtmlRaw posts
