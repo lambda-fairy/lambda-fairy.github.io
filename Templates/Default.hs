@@ -29,7 +29,6 @@ defaultTemplate = LucidTemplate $ \ask -> do
             stylesheet "/styles/styles.css"
             stylesheet "//fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic"
             meta_ [name_ "viewport", content_ "width=device-width"]
-            toHtmlRaw analytics
 
         body_ $ do
             header_ $ h1_ $ a_ [href_ "/"] "lambda fairy"
@@ -51,6 +50,8 @@ defaultTemplate = LucidTemplate $ \ask -> do
                     br_ []
                     a_ [href_ "https://blockchain.info/address/12oNDcYKQgH3QTMm2rChMC4a6FdQC65wLb"]
                         "Bitcoin"
+
+            toHtmlRaw analytics
 
 
 defaultLinks :: [Link]
