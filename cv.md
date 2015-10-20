@@ -23,6 +23,13 @@ Education
 Experience
 ==========
 
+## Google
+
+Software Engineering intern, November 2015 -- February 2016
+
+* Work to be decided.
+
+
 ## The Rust programming language (Mozilla)
 
 Volunteer contributor, February -- March 2015
@@ -61,8 +68,8 @@ Most of this work can also be found on [GitHub].
 [Maud](http://lfairy.gitbooks.io/maud/content/)
   : A template engine implemented as a Rust compiler plugin. Templates are written inline using Rust syntax, and type-checked and optimized with the rest of the program.
 
-[Hircine](https://github.com/lfairy/hircine)
-  : A framework for IRC bots, written in Haskell. Each module runs on its own thread, communicating via a bounded queue.
+[nationstates](https://github.com/lfairy/nationstates)
+  : Haskell API wrapper for the web game NationStates. Uses applicative functors to provide a type-safe, composable interface.
 
 
 Achievements
