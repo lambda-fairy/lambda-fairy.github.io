@@ -11,9 +11,9 @@ machine:
     - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 10
     - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 10
   ghc:
-    version: 7.10.3
+    version: 7.10.2
   ruby:
-    version: 2.2.0
+    version: 2.3.0
 
 dependencies:
   override:
