@@ -27,7 +27,8 @@ Experience
 
 Software Engineering intern, November 2015 -- February 2016
 
-* Work to be decided.
+* Constructed a statistical model of CSS performance.
+* Developed tools for profiling the style engine in Chrome/Blink.
 
 
 ## The Rust programming language (Mozilla)
