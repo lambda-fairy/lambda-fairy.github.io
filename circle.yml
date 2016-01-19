@@ -4,6 +4,12 @@ general:
       - master
 
 machine:
+  pre:
+    # http://stackoverflow.com/q/34654262
+    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.6 20
+    - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.6 20
+    - sudo update-alternatives --install /usr/bin/gcc gcc /usr/bin/gcc-4.9 10
+    - sudo update-alternatives --install /usr/bin/g++ g++ /usr/bin/g++-4.9 10
   ghc:
     version: 7.10.1
   ruby:
