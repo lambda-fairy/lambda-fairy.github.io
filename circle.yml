@@ -13,7 +13,7 @@ machine:
   ghc:
     version: 7.10.2
   ruby:
-    version: 2.3.0
+    version: 2.2
 
 dependencies:
   override:
