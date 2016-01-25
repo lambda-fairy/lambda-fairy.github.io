@@ -23,7 +23,7 @@ dependencies:
 
 test:
   override:
-    - cabal configure -O0 && cabal run -- rebuild
+    - cabal configure -O0 && cabal run --ghc-option=-j -- rebuild
 
 deployment:
   push:
