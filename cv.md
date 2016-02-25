@@ -4,7 +4,7 @@ page-title: Chris Wong
 ---
 
 
-<lambda.fairy@gmail.com>&emsp;&emsp;[+61 43 273 273 1][mobile]&emsp;&emsp;[lambda.xyz][website]&emsp;&emsp;[stackoverflow/617159][stackoverflow]&emsp;&emsp;[github/lfairy][github]
+<lambda.fairy@gmail.com> &emsp; [+61&nbsp;4&nbsp;327&nbsp;327&nbsp;31][mobile]  &emsp; [lambda.xyz][website] &emsp; [stackoverflow/617159][stackoverflow] &emsp; [github/lfairy][github]
 
 [mobile]: tel:+61432732731
 [website]: https://lambda.xyz
