@@ -48,9 +48,6 @@ defaultTemplate = LucidTemplate $ \ask -> do
                     a_ [href_ "https://creativecommons.org/licenses/by-sa/4.0/"]
                         "CC BY-SA 4.0"
                     "."
-                    br_ []
-                    a_ [href_ "https://blockchain.info/address/12oNDcYKQgH3QTMm2rChMC4a6FdQC65wLb"]
-                        "Bitcoin"
 
             toHtmlRaw analytics
 
