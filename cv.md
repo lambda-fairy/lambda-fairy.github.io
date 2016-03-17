@@ -29,18 +29,7 @@ Experience
 
 Software Engineering intern, November 2015 -- February 2016
 
-* Constructed a statistical model of CSS performance.
-* Developed tools for profiling the style engine in Chrome/Blink.
-
-
-## The Rust programming language (Mozilla)
-
-Contributor, February -- March 2015
-
-* Researched and authored [RFC 940], which tweaked the semantics of Rust package names.
-* Incorporated feedback from users and the core team.
-
-[RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
+* Developed tools for profiling the style engine in Chrome (Blink).
 
 
 ## University of Canterbury
@@ -74,6 +63,16 @@ Most of this work can also be found on [GitHub].
 
 [nationstates](https://github.com/lfairy/nationstates)
   : Haskell API wrapper for the web game NationStates. Uses applicative functors to provide a type-safe, composable interface.
+
+
+Publications
+============
+
+* The Rust Programming Language. [RFC #940: Tweak the behavior of hyphens in package names][RFC 940].
+* StackOverflow. ["Illegal instance declaration" when declaring instance of IsString][type classes are cool].
+
+[RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
+[type classes are cool]: http://stackoverflow.com/a/8663534/617159
 
 
 Activities
