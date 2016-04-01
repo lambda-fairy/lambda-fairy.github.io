@@ -27,7 +27,7 @@ Experience
 
 ## Google
 
-Software Engineering intern, November 2015 -- February 2016
+Software engineering intern, November 2015 -- February 2016
 
 * Developed tools for profiling the style engine in Chrome (Blink).
 
