@@ -64,6 +64,9 @@ Most of this work can also be found on [GitHub].
 [nationstates](https://github.com/lfairy/nationstates)
   : Haskell API wrapper for the web game NationStates. Uses applicative functors to provide a type-safe, composable interface.
 
+[Guess the Number](https://lambda.xyz/gtn/)
+  : A nihilistic number guessing game. Uses a bisecting algorithm to make the game impossible to win. Written in HTML and JavaScript/ES6.
+
 
 Publications
 ============
@@ -80,9 +83,7 @@ Activities
 
 * NZOI computer programming camp at Auckland; 2010, 2012, 2013.
 
-* University of Canterbury Mathematics Society:
-    + Secretary, 2015.
-    + Treasurer, 2016.
+* University of Canterbury Mathematics Society, Secretary, 2015.
 
 
 Achievements
