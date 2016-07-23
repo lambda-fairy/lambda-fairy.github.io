@@ -3,7 +3,10 @@
 module Templates.Blog where
 
 
+import Control.Monad.Trans.Class
 import qualified Data.Text as Text
+import Hakyll
+import Lucid
 
 import Templates.Core
 

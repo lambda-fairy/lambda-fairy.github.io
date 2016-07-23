@@ -5,7 +5,10 @@ module Templates.Default (defaultTemplate) where
 
 import Control.Applicative
 import Control.Monad
+import Control.Monad.Trans.Class
 import Data.Monoid
+import Hakyll
+import Lucid
 import System.IO.Unsafe
 
 import Templates.Core

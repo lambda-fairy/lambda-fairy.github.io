@@ -18,14 +18,8 @@ module Templates.Core
 
     -- * Everything else
     , stylesheet
-
-    -- * Re-exports
-    , module Control.Monad.Trans.Class
-    , module Hakyll
-    , module Lucid
     ) where
 
-import Control.Monad.Trans.Class
 import Data.List (isPrefixOf)
 import qualified Data.Text as Text
 import qualified Data.Text.Lazy as LText
