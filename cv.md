@@ -82,8 +82,8 @@ Activities
 ==========
 
 * NZOI computer programming camp at Auckland; 2010, 2012, 2013.
-
-* University of Canterbury Mathematics Society, Secretary, 2015.
+* University of Canterbury Mathematics and Statistics Society, Secretary; 2015.
+* University of Canterbury Music Club, Secretary; 2016.
 
 
 Achievements
