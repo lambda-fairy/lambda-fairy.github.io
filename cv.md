@@ -15,11 +15,7 @@ page-title: Chris Wong
 Education
 =========
 
-BSc(Hons) in Mathematics at the University of Canterbury; 2012, 2014--2016.
-
-* Entered in 2012 as part of a [secondary school program][STAR].
-
-[STAR]: http://www.canterbury.ac.nz/aqua/star/
+BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016.
 
 
 Experience
@@ -27,14 +23,14 @@ Experience
 
 ## Google
 
-Software engineering intern, November 2015 -- February 2016
+Software engineering intern, 2015--2016
 
 * Developed tools for profiling the style engine in Chrome (Blink).
 
 
 ## University of Canterbury
 
-Python developer, November 2014 -- June 2015
+Python developer, 2014--2015
 
 * Extended the online quiz system for the 200-level course "Formal Languages and Compilers".
 * Implemented a pushdown automaton simulator, with documentation and tests.
@@ -43,7 +39,7 @@ Python developer, November 2014 -- June 2015
 
 ## Google Summer of Code
 
-Student, Mid-2014
+Student, 2014
 
 * Worked on [Hackage], the repository of software for the Haskell programming language.
 * Added *build reports* to the interface, which indicated whether a package could be built on the server.
@@ -61,8 +57,8 @@ Most of this work can also be found on [GitHub].
 [Maud](http://lfairy.gitbooks.io/maud/content/)
   : An HTML template engine implemented as a Rust compiler plugin. Templates are written inline using Rust syntax, and type-checked and optimized with the rest of the program.
 
-[nationstates](https://github.com/lfairy/nationstates)
-  : Haskell API wrapper for the web game NationStates. Uses applicative functors to provide a type-safe, composable interface.
+[Arroyo](https://github.com/lfairy/arroyo)
+  : Server that handles GitHub web hooks. Features authentication (via HMAC signatures) and simple configuration via shell scripts. Written in Python.
 
 [Guess the Number](https://lambda.xyz/gtn/)
   : A nihilistic number guessing game. Uses a bisecting algorithm to make the game impossible to win. Written in HTML and JavaScript/ES6.
@@ -81,7 +77,6 @@ Publications
 Activities
 ==========
 
-* NZOI computer programming camp at Auckland; 2010, 2012, 2013.
 * University of Canterbury Mathematics and Statistics Society, Secretary; 2015.
 * University of Canterbury Music Club, Secretary; 2016.
 
