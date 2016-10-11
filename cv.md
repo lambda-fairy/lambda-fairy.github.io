@@ -68,14 +68,14 @@ Most of this work can also be found on [GitHub].
   : Server that handles GitHub web hooks. Features authentication (via HMAC signatures) and simple configuration via shell scripts. Written in Python.
 
 [Guess the Number](https://lambda.xyz/gtn/)
-  : A nihilistic number guessing game. Uses a bisecting algorithm to make the game impossible to win. Written in HTML and JavaScript/ES6.
+  : A subversive number guessing game. Uses a bisecting algorithm to make the game impossible to win. Written in HTML and JavaScript/ES6.
 
 
 Publications
 ============
 
 * The Rust Programming Language. [RFC #940: Tweak the behavior of hyphens in package names][RFC 940].
-* *Rust Design Patterns*. [Iterating over an Option][option-iter]
+* *Rust Design Patterns*. [Iterating over an Option][option-iter].
 * StackOverflow. ["Illegal instance declaration" when declaring instance of IsString][type classes are cool].
 
 [RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
@@ -94,6 +94,8 @@ Achievements
 Activities
 ==========
 
-* *Rust Design Patterns*, Editor; 2016.
+* [*Rust Design Patterns*][patterns], Editor; 2016.
 * University of Canterbury Music Club, Secretary; 2016.
 * University of Canterbury Mathematics and Statistics Society, Secretary; 2015.
+
+[patterns]: https://github.com/rust-unofficial/patterns
