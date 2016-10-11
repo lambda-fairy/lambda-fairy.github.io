@@ -11,6 +11,7 @@ machine:
 
 dependencies:
   override:
+    - ghc --version  # test!
     - gem install sass --no-rdoc --no-ri
     - cabal update
     - cabal install --only-dependencies -O0 -j
