@@ -3,7 +3,7 @@ title: Hackage update, part 2
 tags: haskell
 ---
 
-[Hi everybody!][Hi Dr Nick!]
+Hello, everyone!
 
 There's still a few weeks before the Summer begins, so I'm taking the time to prepare. Among other things, this involves setting up a development server, to test the code I write.
 
@@ -28,5 +28,4 @@ Building and running the Hackage server went mostly without a hitch. Here are th
 
 [Here's what it looks like.][Screenshot] Beautiful, isn't it?
 
-[Hi Dr Nick!]: https://www.youtube.com/watch?v=YlmECL2ED2I
 [Screenshot]: https://imgur.com/iYz3962
