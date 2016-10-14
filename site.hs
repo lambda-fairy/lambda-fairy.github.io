@@ -22,9 +22,7 @@ main = (getConfig >>=) . flip hakyllWith $ do
     -- Compile styles using Sass
     match "styles/*.sass" $ do
         route   $ setExtension ".css"
-        compile $ getResourceString
-                    >>= withItemBody (unixFilter "sass" ["-s"])
-                    >>= return . fmap compressCss
+        compile $ getResourceString >>= withItemBody (unixFilter "sass" ["-s"])
 
     -- Build tags
     tags <- buildTags "posts/*" (fromCapture "tags/*")
