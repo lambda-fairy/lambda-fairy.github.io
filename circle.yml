@@ -1,7 +1,7 @@
 general:
   branches:
-    ignore:
-      - master
+    only:
+      - source
 
 machine:
 #  ghc:
