@@ -16,11 +16,13 @@ blogPostTemplate = LucidTemplate $ \ask -> do
     StringField body <- lift $ ask "body"
     StringField url <- lift $ ask "url"
 
-    p_ [class_ "timestamp"] $
+    toHtmlRaw body
+
+    p_ $ small_ $ do
+        "(Posted on "
         a_ [href_ (Text.pack url), title_ "link to this post"] $
             time_ $ toHtml date
-
-    toHtmlRaw body
+        ".)"
 
 
 -- | A single entry on the archive page.
@@ -32,7 +34,7 @@ postItemTemplate = LucidTemplate $ \ask -> do
     li_ $ do
         a_ [href_ (Text.pack url)] $ toHtml title
         " "
-        time_ [class_ "timestamp"] $ toHtml date
+        small_ $ time_ $ toHtml date
 
 
 postListTemplate = LucidTemplate $ \ask -> do
