@@ -30,6 +30,7 @@ defaultTemplate = LucidTemplate $ \ask -> do
                 when (home /= "true") $ toHtml title <> " « "
                 "lambda fairy"
             stylesheet "/styles/styles.css"
+            stylesheet "/styles/hk-pyg.css"
             stylesheet "//fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic"
             meta_ [name_ "theme-color", content_ "#5c3566"]
             meta_ [name_ "viewport", content_ "width=device-width"]
