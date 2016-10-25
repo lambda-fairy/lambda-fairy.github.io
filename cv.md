@@ -76,11 +76,11 @@ Publications
 
 * The Rust Programming Language. [RFC #940: Tweak the behavior of hyphens in package names][RFC 940].
 * *Rust Design Patterns*. [Iterating over an Option][option-iter].
-* StackOverflow. ["Illegal instance declaration" when declaring instance of IsString][type classes are cool].
+* *Rust Design Patterns*. [Prefer small crates][smol-crates].
 
 [RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
 [option-iter]: https://github.com/rust-unofficial/patterns/blob/master/idioms/option-iter.md
-[type classes are cool]: http://stackoverflow.com/a/8663534/617159
+[smol-crates]: https://github.com/rust-unofficial/patterns/blob/master/patterns/small-crates.md
 
 
 Achievements
