@@ -1,6 +1,6 @@
 ---
 title: Hackage update, part 2
-tags: haskell
+tags: code, haskell
 ---
 
 Hello, everyone!

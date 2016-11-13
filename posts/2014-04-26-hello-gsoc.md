@@ -1,6 +1,6 @@
 ---
 title: Hello, GSoC!
-tags: haskell
+tags: code, haskell
 ---
 
 A few days ago, my proposal, ["Flesh out features of Hackage 2.0"][proposal], was accepted into this year's [Google Summer of Code][GSoC] -- hooray!

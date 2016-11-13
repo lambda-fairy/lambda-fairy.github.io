@@ -1,6 +1,6 @@
 ---
 title: Hackage update, part 3
-tags: haskell
+tags: code, haskell
 ---
 
 Over the last few months, I've been working on [various improvements][proposal] to [Hackage][hackage] under the supervision of Duncan Coutts, as part of the [Google Summer of Code][gsoc]. As it's been a while since my last post, I thought I'd give a short summary of what I've done so far.

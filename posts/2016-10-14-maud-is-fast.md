@@ -1,6 +1,6 @@
 ---
 title: The fastest template engine in the West
-tags: rust
+tags: code, rust
 ---
 
 Lately I've been working on [Maud], an HTML template library for Rust. One of the features that make it special is that it works at *compile time*. That is, your templates are compiled to plain Rust code, and type-checked and optimized with the rest of your app.

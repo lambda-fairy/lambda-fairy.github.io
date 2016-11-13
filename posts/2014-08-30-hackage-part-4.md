@@ -1,6 +1,6 @@
 ---
 title: Hackage update, part 4
-tags: haskell
+tags: code, haskell
 ---
 
 A lot has happened with Hackage since my [last update][part 3]. Now that the Summer of Code is over, I'll summarize the work I've done since then, and outline where this project will go next.
