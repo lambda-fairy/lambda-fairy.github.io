@@ -58,14 +58,14 @@ Most of this work can also be found on [GitHub].
 
 [GitHub]: https://github.com/lfairy
 
-[Maud](http://lfairy.gitbooks.io/maud/content/)
+[Maud](https://maud.lambda.xyz)
   : An HTML template engine implemented as a Rust compiler plugin. Templates are written inline using Rust syntax, and type-checked and optimized with the rest of the program.
-
-[Gensokyo](https://github.com/lfairy/gensokyo)
-  : Toy operating system built upon Rust and UEFI.
 
 [Arroyo](https://github.com/lfairy/arroyo)
   : Server that handles GitHub web hooks. Features authentication (via HMAC signatures) and simple configuration via shell scripts. Written in Python.
+
+[Karkinos](https://karkinos.lambda.xyz)
+  : Online directory of people interested in the Rust programming language. Features a bespoke full-text search engine and a mobile-first design.
 
 [Guess the Number](https://lambda.xyz/gtn/)
   : A subversive number guessing game. Uses a bisecting algorithm to make the game impossible to win. Written in HTML and JavaScript/ES6.
@@ -77,10 +77,12 @@ Publications
 * The Rust Programming Language. [RFC #940: Tweak the behavior of hyphens in package names][RFC 940].
 * *Rust Design Patterns*. [Iterating over an Option][option-iter].
 * *Rust Design Patterns*. [Prefer small crates][smol-crates].
+* [The fastest template engine in the West][maud-is-fast].
 
 [RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
 [option-iter]: https://github.com/rust-unofficial/patterns/blob/master/idioms/option-iter.md
 [smol-crates]: https://github.com/rust-unofficial/patterns/blob/master/patterns/small-crates.md
+[maud-is-fast]: https://lambda.xyz/blog/maud-is-fast/
 
 
 Achievements
