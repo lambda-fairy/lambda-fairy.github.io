@@ -9,7 +9,9 @@ Among other benefits, this design makes the library *fast*. Like, really, really
 
 [![Graph of render times for different template engines](/images/2016/maud-is-fast.svg)](/images/2016/maud-is-fast.svg)
 
-That's right. Maud is 69 times faster than Handlebars.
+That's right. Maud is 69 times faster than Handlebars.[^1]
+
+[^1]: The benchmark code can be found on [GitHub](https://github.com/lfairy/maud/tree/1bdf6ea06adf4e62cf3b4fe65d1cd086db7ed190/benchmarks).
 
 I know what you're thinking:
 
