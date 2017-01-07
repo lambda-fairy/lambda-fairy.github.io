@@ -17,6 +17,7 @@ Education
 
 BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016.
 
+* Graduated with First Class Honours.
 * Thesis: "Computable analysis via fast converging Cauchy sequences" ([pdf])
 
 [pdf]: /images/2016/thesis.pdf
@@ -78,11 +79,13 @@ Publications
 * *Rust Design Patterns*. [Iterating over an Option][option-iter].
 * *Rust Design Patterns*. [Prefer small crates][smol-crates].
 * [The fastest template engine in the West][maud-is-fast].
+* [Announcing `if_chain`][if-chain].
 
 [RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
 [option-iter]: https://github.com/rust-unofficial/patterns/blob/master/idioms/option-iter.md
 [smol-crates]: https://github.com/rust-unofficial/patterns/blob/master/patterns/small-crates.md
 [maud-is-fast]: https://lambda.xyz/blog/maud-is-fast/
+[if-chain]: https://lambda.xyz/blog/if-chain/
 
 
 Achievements
