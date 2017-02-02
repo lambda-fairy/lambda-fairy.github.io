@@ -26,16 +26,23 @@ BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016.
 Experience
 ==========
 
+## Telogis
+
+Software Engineer, 2017--present
+
+* Updating the Hours of Service (HoS) logging app to comply with United States regulations.
+
+
 ## Google
 
-Software engineering intern, 2015--2016
+Software Engineering Intern, 2015--2016
 
 * Developed tools for profiling the style engine in Chrome (Blink).
 
 
 ## University of Canterbury
 
-Python developer, 2014--2015
+Python Developer, 2014--2015
 
 * Extended the online quiz system for the 200-level course "Formal Languages and Compilers".
 * Implemented a pushdown automaton simulator, with documentation and tests.
@@ -78,14 +85,16 @@ Publications
 * The Rust Programming Language. [RFC #940: Tweak the behavior of hyphens in package names][RFC 940].
 * *Rust Design Patterns*. [Iterating over an Option][option-iter].
 * *Rust Design Patterns*. [Prefer small crates][smol-crates].
-* [The fastest template engine in the West][maud-is-fast].
 * [Announcing `if_chain`][if-chain].
+* [The fastest template engine in the West][maud-is-fast].
+* [Shooting yourself in the foot][twelve-inches].
 
 [RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
 [option-iter]: https://github.com/rust-unofficial/patterns/blob/master/idioms/option-iter.md
 [smol-crates]: https://github.com/rust-unofficial/patterns/blob/master/patterns/small-crates.md
-[maud-is-fast]: https://lambda.xyz/blog/maud-is-fast/
 [if-chain]: https://lambda.xyz/blog/if-chain/
+[maud-is-fast]: https://lambda.xyz/blog/maud-is-fast/
+[twelve-inches]: https://lambda.xyz/blog/twelve-inches/
 
 
 Achievements
