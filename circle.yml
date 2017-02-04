@@ -24,4 +24,4 @@ deployment:
   push:
     branch: source
     commands:
-      - deploy/deploy 'Circle CI'
+      - ./deploy.sh 'Circle CI'

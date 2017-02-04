@@ -1,4 +1,0 @@
-Host aloe.lambda.xyz
-    Port 443
-    StrictHostKeyChecking no
-    UserKnownHostsFile /dev/null

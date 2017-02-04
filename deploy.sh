@@ -2,8 +2,6 @@
 
 set -e
 
-cat deploy/ssh_config >> $HOME/.ssh/config
-
 git config --global user.email 'nobody@example.com'
 git config --global user.name "$1"
 
@@ -11,9 +9,6 @@ cd _site
 git init
 git add .
 git commit -m 'Deploy'
-
-# git remote add aloe git@aloe.lambda.xyz:lfairy.github.io.git
-# git push -f aloe master
 
 git remote add github git@github.com:lfairy/lfairy.github.io.git
 git push -f github master
