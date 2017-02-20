@@ -17,7 +17,7 @@ Hackage has supported [manual documentation uploads][#56] for quite some time, a
 
 My contribution was a simple HTML interface, which allowed for uploading and deleting documentation at the click of a button. Here's how it looks (click to enlarge):
 
-[![](/images/2014/doc-upload.thumb.png)](/images/2014/doc-upload.png)
+![](/images/2014/doc-upload.png)
 
 There is still one pain point, however. Building the documentation archive in the first place is quite error-prone; it would be nice if Cabal could automate the process. As that is a Cabal issue, not a Hackage one, it is out of scope for now -- but would make a good project to tackle next.
 
@@ -33,11 +33,11 @@ The next feature I worked on was build reporting. The Hackage build bot leaves l
 
 My contribution had two parts -- a fancy build status indicator (click to enlarge):
 
-[![](/images/2014/br-status.thumb.png)](/images/2014/br-status.png)
+![](/images/2014/br-status.png)
 
 and a pretty build reports view:
 
-[![](/images/2014/br-report.thumb.png)](/images/2014/br-report.png)
+![](/images/2014/br-report.png)
 
 This part of the project ended up a bit broader than expected, as there was plenty of information to summarize. The gory details are on the [wiki][bikeshed], for the curious.
 

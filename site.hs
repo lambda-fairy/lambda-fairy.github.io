@@ -4,10 +4,14 @@ import Control.Applicative
 import Control.Arrow
 import Data.Maybe
 import Data.Monoid
+import qualified Data.Set as Set
 import System.Environment
 import System.FilePath.Posix
 
 import Hakyll
+import Text.Pandoc.Definition
+import Text.Pandoc.Options
+import Text.Pandoc.Walk
 
 import Templates
 
@@ -33,7 +37,7 @@ main = (getConfig >>=) . flip hakyllWith $ do
         route $ gsubRoute "^posts/[[:digit:]]+-[[:digit:]]+-[[:digit:]]+-" (const "blog/")
                     `composeRoutes` prettyUrlRoute
         compile $ do
-            pandocCompiler
+            pandocCompilerWithTransform myReaderOptions defaultHakyllWriterOptions myPandocTransform
                 >>= saveSnapshot "content"  -- used in atom.xml
                 >>= return . fmap demoteHeaders
                 >>= applyLucidTemplate blogPostTemplate (postContext tags)
@@ -124,6 +128,19 @@ removeIndexHtml = uncurry combine . second frobnicate . splitFileName
     frobnicate name
       | name == "index.html" = ""
       | otherwise = name
+
+
+myReaderOptions :: ReaderOptions
+myReaderOptions = defaultHakyllReaderOptions
+    { readerExtensions = Set.delete Ext_implicit_figures $
+        readerExtensions defaultHakyllReaderOptions }
+
+
+myPandocTransform :: Pandoc -> Pandoc
+myPandocTransform (Pandoc meta blocks) = Pandoc meta (walk addImageLink blocks)
+  where
+    addImageLink (Para [image@(Image _ _ target)]) = Para [Link nullAttr [image] target]
+    addImageLink block = block
 
 
 postContext :: Tags -> Context String

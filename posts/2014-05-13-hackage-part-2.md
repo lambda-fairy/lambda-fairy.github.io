@@ -26,6 +26,8 @@ Building and running the Hackage server went mostly without a hitch. Here are th
 
     Alternatively, one could upload documentation manually, which is what I tried first.
 
-[Here's what it looks like.][Screenshot] Beautiful, isn't it?
+Here's what it looks like:
 
-[Screenshot]: https://imgur.com/iYz3962
+![Screenshot of Hackage instance, displaying the package "hello"](/images/2014/hello.png)
+
+Beautiful, isn't it?

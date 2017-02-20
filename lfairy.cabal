@@ -10,8 +10,11 @@ executable lfairy
 
     build-depends:
         base == 4.*,
+        containers,
         filepath,
         hakyll == 4.9.*,
         lucid,
+        pandoc,
+        pandoc-types,
         text,
         transformers
