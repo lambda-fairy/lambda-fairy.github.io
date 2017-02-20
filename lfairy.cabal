@@ -11,7 +11,7 @@ executable lfairy
     build-depends:
         base == 4.*,
         filepath,
-        hakyll == 4.8.*,
+        hakyll == 4.9.*,
         lucid,
         text,
         transformers
