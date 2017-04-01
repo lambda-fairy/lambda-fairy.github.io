@@ -17,23 +17,23 @@ This structure is intuitive and obvious, and a clear improvement over that of ot
 
 As mentioned above, we have the owned `String` and the borrowed `&str`. But with arrays, the developers have opted for the confusing `Vec<T>` and `&[T]` instead. Going through the names for common owned and borrowed types, we realize that they do not follow a consistent pattern:
 
-| Owned | Borrowed |
+| Borrowed | Owned |
 | :-- | :-- |
-| `String` | `str` |
-| `PathBuf` | `Path` |
-| `OsString` | `OsStr` |
-| `Vec<T>` | `[T]` |
+| `str` | `String` |
+| `Path` | `PathBuf` |
+| `OsStr` | `OsString` |
+| `[T]` | `Vec<T>` |
 
 Uppercase vs lowercase, two different suffixes, and a different set of symbols altogether. How can a newcomer be expected to learn this naming scheme? If the Rust developers really [care about ergonomics][ergonomics], then this is a good place to start.
 
 Luckily, the author has a solution. Suppose that the names of these types were changed to the following:
 
-| Owned | Borrowed |
+| Borrowed | Owned |
 | :-- | :-- |
-| `String` | `Str` |
-| `Pathing` | `Path` |
-| `OsString` | `OsStr` |
-| `Slicing<T>` | `Slic<T>` |
+| `Str` | `String` |
+| `Path` | `Pathing` |
+| `OsStr` | `OsString` |
+| `Slic<T>` | `Slicing<T>` |
 
 This scheme is easy to learn: just add `-ing` for the owned type. (We shall refer to this as *Dutch notation*, for reasons elaborated on later.) As an added benefit, the `Slic` name alludes to the efficiency of Rust's zero-cost abstractions. Very *slic*.
 
