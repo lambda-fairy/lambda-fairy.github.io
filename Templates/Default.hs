@@ -34,6 +34,7 @@ defaultTemplate = LucidTemplate $ \ask -> do
             stylesheet "//fonts.googleapis.com/css?family=Cabin:400,700,400italic,700italic"
             meta_ [name_ "theme-color", content_ "#5c3566"]
             meta_ [name_ "viewport", content_ "width=device-width"]
+            link_ [rel_ "alternate", type_ "application/atom+xml", href_ "/atom.xml"]
 
         body_ $ do
             header_ $ h1_ $ a_ [href_ "/"] "lambda fairy"
