@@ -9,7 +9,7 @@ Despite these advantages, Rust does have a fatal flaw. Now, having fatal flaws i
 
 But this time, it's different. This flaw touches on a feature much more fundamental than struct declarations. If left unfixed, it threatens to lock out all but the most dedicated users from the language.
 
-The flaw involves Rust's distinction between *owned* and *borrowed* types. Owned values wrap a resource; this resource is de-allocated automatically when the value falls out of scope. Compare this to a borrowed value, which may point to a resource but does not take responsibility for de-allocating it.
+The flaw involves Rust's distinction between *owned* and *borrowed* types. Owned values wrap a resource; this resource is deällocated automatically when the value falls out of scope. Compare this to a borrowed value, which may point to a resource but does not take responsibility for deällocating it.
 
 Borrowed values often have fewer capabilities than their owned counterparts, but are in turn easier to pass around. For example, both an owned `String` and a borrowed `&str` point to UTF-8--encoded text, but only `String` lets you mutate and grow the underlying buffer. On the other hand, since `&str` handles do not manage the buffer themselves, they can be copied cheaply without risking a [double free].
 
