@@ -8,6 +8,7 @@ import System.Environment
 import System.FilePath.Posix
 
 import Hakyll
+import Hakyll.Web.Sass
 import Text.Pandoc.Definition
 import Text.Pandoc.Options
 import Text.Pandoc.Walk
@@ -26,7 +27,7 @@ main = (getConfig >>=) . flip hakyllWith $ do
     -- Compile styles using Sass
     match "styles/*.sass" $ do
         route   $ setExtension ".css"
-        compile $ getResourceString >>= withItemBody (unixFilter "sass" ["-s"])
+        compile sassCompiler
 
     -- Build tags
     tags <- buildTags "posts/*" (fromCapture "tags/*")

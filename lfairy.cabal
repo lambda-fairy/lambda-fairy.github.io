@@ -13,6 +13,7 @@ executable lfairy
         containers,
         filepath,
         hakyll == 4.12.*,
+        hakyll-sass,
         lucid,
         pandoc,
         pandoc-types,
