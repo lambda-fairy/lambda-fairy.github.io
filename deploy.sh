@@ -2,8 +2,8 @@
 
 set -e
 
-git config --global user.email 'nobody@example.com'
-git config --global user.name "$1"
+cabal configure -O0
+cabal run --ghc-option=-j -- rebuild
 
 cd _site
 git init
