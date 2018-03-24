@@ -4,7 +4,6 @@ import Control.Applicative
 import Control.Arrow
 import Data.Maybe
 import Data.Monoid
-import qualified Data.Set as Set
 import System.Environment
 import System.FilePath.Posix
 
@@ -132,7 +131,7 @@ removeIndexHtml = uncurry combine . second frobnicate . splitFileName
 
 myReaderOptions :: ReaderOptions
 myReaderOptions = defaultHakyllReaderOptions
-    { readerExtensions = Set.delete Ext_implicit_figures $
+    { readerExtensions = disableExtension Ext_implicit_figures $
         readerExtensions defaultHakyllReaderOptions }
 
 

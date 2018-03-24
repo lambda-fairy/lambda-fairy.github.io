@@ -12,9 +12,15 @@ executable lfairy
         base == 4.*,
         containers,
         filepath,
-        hakyll == 4.9.*,
+        hakyll == 4.12.*,
         lucid,
         pandoc,
         pandoc-types,
         text,
         transformers
+
+    other-modules:
+        Templates
+        Templates.Blog
+        Templates.Core
+        Templates.Default
