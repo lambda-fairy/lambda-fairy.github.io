@@ -3,18 +3,16 @@
 module Templates.Blog where
 
 
-import Control.Monad.Trans.Class
 import qualified Data.Text as Text
-import Hakyll
 import Lucid
 
 import Templates.Core
 
 
 blogPostTemplate = LucidTemplate $ \ask -> do
-    StringField date <- lift $ ask "date"
-    StringField body <- lift $ ask "body"
-    StringField url <- lift $ ask "url"
+    date <- getStringField $ ask "date"
+    body <- getStringField $ ask "body"
+    url <- getStringField $ ask "url"
 
     toHtmlRaw body
 
@@ -27,9 +25,9 @@ blogPostTemplate = LucidTemplate $ \ask -> do
 
 -- | A single entry on the archive page.
 postItemTemplate = LucidTemplate $ \ask -> do
-    StringField title <- lift $ ask "title"
-    StringField date <- lift $ ask "date"
-    StringField url <- lift $ ask "url"
+    title <- getStringField $ ask "title"
+    date <- getStringField $ ask "date"
+    url <- getStringField $ ask "url"
 
     li_ $ do
         a_ [href_ (Text.pack url)] $ toHtml title
@@ -38,6 +36,6 @@ postItemTemplate = LucidTemplate $ \ask -> do
 
 
 postListTemplate = LucidTemplate $ \ask -> do
-    StringField posts <- lift $ ask "posts"
+    posts <- getStringField $ ask "posts"
 
     ul_ [id_ "posts"] $ toHtmlRaw posts

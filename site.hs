@@ -3,7 +3,6 @@
 import Control.Applicative
 import Control.Arrow
 import Data.Maybe
-import Data.Monoid
 import System.Environment
 import System.FilePath.Posix
 

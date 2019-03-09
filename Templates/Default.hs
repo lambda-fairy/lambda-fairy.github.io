@@ -5,8 +5,6 @@ module Templates.Default (defaultTemplate) where
 
 import Control.Applicative
 import Control.Monad
-import Control.Monad.Trans.Class
-import Data.Monoid
 import Hakyll
 import Lucid
 import System.IO.Unsafe
@@ -16,11 +14,11 @@ import Templates.Core
 
 -- | The main page template.
 defaultTemplate = LucidTemplate $ \ask -> do
-    StringField home <- lift $ ask "home" <|> pure (StringField "false")
-    StringField title <- lift $ ask "title"
-    StringField pageTitle <- lift $ ask "page-title" <|> pure (StringField title)
-    StringField body <- lift $ ask "body"
-    StringField url <- lift $ ask "url"
+    home <- getStringField $ ask "home" <|> pure (StringField "false")
+    title <- getStringField $ ask "title"
+    pageTitle <- getStringField $ ask "page-title" <|> pure (StringField title)
+    body <- getStringField $ ask "body"
+    url <- getStringField $ ask "url"
 
     doctypehtml_ $ do
 

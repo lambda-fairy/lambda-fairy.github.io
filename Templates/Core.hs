@@ -8,6 +8,7 @@ module Templates.Core
       LucidTemplate(..)
     , applyLucidTemplate
     , applyLucidTemplateList
+    , getStringField
 
     -- * Navigation bar
     , Link()
@@ -20,6 +21,7 @@ module Templates.Core
     , stylesheet
     ) where
 
+import Control.Monad.Trans.Class
 import Data.List (isPrefixOf)
 import qualified Data.Text as Text
 import qualified Data.Text.Lazy as LText
@@ -44,6 +46,14 @@ applyLucidTemplateList :: LucidTemplate -> Context a -> [Item a] -> Compiler Str
 applyLucidTemplateList tpl context items = do
     items' <- mapM (applyLucidTemplate tpl context) items
     return $ concatMap itemBody items'
+
+
+getStringField :: Compiler ContextField -> HtmlT Compiler String
+getStringField m = do
+    f <- lift m
+    case f of
+        StringField f' -> return f'
+        _ -> error "expected string"
 
 
 -- | Represents an entry on the navigation bar.
