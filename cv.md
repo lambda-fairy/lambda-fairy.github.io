@@ -29,7 +29,7 @@ BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016.
 Software Engineer, 2017--present
 
 * Developing the Hours of Service (HoS) compliance system in accordance with United States Electronic Logging Device (ELD) regulations.
-* Full-stack development using TypeScript/JavaScript, C#, Postgres, and RabbitMQ.
+* Full-stack development using TypeScript, Node.js, C#, Postgres, and RabbitMQ.
 
 
 ## Google
