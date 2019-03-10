@@ -12,8 +12,7 @@ page-title: Chris Wong
 [github]: https://github.com/lfairy
 
 
-Education
-=========
+# Education
 
 BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016.
 
@@ -23,14 +22,14 @@ BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016.
 [pdf]: /images/2016/thesis.pdf
 
 
-Experience
-==========
+# Experience
 
-## Telogis
+## Verizon Connect
 
 Software Engineer, 2017--present
 
-* Updating the Hours of Service (HoS) logging app to comply with United States regulations.
+* Developing the Hours of Service (HoS) compliance system in accordance with United States Electronic Logging Device (ELD) regulations.
+* Full-stack development using TypeScript/JavaScript, C#, Postgres, and RabbitMQ.
 
 
 ## Google
@@ -59,55 +58,50 @@ Student, 2014
 [Hackage]: https://hackage.haskell.org/
 
 
-Projects
-========
+# Projects
 
 Most of this work can also be found on [GitHub].
 
 [GitHub]: https://github.com/lfairy
 
 [Maud](https://maud.lambda.xyz)
-  : An HTML template engine implemented as a Rust compiler plugin. Templates are written inline using Rust syntax, and type-checked and optimized with the rest of the program.
+  : An HTML template engine implemented as a Rust procedural macro. Templates are written inline using Rust syntax, and type-checked and optimized with the rest of the program.
 
 [Arroyo](https://github.com/lfairy/arroyo)
   : Server that handles GitHub web hooks. Features authentication (via HMAC signatures) and simple configuration via shell scripts. Written in Python.
 
-[Karkinos](https://karkinos.lambda.xyz)
+[Karkinos](https://github.com/lfairy/karkinos)
   : Online directory of people interested in the Rust programming language. Features a bespoke full-text search engine and a mobile-first design.
 
 [Guess the Number](https://lambda.xyz/gtn/)
   : A subversive number guessing game. Uses a bisecting algorithm to make the game impossible to win. Written in HTML and JavaScript/ES6.
 
 
-Publications
-============
+# Publications & Talks
 
-* The Rust Programming Language. [RFC #940: Tweak the behavior of hyphens in package names][RFC 940].
-* *Rust Design Patterns*. [Iterating over an Option][option-iter].
-* *Rust Design Patterns*. [Prefer small crates][smol-crates].
+* Christchurch Hacker Conference 2018. [Variance, with ponies][variance-with-ponies].
+* RustConf 2018. [My Little Procedural Macro][maud-talk].
 * [Announcing `if_chain`][if-chain].
 * [The fastest template engine in the West][maud-is-fast].
-* [Shooting yourself in the foot][twelve-inches].
+* The Rust Programming Language. [RFC #940: Tweak the behavior of hyphens in package names][RFC 940].
 
 [RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
-[option-iter]: https://github.com/rust-unofficial/patterns/blob/master/idioms/option-iter.md
-[smol-crates]: https://github.com/rust-unofficial/patterns/blob/master/patterns/small-crates.md
 [if-chain]: https://lambda.xyz/blog/if-chain/
 [maud-is-fast]: https://lambda.xyz/blog/maud-is-fast/
-[twelve-inches]: https://lambda.xyz/blog/twelve-inches/
+[maud-talk]: https://www.youtube.com/watch?v=11Bme1xw0ag
+[variance-with-ponies]: https://2018.chcon.nz/mainevent.html#chris
 
 
-Achievements
-============
+# Achievements
 
 * First Place in the New Zealand Programming Competition, 2012 and 2013.
 * Reserve member of the New Zealand team, International Olympiad in Informatics, 2013.
 * New Zealand Scholarship, 2013.
 
 
-Activities
-==========
+# Activities
 
+* New Zealand Olympiad in Informatics, Tutor; 2019.
 * [*Rust Design Patterns*][patterns], Editor; 2016.
 * University of Canterbury Music Club, Secretary; 2016.
 * University of Canterbury Mathematics and Statistics Society, Secretary; 2015.
