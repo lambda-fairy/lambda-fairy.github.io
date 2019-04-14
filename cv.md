@@ -14,12 +14,9 @@ page-title: Chris Wong
 
 # Education
 
-BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016.
+BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016. ([PDF]).
 
-* Graduated with First Class Honours.
-* Thesis: "Computable analysis via fast converging Cauchy sequences" ([pdf])
-
-[pdf]: /images/2016/thesis.pdf
+[PDF]: /images/2016/thesis.pdf
 
 
 # Experience
@@ -28,8 +25,9 @@ BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016.
 
 Software Engineer, 2017--present
 
-* Developing the Hours of Service (HoS) compliance system in accordance with United States Electronic Logging Device (ELD) regulations.
 * Full-stack development using TypeScript, Node.js, C#, Postgres, and RabbitMQ.
+* Rewrote the thread pool for our REST API, cutting memory usage in half.
+* Pioneered the use of automated UI testing for our mobile apps.
 
 
 ## Google
@@ -44,7 +42,6 @@ Software Engineering Intern, 2015--2016
 Python Developer, 2014--2015
 
 * Extended the online quiz system for the 200-level course "Formal Languages and Compilers".
-* Implemented a pushdown automaton simulator, with documentation and tests.
 * Used by 145 students in 2015.
 
 
@@ -65,13 +62,13 @@ Most of this work can also be found on [GitHub].
 [GitHub]: https://github.com/lfairy
 
 [Maud](https://maud.lambda.xyz)
-  : An HTML template engine implemented as a Rust procedural macro. Templates are written inline using Rust syntax, and type-checked and optimized with the rest of the program.
+  : HTML template engine implemented as a Rust procedural macro. Templates are written inline using Rust syntax, and type-checked and optimized with the rest of the program.
 
-[Arroyo](https://github.com/lfairy/arroyo)
-  : Server that handles GitHub web hooks. Features authentication (via HMAC signatures) and simple configuration via shell scripts. Written in Python.
+[if\_chain](https://lambda.xyz/blog/if-chain/)
+  : An implementation of pattern guards for Rust. Used by the Clippy lint tool.
 
-[Karkinos](https://github.com/lfairy/karkinos)
-  : Online directory of people interested in the Rust programming language. Features a bespoke full-text search engine and a mobile-first design.
+[juxta](https://github.com/lfairy/juxta)
+  : Library for writing comparison functions in TypeScript, inspired by contravariant functors.
 
 [Guess the Number](https://lambda.xyz/gtn/)
   : A subversive number guessing game. Uses a bisecting algorithm to make the game impossible to win. Written in HTML and JavaScript/ES6.
@@ -81,22 +78,11 @@ Most of this work can also be found on [GitHub].
 
 * Christchurch Hacker Conference 2018. [Variance, with ponies][variance-with-ponies].
 * RustConf 2018. [My Little Procedural Macro][maud-talk].
-* [Announcing `if_chain`][if-chain].
-* [The fastest template engine in the West][maud-is-fast].
 * The Rust Programming Language. [RFC #940: Tweak the behavior of hyphens in package names][RFC 940].
 
-[RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
-[if-chain]: https://lambda.xyz/blog/if-chain/
-[maud-is-fast]: https://lambda.xyz/blog/maud-is-fast/
 [maud-talk]: https://www.youtube.com/watch?v=11Bme1xw0ag
 [variance-with-ponies]: https://2018.chcon.nz/mainevent.html#chris
-
-
-# Achievements
-
-* First Place in the New Zealand Programming Competition, 2012 and 2013.
-* Reserve member of the New Zealand team, International Olympiad in Informatics, 2013.
-* New Zealand Scholarship, 2013.
+[RFC 940]: https://github.com/rust-lang/rfcs/blob/master/text/0940-hyphens-considered-harmful.md
 
 
 # Activities
