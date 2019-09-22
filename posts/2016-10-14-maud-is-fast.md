@@ -11,7 +11,7 @@ Among other benefits, this design makes the library *fast*. Like, really, really
 
 That's right. Maud is 69 times faster than Handlebars.[^1]
 
-[^1]: The benchmark code can be found on [GitHub](https://github.com/lfairy/maud/tree/1bdf6ea06adf4e62cf3b4fe65d1cd086db7ed190/benchmarks).
+[^1]: The benchmark code can be found on [GitHub](https://github.com/lambda-fairy/maud/tree/1bdf6ea06adf4e62cf3b4fe65d1cd086db7ed190/benchmarks).
 
 I know what you're thinking:
 
@@ -21,7 +21,7 @@ I know what you're thinking:
 
 For the sake of professionalism, I will only answer the second question.
 
-[Maud]: https://github.com/lfairy/maud
+[Maud]: https://github.com/lambda-fairy/maud
 
 Maud is fast, because it **does as little work as possible at runtime**. For example, the following template:
 

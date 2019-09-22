@@ -4,12 +4,12 @@ page-title: Chris Wong
 ---
 
 
-<lambda.fairy@gmail.com> &emsp; [+64&nbsp;22&nbsp;620&nbsp;6369][mobile]  &emsp; [lambda.xyz][website] &emsp; [stackoverflow/617159][stackoverflow] &emsp; [github/lfairy][github]
+<lambda.fairy@gmail.com>&emsp;[+64&nbsp;22&nbsp;620&nbsp;6369][mobile]&emsp;[lambda.xyz][website]&emsp;[stackoverflow/617159][stackoverflow]&emsp;[github/lambda-fairy][github]
 
 [mobile]: tel:+64226206369
 [website]: https://lambda.xyz
 [stackoverflow]: https://stackoverflow.com/users/617159
-[github]: https://github.com/lfairy
+[github]: https://github.com/lambda-fairy
 
 
 # Education
@@ -59,7 +59,7 @@ Student, 2014
 
 Most of this work can also be found on [GitHub].
 
-[GitHub]: https://github.com/lfairy
+[GitHub]: https://github.com/lambda-fairy
 
 [Maud](https://maud.lambda.xyz)
   : HTML template engine implemented as a Rust procedural macro. Templates are written inline using Rust syntax, and type-checked and optimized with the rest of the program.
@@ -67,7 +67,7 @@ Most of this work can also be found on [GitHub].
 [if\_chain](https://lambda.xyz/blog/if-chain/)
   : An implementation of pattern guards for Rust. Used by the Clippy lint tool.
 
-[juxta](https://github.com/lfairy/juxta)
+[juxta](https://github.com/lambda-fairy/juxta)
   : Library for writing comparison functions in TypeScript, inspired by contravariant functors.
 
 [Guess the Number](https://lambda.xyz/gtn/)

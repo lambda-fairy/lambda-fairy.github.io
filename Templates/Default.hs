@@ -60,7 +60,7 @@ defaultLinks
     = link' "/index.html" "/" "Home"
     : link "/cv" "CV"
     : link "/blog" "Blog"
-    : link "https://github.com/lfairy" "GitHub"
+    : link "https://github.com/lambda-fairy" "GitHub"
     : []
 
 
