@@ -12,10 +12,10 @@ executable lfairy
         base == 4.*,
         containers,
         filepath,
-        hakyll == 4.12.*,
+        hakyll == 4.13.*,
         hakyll-sass,
         lucid,
-        pandoc,
+        pandoc == 2.7.*,
         pandoc-types,
         text,
         transformers
