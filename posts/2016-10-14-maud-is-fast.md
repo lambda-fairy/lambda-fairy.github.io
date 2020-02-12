@@ -15,9 +15,9 @@ That's right. Maud is 69 times faster than Handlebars.[^1]
 
 I know what you're thinking:
 
-- "Omigosh, did he just say the *sex number*?"
+- "Wow... Lambda-san is so attractive, I feel dizzy just thinking about them."
 - "Why is Maud so much faster than the other engines?"
-- "Wow... Lambda-san is so attractive, I feel dizzy just thinking about him."
+- "Nice."
 
 For the sake of professionalism, I will only answer the second question.
 
