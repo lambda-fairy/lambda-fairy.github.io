@@ -21,9 +21,15 @@ BSc(Hons) in Mathematics at the University of Canterbury; 2014--2016. ([PDF]).
 
 # Experience
 
+## Google
+
+Software Engineer, 2020--present
+
+* Building for the Next Billion Users.
+
 ## Verizon Connect
 
-Software Engineer, 2017--present
+Software Engineer, 2017--2020
 
 * Full-stack development using TypeScript, Node.js, C#, Postgres, and RabbitMQ.
 * Rewrote the thread pool for our REST API, cutting memory usage in half.
