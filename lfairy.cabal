@@ -15,7 +15,7 @@ executable lfairy
         hakyll == 4.13.*,
         hakyll-sass,
         lucid,
-        pandoc == 2.7.*,
+        pandoc,
         pandoc-types,
         text,
         transformers
