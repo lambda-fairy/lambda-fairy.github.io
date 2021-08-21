@@ -25,7 +25,8 @@ jobs:
     - name: Build
       run: cabal run -O0 lambda-fairy -- rebuild
 
-    - name: Deploy
+    - if: ${{ github.ref == 'refs/heads/source' }}
+      name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
