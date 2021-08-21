@@ -2,7 +2,7 @@
 
 set -e
 
-cabal new-run --ghc-option=-dynamic -O0 lfairy -- rebuild
+cabal new-run --ghc-option=-dynamic -O0 lambda-fairy -- rebuild
 
 cd _site
 git init

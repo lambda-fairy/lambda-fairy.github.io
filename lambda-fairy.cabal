@@ -1,10 +1,10 @@
-name: lfairy
+name: lambda-fairy
 version: 0
 build-type: Simple
 extra-source-files: README.md
 cabal-version: >= 1.8
 
-executable lfairy
+executable lambda-fairy
     main-is: site.hs
     ghc-options: -Wall -fno-warn-unused-do-bind -fno-warn-missing-signatures
 
@@ -12,7 +12,7 @@ executable lfairy
         base == 4.*,
         containers,
         filepath,
-        hakyll == 4.13.*,
+        hakyll,
         hakyll-sass,
         lucid,
         pandoc,
