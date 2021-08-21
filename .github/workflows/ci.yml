@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+    - source
+  pull_request:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - uses: haskell/actions/setup@v1
+      with:
+        ghc-version: '8.10'
+        cabal-version: '3.2'
+
+    - name: Install dependencies
+      run: |
+        cabal update
+        cabal build --only-dependencies -O0
+
+    - name: Build
+      run: cabal run -O0 lambda-fairy -- rebuild
