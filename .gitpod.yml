@@ -1,0 +1,18 @@
+image:
+  file: .gitpod.Dockerfile
+
+tasks:
+  - init: |
+      cabal update
+      cabal build
+
+    command: |
+      cabal run lambda-fairy -- watch
+
+ports:
+  - port: 8000
+    onOpen: open-preview
+
+vscode:
+  extensions:
+    - haskell.haskell
