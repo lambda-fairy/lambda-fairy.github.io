@@ -14,12 +14,12 @@ use std::{
 fn main() -> Result<()> {
     let args = env::args().collect::<Vec<_>>();
     ensure!(
-        args.len() >= 1 && args[1..].iter().all(|arg| arg.split(':').count() >= 3),
+        !args.is_empty() && args[1..].iter().all(|arg| arg.split(':').count() >= 3),
         format!("Usage: {} SLUG:INPUT_FILE ...", args[0]),
     );
     let entries: Vec<(&str, &str, &str)> = args[1..]
         .iter()
-        .map(|arg| arg.splitn(3, ":").collect_tuple().unwrap())
+        .map(|arg| arg.splitn(3, ':').collect_tuple().unwrap())
         .collect::<Vec<_>>();
     build(&entries)
 }
