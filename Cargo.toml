@@ -11,11 +11,5 @@ itertools = "*"
 maud = "*"
 syntect = "*"
 
-[profile.dev.package.flate2]
-opt-level = 2
-
-[profile.dev.package.miniz_oxide]
-opt-level = 2
-
-[profile.dev.package.syntect]
+[profile.dev.package."*"]
 opt-level = 2
