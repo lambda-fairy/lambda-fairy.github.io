@@ -35,6 +35,32 @@ pub fn base(head_title: Option<String>, main: Markup) -> Markup {
     }
 }
 
+pub struct BlogEntry<'a> {
+    pub date: NaiveDate,
+    pub slug: String,
+    pub title: &'a AstNode<'a>,
+}
+
+pub fn blog_manifest(entries: &[BlogEntry<'_>]) -> Markup {
+    base(
+        Some("Blog".into()),
+        html! {
+            h1 { "Blog" }
+            ul {
+                @for entry in entries {
+                    li {
+                        a href=(entry.slug) {
+                            (Comrak(entry.title))
+                        }
+                        " "
+                        (small_date(entry.date))
+                    }
+                }
+            }
+        },
+    )
+}
+
 pub fn blog_post(date: NaiveDate, page: Page<'_>) -> Markup {
     base(
         Some(comrak_to_text(page.title)),
@@ -43,15 +69,21 @@ pub fn blog_post(date: NaiveDate, page: Page<'_>) -> Markup {
                 (Comrak(page.title))
             }
             p {
-                small {
-                    time datetime=(date.format("%Y-%m-%d")) {
-                        (date.format("%B %-d, %Y"))
-                    }
-                }
+                (small_date(date))
             }
             (Comrak(page.content))
         },
     )
+}
+
+fn small_date(date: NaiveDate) -> Markup {
+    html! {
+        small {
+            time datetime=(date.format("%Y-%m-%d")) {
+                (date.format("%B %-d, %Y"))
+            }
+        }
+    }
 }
 
 struct Comrak<'a>(&'a AstNode<'a>);

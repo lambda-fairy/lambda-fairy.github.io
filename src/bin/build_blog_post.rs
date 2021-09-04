@@ -19,10 +19,10 @@ fn main() -> Result<()> {
         args.len() == 3,
         format!("Usage: {} YYYY-MM-DD INPUT_FILE", args[0]),
     );
-    build_page(&args[1], &args[2])
+    build(&args[1], &args[2])
 }
 
-fn build_page(date: &str, input_path: &str) -> Result<()> {
+fn build(date: &str, input_path: &str) -> Result<()> {
     let date = NaiveDate::parse_from_str(date, "%Y-%m-%d")?;
 
     let arena = Arena::new();

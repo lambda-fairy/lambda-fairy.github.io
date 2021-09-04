@@ -37,7 +37,9 @@ impl<'a> Page<'a> {
 
 pub static COMRAK_OPTIONS: SyncLazy<ComrakOptions> = SyncLazy::new(|| {
     let mut options = ComrakOptions::default();
+    options.extension.table = true;
     options.extension.header_ids = Some("".to_string());
+    options.extension.footnotes = true;
     options.parse.smart = true;
     options.render.unsafe_ = true;
     options
