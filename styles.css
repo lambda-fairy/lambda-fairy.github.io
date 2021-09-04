@@ -20,7 +20,8 @@ header {
 
 header h1 {
   width: var(--width);
-  font-size: calc(var(--width) / 6);
+  font-size: calc(var(--width) / 6.25);
+  font-weight: 900;
   line-height: 1;
   margin: .5em auto 0;
   color: white;
@@ -52,7 +53,7 @@ main h1 {
   background: bottom .15em center linear-gradient(to top, #0c06, .15em, transparent 0);
   font-size: 3rem;
   line-height: .9;
-  margin: 2rem 0 1rem;
+  margin: 2.5rem 0 1rem;
   padding: .05em calc((100% - var(--width)) / 2);
 }
 
