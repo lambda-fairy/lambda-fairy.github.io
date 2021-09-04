@@ -1,7 +1,4 @@
----
-title: The Crystal Caves
-tags: fiction
----
+# The Crystal Caves
 
 *One day, I decided to write a story about ponies and plants. This is the result.*
 

@@ -1,7 +1,4 @@
----
-title: Interruptible sleep in Rust
-tags: code, rust
----
+# Interruptible sleep in Rust
 
 In my projects, I've often wanted to put a thread to sleep for some fixed duration, such that it can be woken up early by another thread.
 

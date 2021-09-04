@@ -1,0 +1,20 @@
+[package]
+name = "lambda_fairy"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "*"
+chrono = "*"
+comrak = "*"
+maud = "*"
+syntect = "*"
+
+[profile.dev.package.flate2]
+opt-level = 2
+
+[profile.dev.package.miniz_oxide]
+opt-level = 2
+
+[profile.dev.package.syntect]
+opt-level = 2

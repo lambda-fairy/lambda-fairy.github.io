@@ -1,7 +1,4 @@
----
-title: Rust's fatal flaw
-tags: fluff, rust
----
+# Rust's fatal flaw
 
 I like [Rust]. It's named after an awesome parasitic fungus, it's developed by a non-profit (Mozilla), and its logo gives it a nice steampunk aesthetic. It's also great fodder for deep, thoughtful think pieces. Like this one.
 

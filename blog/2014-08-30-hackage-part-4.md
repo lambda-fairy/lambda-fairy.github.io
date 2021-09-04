@@ -1,15 +1,11 @@
----
-title: Hackage update, part 4
-tags: code, haskell
----
+# Hackage update, part 4
 
 A lot has happened with Hackage since my [last update][part 3]. Now that the Summer of Code is over, I'll summarize the work I've done since then, and outline where this project will go next.
 
 [part 3]: /blog/hackage-part-3/
 
 
-What's "build reporting"?
-=========================
+## What's "build reporting"?
 
 Since my project covered a few obscure parts of Hackage and Cabal, I think it's worthwhile to clear some terminology first.
 
@@ -40,16 +36,14 @@ Since the build bot uses `cabal`, it has access to these reports as well. So whe
 In summary: if the docs for a package are missing, then the reports will tell us why. If there are no reports, then it must mean the build bot hasn't attempted the package yet. All is fine and dandy, at least in theory.
 
 
-Unfortunately...
-================
+## Unfortunately...
 
 ... not all builds were reported. The gaps were in two places: *planning failures* and *package candidates*. My [latest patch][#2025] to `cabal` fixed both these issues.
 
 [#2025]: https://github.com/haskell/cabal/pull/2025
 
 
-Reporting planning failures
----------------------------
+### Reporting planning failures
 
 A *planning failure* is when cabal-install cannot find a consistent set of dependencies to use. You can trigger a planning failure yourself:
 
@@ -64,8 +58,7 @@ Formerly, as dependency resolution ran early in the build process, any failures 
 The fix was mostly straightforward, save for one issue: since users can report their own builds, a naïve implementation would have lead to Hackage being swamped with frivolous reports. So this feature is guarded behind a flag (`--report-planning-failure`), and disabled by default.
 
 
-Reporting candidate builds
---------------------------
+### Reporting candidate builds
 
 Hackage has a feature called *build candidates*. This lets package maintainers upload and test packages without publishing them to the main site.
 
@@ -78,8 +71,7 @@ After some digging, I traced this to [a bug in `cabal`][#1189]. A candidate is n
 The problem was if only a URL was given, `cabal` considered it a "local" package and did not generate a report. The reason for this behavior is outside the scope of this post, but the fix was clear: change `cabal` to generate reports for all packages, no matter how they are specified on the command line.
 
 
-Where to next?
-==============
+## Where to next?
 
 Though the Summer of Code has ended, my work with Hackage has not. There are still many issues that need clearing up, especially with the [candidates feature][candidates bugs]; I'll continue hacking away at them in my spare time.
 

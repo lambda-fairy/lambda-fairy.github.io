@@ -1,7 +1,4 @@
----
-title: Hackage update, part 3
-tags: code, haskell
----
+# Hackage update, part 3
 
 Over the last few months, I've been working on [various improvements][proposal] to [Hackage][hackage] under the supervision of Duncan Coutts, as part of the [Google Summer of Code][gsoc]. As it's been a while since my last post, I thought I'd give a short summary of what I've done so far.
 
@@ -10,8 +7,7 @@ Over the last few months, I've been working on [various improvements][proposal] 
 [gsoc]: https://www.google-melange.com/gsoc/homepage/google/gsoc2014
 
 
-Documentation upload
-====================
+## Documentation upload
 
 Hackage has supported [manual documentation uploads][#56] for quite some time, albeit through a rather obscure API. This is an important feature for packages which cannot be built automatically on the server.
 
@@ -24,8 +20,7 @@ There is still one pain point, however. Building the documentation archive in th
 [#56]: https://github.com/haskell/hackage-server/issues/56
 
 
-Build reports
-=============
+## Build reports
 
 The next feature I worked on was build reporting. The Hackage build bot leaves logs for every package it builds, and it is often helpful to view them. Users can submit their own reports as well, though this is rare in practice. Unfortunately, as with documentation uploads, while the functionality was there, it was [difficult to discover and use][fuuzetsu].
 
@@ -44,8 +39,7 @@ This part of the project ended up a bit broader than expected, as there was plen
 [bikeshed]: https://github.com/haskell/hackage-server/wiki/Bikeshed:-build-reports
 
 
-Next steps
-==========
+## Next steps
 
 Overall, I'm happy with the work I've done so far, especially given that it's my first time working on a project of this scale.
 

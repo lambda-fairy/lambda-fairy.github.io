@@ -1,7 +1,4 @@
----
-title: Splitting a list into chunks with unfoldr
-tags: code, haskell
----
+# Splitting a list into chunks with unfoldr
 
 I'm quite fond of the [`unfoldr`][unfoldr] function in Haskell. It doesn't seem well known, which is a shame because I've often found it useful.
 
