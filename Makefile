@@ -15,7 +15,7 @@ dates_of_blog_paths = $(foreach date_slug,$(notdir $(basename $1)),$(shell echo 
 slugs_of_blog_paths = $(foreach date_slug,$(notdir $(basename $1)),$(shell echo $(date_slug) | cut -d- -f4-))
 blog_posts := $(foreach slug,$(call slugs_of_blog_paths,$(wildcard blog/*.md)),_site/blog/$(slug)/index.html)
 
-static_files := _site/index.html _site/styles.css
+static_files := $(addprefix _site/,index.html styles.css $(shell find images -type f))
 
 print_status = @ printf ' \033[1;35m♦ %s\033[0m\n' '$(1)'
 
