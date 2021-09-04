@@ -71,6 +71,16 @@ pre {
   padding: 1rem;
 }
 
+pre, code {
+  font-size: .95em;
+}
+
+small {
+  font-size: .7em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
 main :any-link {
   text-decoration: none;
   color: black;
