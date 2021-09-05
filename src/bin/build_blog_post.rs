@@ -11,11 +11,7 @@ use lambda_fairy::{
 };
 use maud::{html, Markup};
 use std::{env, io, io::Write, mem, str};
-use syntect::{
-    highlighting::{Color, ThemeSet},
-    html::highlighted_html_for_string,
-    parsing::SyntaxSet,
-};
+use syntect::{highlighting::ThemeSet, html::highlighted_html_for_string, parsing::SyntaxSet};
 
 fn main() -> Result<()> {
     let args = env::args().collect::<Vec<_>>();
@@ -66,13 +62,7 @@ fn rewrite_md_links<'a>(root: &'a AstNode<'a>) -> Result<()> {
 fn highlight_code<'a>(root: &'a AstNode<'a>) -> Result<()> {
     let ss = SyntaxSet::load_defaults_newlines();
     let ts = ThemeSet::load_defaults();
-    let mut theme = ts.themes["InspiredGitHub"].clone();
-    theme.settings.background = Some(Color {
-        r: 0xff,
-        g: 0xee,
-        b: 0xff,
-        a: 0xff,
-    });
+    let theme = &ts.themes["InspiredGitHub"];
     for node in root.descendants() {
         let mut data = node.data.borrow_mut();
         if let NodeValue::CodeBlock(NodeCodeBlock { info, literal, .. }) = &mut data.value {
@@ -83,12 +73,19 @@ fn highlight_code<'a>(root: &'a AstNode<'a>) -> Result<()> {
                 .filter_map(|token| ss.find_syntax_by_token(token))
                 .next()
                 .unwrap_or_else(|| ss.find_syntax_plain_text());
+
             let mut literal = String::from_utf8(mem::take(literal))?;
             if !literal.ends_with('\n') {
                 // Syntect expects a trailing newline
                 literal.push('\n');
             }
-            let html = highlighted_html_for_string(&literal, &ss, syntax, &theme);
+
+            let mut html = highlighted_html_for_string(&literal, &ss, syntax, theme);
+
+            // Syntect adds an inline background which conflicts with our CSS
+            assert!(html.starts_with("<pre "));
+            html.replace_range(..html.find('>').unwrap() + 1, "<pre>");
+
             let mut html_block = NodeHtmlBlock::default();
             html_block.literal = html.into_bytes();
             data.value = NodeValue::HtmlBlock(html_block);
