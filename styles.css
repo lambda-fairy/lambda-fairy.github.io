@@ -42,7 +42,7 @@ header h1 a {
   transition: bottom .5s;
 }
 
-header h1 a:hover {
+header h1 a:hover, header h1 a:focus, header h1 a:active {
   bottom: -.25em;
 }
 
@@ -96,7 +96,7 @@ main :any-link {
   color: #9859a8;
 }
 
-main :any-link:hover, main :any-link:active {
+main :any-link:hover, main :any-link:focus, main :any-link:active {
   background: var(--lavender);
   border-radius: .5rem;
   box-shadow: 0 0 0 .5rem var(--lavender);
