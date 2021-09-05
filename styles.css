@@ -99,12 +99,9 @@ main :any-link:hover, main :any-link:active {
 }
 
 table {
-  --big-border: 3px double var(--black);
-  --little-border: 1px solid var(--black);
-
   border-collapse: collapse;
-  border-top: var(--big-border);
-  border-bottom: var(--big-border);
+  border: 0 double var(--black);
+  border-width: 3px 0;
   margin-top: 1.5rem;
   margin-bottom: 1.5rem;
 }
