@@ -3,6 +3,9 @@
   color: var(--black);
   box-sizing: border-box;
 
+  /* Gimme some space! Yeah!! */
+  padding-bottom: 10rem;
+
   --line-height: 1.5;
   --width: min(40rem, 100vw - 2rem);
   --black: #222;
