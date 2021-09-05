@@ -1,5 +1,6 @@
 :root {
   font: clamp(16px, 4vw, 20px) / 1.5 "Libre Franklin", sans-serif;
+  color: #222;
   box-sizing: border-box;
 
   --width: min(40rem, 100vw - 2rem);
