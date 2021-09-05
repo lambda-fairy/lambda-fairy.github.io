@@ -1,6 +1,6 @@
 use chrono::NaiveDate;
 use comrak::nodes::AstNode;
-use maud::{html, Markup, Render, DOCTYPE};
+use maud::{html, Markup, PreEscaped, Render, DOCTYPE};
 
 use crate::{page::COMRAK_OPTIONS, string_writer::StringWriter};
 
@@ -29,6 +29,8 @@ pub fn base(head_title: Option<String>, main: Markup) -> Markup {
         main {
             (main)
         }
+
+        (ANALYTICS)
     }
 }
 
@@ -55,3 +57,10 @@ pub fn comrak_to_text<'a>(content: &'a AstNode<'a>) -> String {
     comrak::format_commonmark(content, &COMRAK_OPTIONS, &mut StringWriter(&mut buffer)).unwrap();
     buffer
 }
+
+const ANALYTICS: PreEscaped<&str> = PreEscaped(
+    r#"
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>
+"#,
+);
