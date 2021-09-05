@@ -43,13 +43,13 @@ pub struct BlogEntry<'a> {
 
 pub fn blog_manifest(entries: &[BlogEntry<'_>]) -> Markup {
     base(
-        Some("Blog".into()),
+        None,
         html! {
             h1 { "Blog" }
             ul {
                 @for entry in entries {
                     li {
-                        a href=(entry.slug) {
+                        a href={ "/blog/" (entry.slug) "/" } {
                             (Comrak(entry.title))
                         }
                         " "

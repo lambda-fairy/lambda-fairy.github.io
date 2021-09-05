@@ -9,13 +9,13 @@ endif
 build_blog_manifest := target/debug/build_blog_manifest
 build_blog_post := target/debug/build_blog_post
 
-blog_manifest := _site/blog/index.html
+blog_manifest := _site/index.html
 
 dates_of_blog_paths = $(foreach date_slug,$(notdir $(basename $1)),$(shell echo $(date_slug) | cut -d- -f-3))
 slugs_of_blog_paths = $(foreach date_slug,$(notdir $(basename $1)),$(shell echo $(date_slug) | cut -d- -f4-))
 blog_posts := $(foreach slug,$(call slugs_of_blog_paths,$(wildcard blog/*.md)),_site/blog/$(slug)/index.html)
 
-static_files := $(addprefix _site/,index.html styles.css $(shell find images -type f))
+static_files := $(addprefix _site/,styles.css $(shell find images -type f))
 
 print_status = @ printf ' \033[1;35m♦ %s\033[0m\n' '$(1)'
 
