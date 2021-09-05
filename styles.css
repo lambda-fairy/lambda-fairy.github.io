@@ -1,9 +1,11 @@
 :root {
   font: clamp(16px, 4vw, 20px) / 1.5 "Libre Franklin", sans-serif;
-  color: #222;
+  color: var(--black);
   box-sizing: border-box;
 
   --width: min(40rem, 100vw - 2rem);
+  --black: #222;
+  --lavender: rgb(183, 128, 255, .3);
 }
 
 * {
@@ -69,7 +71,7 @@ aside {
 }
 
 pre {
-  background: rgb(183, 128, 255, .3);
+  background: var(--lavender);
   padding: 1rem;
 }
 
@@ -85,12 +87,13 @@ small {
 
 main :any-link {
   text-decoration: none;
-  color: black;
-  background: bottom .15em center linear-gradient(to top, #0c06, .25em, transparent 0), transparent;
+  font-weight: 500;
+  color: #9859a8;
 }
 
 main :any-link:hover, main :any-link:active {
-  background: none, #0c06;
-  outline: .5rem solid #0c06;
+  background: var(--lavender);
+  outline: .5rem solid var(--lavender);
   border-radius: .1rem;
+  color: var(--black);
 }
