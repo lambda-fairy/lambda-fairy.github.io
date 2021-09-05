@@ -1,8 +1,9 @@
 :root {
-  font: clamp(16px, 4vw, 20px) / 1.5 "Libre Franklin", sans-serif;
+  font: clamp(16px, 4vw, 20px) / var(--line-height) "Libre Franklin", sans-serif;
   color: var(--black);
   box-sizing: border-box;
 
+  --line-height: 1.5;
   --width: min(40rem, 100vw - 2rem);
   --black: #222;
   --lavender: rgb(183, 128, 255, .3);
@@ -116,4 +117,36 @@ tr:last-child td, tr:last-child th {
 
 thead th {
   border-bottom: 1px solid var(--black);
+}
+
+ul.blog-manifest {
+  list-style: none;
+  padding-left: 0;
+}
+
+ul.blog-manifest li {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+ul.blog-manifest li > a {
+  order: 1;
+}
+
+ul.blog-manifest li > small {
+  order: 3;
+  text-align: right;
+}
+
+/* Based on a solution by Rúnar Berg: https://stackoverflow.com/a/28097029/617159 */
+ul.blog-manifest li::after {
+  background: radial-gradient(circle, currentcolor 1px, transparent 1px);
+  background-position: center bottom calc((var(--line-height) - 1) / 2 * 100%);
+  background-size: 1ex 4.5px;
+  background-repeat: space no-repeat;
+  content: "\200b";
+  flex-grow: 1;
+  height: calc(var(--line-height) * 1em);
+  order: 2;
 }

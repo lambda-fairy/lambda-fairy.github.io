@@ -62,7 +62,7 @@ fn blog_manifest(entries: &[BlogEntry<'_>]) -> Markup {
         None,
         html! {
             h1 { "Blog" }
-            ul {
+            ul.blog-manifest {
                 @for entry in entries {
                     li {
                         a href={ "/blog/" (entry.slug) "/" } {
