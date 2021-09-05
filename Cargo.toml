@@ -1,0 +1,15 @@
+[package]
+name = "lambda_fairy"
+version = "1.0.0"
+edition = "2021"
+
+[dependencies]
+anyhow = "*"
+chrono = "*"
+comrak = "*"
+itertools = "*"
+maud = "*"
+syntect = "*"
+
+[profile.dev.package."*"]
+opt-level = 2

@@ -7,23 +7,23 @@ on:
   pull_request:
 
 jobs:
-  build:
+  main:
+    name: Main
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v2
-    - uses: haskell/actions/setup@v1
-      with:
-        ghc-version: '8.10'
-        cabal-version: '3.2'
+    - name: Check out repository
+      uses: actions/checkout@v2
 
-    - name: Install dependencies
-      run: |
-        cabal update
-        cabal build --only-dependencies -O0
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        profile: minimal
+        override: true
 
     - name: Build
-      run: cabal run -O0 lambda-fairy -- rebuild
+      run: make -j$(nproc)
 
     - if: ${{ github.ref == 'refs/heads/source' }}
       name: Deploy
@@ -34,3 +34,32 @@ jobs:
         publish_dir: _site
         cname: lambda.xyz
         force_orphan: true
+  
+  lint:
+    name: Lint
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out repository
+      uses: actions/checkout@v2
+
+    - name: Install Rust
+      uses: actions-rs/toolchain@v1
+      with:
+        toolchain: nightly
+        profile: minimal
+        override: true
+        components: clippy, rustfmt
+    
+    - name: Rustfmt
+      uses: actions-rs/cargo@v1
+      with:
+        command: fmt
+        args: -- --check
+    
+    - name: Clippy
+      uses: actions-rs/cargo@v1
+      with:
+        command: clippy
+        args: -- -D warnings
+
