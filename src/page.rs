@@ -3,7 +3,8 @@ use comrak::{
     nodes::{AstNode, NodeHeading, NodeValue},
     Arena, ComrakOptions,
 };
-use std::{fs, lazy::SyncLazy, path::Path};
+use once_cell::sync::Lazy;
+use std::{fs, path::Path};
 
 #[derive(Clone, Copy)]
 pub struct Page<'a> {
@@ -35,7 +36,7 @@ impl<'a> Page<'a> {
     }
 }
 
-pub static COMRAK_OPTIONS: SyncLazy<ComrakOptions> = SyncLazy::new(|| {
+pub static COMRAK_OPTIONS: Lazy<ComrakOptions> = Lazy::new(|| {
     let mut options = ComrakOptions::default();
     options.extension.table = true;
     options.extension.header_ids = Some("".to_string());

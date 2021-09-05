@@ -8,6 +8,7 @@ anyhow = "*"
 chrono = "*"
 comrak = "*"
 itertools = "*"
+once_cell = "*"
 maud = "*"
 syntect = "*"
 
