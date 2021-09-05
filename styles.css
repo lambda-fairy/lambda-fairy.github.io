@@ -38,7 +38,7 @@ header h1 a {
   color: inherit;
   text-decoration: inherit;
   position: relative;
-  bottom: -.5em;
+  bottom: -.45em;
   transition: bottom .5s;
 }
 
