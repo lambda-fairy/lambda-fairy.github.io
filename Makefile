@@ -1,11 +1,3 @@
-ifneq (,$(findstring GNU,$(shell cp --version 2>/dev/null || true)))
-	# GNU
-	cp := cp --reflink=auto
-else
-	# BSD (including macOS)
-	cp := cp -c
-endif
-
 build_blog_manifest := target/debug/build_blog_manifest
 build_blog_post := target/debug/build_blog_post
 
