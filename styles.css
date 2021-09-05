@@ -93,8 +93,8 @@ main :any-link {
 
 main :any-link:hover, main :any-link:active {
   background: var(--lavender);
-  outline: .5rem solid var(--lavender);
-  border-radius: .1rem;
+  border-radius: .5rem;
+  box-shadow: 0 0 0 .5rem var(--lavender);
   color: var(--black);
 }
 
