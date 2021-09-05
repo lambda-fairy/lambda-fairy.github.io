@@ -5,7 +5,11 @@ use comrak::{
     nodes::{AstNode, NodeCodeBlock, NodeHtmlBlock, NodeLink, NodeValue},
     Arena,
 };
-use lambda_fairy::{page::Page, views};
+use lambda_fairy::{
+    page::Page,
+    views::{self, Comrak},
+};
+use maud::{html, Markup};
 use std::{env, io, io::Write, mem, str};
 use syntect::{
     highlighting::{Color, ThemeSet},
@@ -29,7 +33,7 @@ fn build(date: &str, input_path: &str) -> Result<()> {
     let page = Page::load(&arena, input_path)?;
     postprocess(page.content)?;
 
-    let markup = views::blog_post(date, page);
+    let markup = blog_post(date, page);
 
     io::stdout()
         .lock()
@@ -91,4 +95,19 @@ fn highlight_code<'a>(root: &'a AstNode<'a>) -> Result<()> {
         }
     }
     Ok(())
+}
+
+fn blog_post(date: NaiveDate, page: Page<'_>) -> Markup {
+    views::base(
+        Some(views::comrak_to_text(page.title)),
+        html! {
+            h1 {
+                (Comrak(page.title))
+            }
+            p {
+                (views::small_date(date))
+            }
+            (Comrak(page.content))
+        },
+    )
 }

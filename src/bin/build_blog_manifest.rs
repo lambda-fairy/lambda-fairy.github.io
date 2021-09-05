@@ -1,11 +1,12 @@
 use anyhow::{ensure, Result};
 use chrono::NaiveDate;
-use comrak::Arena;
+use comrak::{nodes::AstNode, Arena};
 use itertools::Itertools;
 use lambda_fairy::{
     page::Page,
-    views::{self, BlogEntry},
+    views::{self, Comrak},
 };
+use maud::{html, Markup};
 use std::{
     env,
     io::{self, Write},
@@ -46,11 +47,38 @@ fn build(entries: &[(&str, &str, &str)]) -> Result<()> {
             .then_with(|| Ord::cmp(&a.slug, &b.slug))
     });
 
-    let markup = views::blog_manifest(&entries);
+    let markup = blog_manifest(&entries);
 
     io::stdout()
         .lock()
         .write_all(markup.into_string().as_bytes())?;
 
     Ok(())
+}
+
+fn blog_manifest(entries: &[BlogEntry<'_>]) -> Markup {
+    let entries = entries;
+    views::base(
+        None,
+        html! {
+            h1 { "Blog" }
+            ul {
+                @for entry in entries {
+                    li {
+                        a href={ "/blog/" (entry.slug) "/" } {
+                            (Comrak(entry.title))
+                        }
+                        " "
+                        (views::small_date(entry.date))
+                    }
+                }
+            }
+        },
+    )
+}
+
+struct BlogEntry<'a> {
+    date: NaiveDate,
+    slug: String,
+    title: &'a AstNode<'a>,
 }

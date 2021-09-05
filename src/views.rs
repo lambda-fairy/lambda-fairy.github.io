@@ -2,10 +2,7 @@ use chrono::NaiveDate;
 use comrak::nodes::AstNode;
 use maud::{html, Markup, Render, DOCTYPE};
 
-use crate::{
-    page::{Page, COMRAK_OPTIONS},
-    string_writer::StringWriter,
-};
+use crate::{page::COMRAK_OPTIONS, string_writer::StringWriter};
 
 pub fn base(head_title: Option<String>, main: Markup) -> Markup {
     html! {
@@ -35,48 +32,7 @@ pub fn base(head_title: Option<String>, main: Markup) -> Markup {
     }
 }
 
-pub struct BlogEntry<'a> {
-    pub date: NaiveDate,
-    pub slug: String,
-    pub title: &'a AstNode<'a>,
-}
-
-pub fn blog_manifest(entries: &[BlogEntry<'_>]) -> Markup {
-    base(
-        None,
-        html! {
-            h1 { "Blog" }
-            ul {
-                @for entry in entries {
-                    li {
-                        a href={ "/blog/" (entry.slug) "/" } {
-                            (Comrak(entry.title))
-                        }
-                        " "
-                        (small_date(entry.date))
-                    }
-                }
-            }
-        },
-    )
-}
-
-pub fn blog_post(date: NaiveDate, page: Page<'_>) -> Markup {
-    base(
-        Some(comrak_to_text(page.title)),
-        html! {
-            h1 {
-                (Comrak(page.title))
-            }
-            p {
-                (small_date(date))
-            }
-            (Comrak(page.content))
-        },
-    )
-}
-
-fn small_date(date: NaiveDate) -> Markup {
+pub fn small_date(date: NaiveDate) -> Markup {
     html! {
         small {
             time datetime=(date.format("%Y-%m-%d")) {
@@ -86,7 +42,7 @@ fn small_date(date: NaiveDate) -> Markup {
     }
 }
 
-struct Comrak<'a>(&'a AstNode<'a>);
+pub struct Comrak<'a>(pub &'a AstNode<'a>);
 
 impl<'a> Render for Comrak<'a> {
     fn render_to(&self, buffer: &mut String) {
@@ -94,7 +50,7 @@ impl<'a> Render for Comrak<'a> {
     }
 }
 
-fn comrak_to_text<'a>(content: &'a AstNode<'a>) -> String {
+pub fn comrak_to_text<'a>(content: &'a AstNode<'a>) -> String {
     let mut buffer = String::new();
     comrak::format_commonmark(content, &COMRAK_OPTIONS, &mut StringWriter(&mut buffer)).unwrap();
     buffer
