@@ -97,3 +97,26 @@ main :any-link:hover, main :any-link:active {
   border-radius: .1rem;
   color: var(--black);
 }
+
+table {
+  --big-border: 3px double var(--black);
+  --little-border: 1px solid var(--black);
+
+  border-collapse: collapse;
+  border-top: var(--big-border);
+  border-bottom: var(--big-border);
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+td, th {
+  padding: .5rem 1rem 0;
+}
+
+tr:last-child td, tr:last-child th {
+  padding-bottom: .5rem;
+}
+
+thead th {
+  border-bottom: 1px solid var(--black);
+}
