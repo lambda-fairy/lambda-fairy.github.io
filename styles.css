@@ -94,6 +94,7 @@ main :any-link {
   text-decoration: none;
   font-weight: 500;
   color: #9859a8;
+  transition: all .1s;
 }
 
 main :any-link:hover, main :any-link:focus, main :any-link:active {
