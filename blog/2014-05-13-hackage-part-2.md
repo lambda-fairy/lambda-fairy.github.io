@@ -2,7 +2,7 @@
 
 Hello, everyone!
 
-There's still a few weeks before the Summer begins, so I'm taking the time to prepare. Among other things, this involves setting up a development server, to test the code I write.
+There's still a few weeks before the Summer begins, so I'm taking the time to prepare. Among other things, this involves setting up a development server to test the code I write.
 
 Building and running the Hackage server went mostly without a hitch. Here are the issues I encountered:
 

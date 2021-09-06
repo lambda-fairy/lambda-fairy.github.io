@@ -24,7 +24,7 @@ There is still one pain point, however. Building the documentation archive in th
 
 The next feature I worked on was build reporting. The Hackage build bot leaves logs for every package it builds, and it is often helpful to view them. Users can submit their own reports as well, though this is rare in practice. Unfortunately, as with documentation uploads, while the functionality was there, it was [difficult to discover and use][fuuzetsu].
 
-[fuuzetsu]: http://fuuzetsu.co.uk/blog/posts/2014-01-06-Fix-your-Hackage-documentation.html
+[fuuzetsu]: http://web.archive.org/web/20160929095712/http://fuuzetsu.co.uk/blog/posts/2014-01-06-Fix-your-Hackage-documentation.html
 
 My contribution had two parts -- a fancy build status indicator (click to enlarge):
 

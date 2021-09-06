@@ -20,7 +20,7 @@ For the sake of professionalism, I will only answer the second question.
 
 [Maud]: https://github.com/lambda-fairy/maud
 
-Maud is fast, because it **does as little work as possible at runtime**. For example, the following template:
+Maud is fast because it **does as little work as possible at runtime**. For example, the following template:
 
 ```rust
 html! {
