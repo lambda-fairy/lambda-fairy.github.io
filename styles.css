@@ -51,7 +51,7 @@ main {
   contain: content;
 }
 
-main > * {
+main > *, main > section.footnotes > ol {
   width: var(--width);
   margin: 1rem auto;
 }
@@ -69,7 +69,7 @@ main h2 {
   margin-top: 2rem;
 }
 
-main section.footnotes {
+main > section.footnotes {
   width: 100%;
   border-top: 1px solid var(--black);
   font-size: smaller;
