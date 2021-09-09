@@ -10,7 +10,7 @@
   --width: min(40rem, 100vw - 2rem);
   --black: #222;
   --lavender: rgb(183, 128, 255, .25);
-  --orange: rgb(255, 166, 0, .3);
+  --orange: rgba(255, 187, 61, .25);
 }
 
 * {
