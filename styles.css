@@ -65,6 +65,10 @@ main h1 {
   padding: .05em calc((100% - var(--width)) / 2);
 }
 
+main h2 {
+  margin-top: 2rem;
+}
+
 main section.footnotes {
   width: 100%;
   border-top: 1px solid var(--black);
