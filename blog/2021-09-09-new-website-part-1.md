@@ -56,7 +56,7 @@ I hate puce.[^puce]
 
 It was **too minimal**.
 When skeuomorphism was all the rage, that restraint was a breath of fresh air.
-But today, everyone is the same, Lighthouse-optimized, flat color drop shadow neo-grotesque rounded box.
+But today, everyone is the same, Lighthouse-optimized, flat color drop shadow neo-grotesque box.
 Apple went from Garamond to Myriad to Helvetica.
 Monochrome just isn't cool anymore.
 
