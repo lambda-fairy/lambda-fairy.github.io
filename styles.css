@@ -10,6 +10,7 @@
   --width: min(40rem, 100vw - 2rem);
   --black: #222;
   --lavender: rgb(183, 128, 255, .25);
+  --orange: rgb(255, 166, 0, .3);
 }
 
 * {
@@ -64,13 +65,21 @@ main h1 {
   padding: .05em calc((100% - var(--width)) / 2);
 }
 
+main section.footnotes {
+  width: 100%;
+  border-top: 1px solid var(--black);
+  font-size: smaller;
+  margin: 10rem 0 0;
+  padding: 0 1rem;
+}
+
 aside, pre {
   contain: content;
   border-radius: .5rem;
 }
 
 aside {
-  background: rgb(255, 166, 0, .3);
+  background: var(--orange);
   padding: 0 1rem;
 }
 
@@ -104,6 +113,12 @@ main :any-link:hover, main :any-link:focus, main :any-link:active {
   color: var(--black);
 }
 
+:target {
+  background: var(--orange);
+  border-radius: .5rem;
+  box-shadow: 0 0 0 .5rem var(--orange);
+}
+
 table {
   border-collapse: collapse;
   border: 0 double var(--black);
@@ -122,6 +137,10 @@ tr:last-child td, tr:last-child th {
 
 thead th {
   border-bottom: 1px solid var(--black);
+}
+
+sup, sub {
+  line-height: 1;
 }
 
 ul.blog-manifest {
