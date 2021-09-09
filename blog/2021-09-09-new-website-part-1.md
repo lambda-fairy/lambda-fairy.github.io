@@ -54,8 +54,8 @@ I hate puce.[^puce]
 
 [^puce]: Who names a color after flea vomit? Seriously.
 
-And the **minimalism**.
-When skeuomorphism was all the rage, that style was a breath of fresh air.
+It was **too minimal**.
+When skeuomorphism was all the rage, that restraint was a breath of fresh air.
 But today, everyone is the same, Lighthouse-optimized, flat color drop shadow neo-grotesque rounded box.
 Apple went from Garamond to Myriad to Helvetica.
 Monochrome just isn't cool anymore.
