@@ -23,7 +23,7 @@ body {
 
 header {
   contain: content;
-  background: center / auto 100% url(/images/lavender.jpg);
+  background: center / auto 100% url(/images/lavender.jpg), #6b5391;
 }
 
 header h1 {
