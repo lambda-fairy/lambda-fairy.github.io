@@ -1,4 +1,4 @@
-use anyhow::{ensure, Result};
+use anyhow::{ensure, Error, Result};
 use chrono::NaiveDate;
 use comrak::{
     self,
@@ -10,26 +10,34 @@ use lambda_fairy::{
     views::{self, Comrak},
 };
 use maud::{html, Markup};
-use std::{env, io, io::Write, mem, str};
+use std::{
+    env, io,
+    io::Write,
+    mem,
+    str::{self, FromStr},
+};
 use syntect::{highlighting::ThemeSet, html::highlighted_html_for_string, parsing::SyntaxSet};
 
 fn main() -> Result<()> {
     let args = env::args().collect::<Vec<_>>();
     ensure!(
         args.len() == 3,
-        format!("Usage: {} YYYY-MM-DD INPUT_FILE", args[0]),
+        format!(
+            "Usage: {0} YYYY-MM-DD INPUT_FILE\n       {0} 0-draft-0 INPUT_FILE",
+            args[0]
+        ),
     );
     build(&args[1], &args[2])
 }
 
-fn build(date: &str, input_path: &str) -> Result<()> {
-    let date = NaiveDate::parse_from_str(date, "%Y-%m-%d")?;
+fn build(publish_date: &str, input_path: &str) -> Result<()> {
+    let publish_date = PublishDate::from_str(publish_date)?;
 
     let arena = Arena::new();
     let page = Page::load(&arena, input_path)?;
     postprocess(page.content)?;
 
-    let markup = blog_post(date, page);
+    let markup = blog_post(publish_date, page);
 
     io::stdout()
         .lock()
@@ -94,17 +102,44 @@ fn highlight_code<'a>(root: &'a AstNode<'a>) -> Result<()> {
     Ok(())
 }
 
-fn blog_post(date: NaiveDate, page: Page<'_>) -> Markup {
+fn blog_post(publish_date: PublishDate, page: Page<'_>) -> Markup {
+    let head_title = views::comrak_to_text(page.title);
+    let draft_prefix = match publish_date {
+        PublishDate::Draft => "[DRAFT] ",
+        PublishDate::Published { .. } => "",
+    };
+
     views::base(
-        Some(views::comrak_to_text(page.title)),
+        Some(format!("{}{}", draft_prefix, head_title)),
         html! {
             h1 {
                 (Comrak(page.title))
             }
             p {
-                (views::small_date(date))
+                @match publish_date {
+                    PublishDate::Draft => small { "Draft – please do not share" },
+                    PublishDate::Published { date } => (views::small_date(date)),
+                }
             }
             (Comrak(page.content))
         },
     )
+}
+
+enum PublishDate {
+    Draft,
+    Published { date: NaiveDate },
+}
+
+impl FromStr for PublishDate {
+    type Err = Error;
+
+    fn from_str(s: &str) -> Result<Self, Self::Err> {
+        if s == "0-draft-0" {
+            Ok(PublishDate::Draft)
+        } else {
+            let date = NaiveDate::parse_from_str(s, "%Y-%m-%d")?;
+            Ok(PublishDate::Published { date })
+        }
+    }
 }

@@ -5,7 +5,9 @@ blog_manifest := _site/index.html
 
 dates_of_blog_paths = $(foreach date_slug,$(notdir $(basename $1)),$(shell echo $(date_slug) | cut -d- -f-3))
 slugs_of_blog_paths = $(foreach date_slug,$(notdir $(basename $1)),$(shell echo $(date_slug) | cut -d- -f4-))
-blog_posts := $(foreach slug,$(call slugs_of_blog_paths,$(wildcard blog/*.md)),_site/blog/$(slug)/index.html)
+blog_sources := $(wildcard blog/*.md)
+published_blog_sources := $(filter-out blog/0-draft-0-%,$(blog_sources))
+blog_posts := $(foreach slug,$(call slugs_of_blog_paths,$(blog_sources)),_site/blog/$(slug)/index.html)
 
 static_files := $(addprefix _site/,styles.css $(shell find images -type f))
 
@@ -18,11 +20,11 @@ $(build_blog_manifest) $(build_blog_post): target/debug/%: $(shell find src) Car
 	$(call print_status,Cargo $(@F))
 	@ cargo build --bin $(@F) --locked
 
-$(blog_manifest): blog/*.md $(build_blog_manifest)
+$(blog_manifest): $(published_blog_sources) $(build_blog_manifest)
 	$(call print_status,Manifest)
 	@ mkdir -p $(dir $@)
 	@ $(build_blog_manifest) \
-		$(foreach blog_path,$(wildcard blog/*.md), \
+		$(foreach blog_path,$(published_blog_sources), \
 			$(call dates_of_blog_paths,$(blog_path)):$(call slugs_of_blog_paths,$(blog_path)):$(blog_path)) \
 		> $@
 
