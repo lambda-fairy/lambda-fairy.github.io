@@ -2,7 +2,7 @@ use anyhow::{ensure, Error, Result};
 use chrono::NaiveDate;
 use comrak::{
     self,
-    nodes::{AstNode, NodeCodeBlock, NodeHtmlBlock, NodeLink, NodeValue},
+    nodes::{AstNode, NodeCodeBlock, NodeHtmlBlock, NodeValue},
     Arena,
 };
 use lambda_fairy::{
@@ -35,7 +35,7 @@ fn build(publish_date: &str, input_path: &str) -> Result<()> {
 
     let arena = Arena::new();
     let page = Page::load(&arena, input_path)?;
-    postprocess(page.content)?;
+    highlight_code(page.content)?;
 
     let markup = blog_post(publish_date, page);
 
@@ -43,27 +43,6 @@ fn build(publish_date: &str, input_path: &str) -> Result<()> {
         .lock()
         .write_all(markup.into_string().as_bytes())?;
 
-    Ok(())
-}
-
-fn postprocess<'a>(content: &'a AstNode<'a>) -> Result<()> {
-    rewrite_md_links(content)?;
-    highlight_code(content)?;
-    Ok(())
-}
-
-fn rewrite_md_links<'a>(root: &'a AstNode<'a>) -> Result<()> {
-    for node in root.descendants() {
-        let mut data = node.data.borrow_mut();
-        if let NodeValue::Link(NodeLink { url, .. }) = &mut data.value {
-            let mut url_string = String::from_utf8(mem::take(url))?;
-            if url_string.ends_with(".md") {
-                url_string.truncate(url_string.len() - ".md".len());
-                url_string.push('/');
-            }
-            *url = url_string.into_bytes();
-        }
-    }
     Ok(())
 }
 
