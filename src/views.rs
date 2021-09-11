@@ -19,7 +19,7 @@ pub fn base(head_title: Option<String>, main: Markup) -> Markup {
         link rel="preconnect" href="https://fonts.gstatic.com" crossorigin;
         link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700";
         link rel="stylesheet" href="/styles.css";
-        meta name="theme-color" content="#6a4c91";
+        meta name="theme-color" content="#6b5391";
         meta name="viewport" content="width=device-width";
 
         header {
