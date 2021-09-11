@@ -6,11 +6,15 @@ edition = "2018"
 [dependencies]
 anyhow = "*"
 chrono = "*"
-comrak = "*"
 itertools = "*"
 once_cell = "*"
 maud = "*"
-syntect = "*"
 
-[profile.dev.package."*"]
-opt-level = 2
+[dependencies.comrak]
+version = "*"
+default-features = false
+
+[dependencies.syntect]
+version = "*"
+default-features = false
+features = ["assets", "dump-load", "html", "regex-onig"]
