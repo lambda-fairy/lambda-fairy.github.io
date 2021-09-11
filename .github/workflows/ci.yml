@@ -3,7 +3,7 @@ name: CI
 on:
   push:
     branches:
-    - source
+    - main
   pull_request:
 
 jobs:
@@ -28,12 +28,12 @@ jobs:
     - name: Build
       run: make -j$(nproc)
 
-    - if: ${{ github.ref == 'refs/heads/source' }}
+    - if: ${{ github.ref == 'refs/heads/main' }}
       name: Deploy
       uses: peaceiris/actions-gh-pages@v3
       with:
         github_token: ${{ secrets.GITHUB_TOKEN }}
-        publish_branch: main
+        publish_branch: deploy
         publish_dir: _site
         cname: lambda.xyz
         force_orphan: true
@@ -68,4 +68,3 @@ jobs:
       with:
         command: clippy
         args: -- -D warnings
-
