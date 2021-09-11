@@ -90,7 +90,7 @@ For a clean glissando, make sure you maintain a consistent pressure throughout.
 This is when you vary the pitch by shaking your hand up and down.
 The effect gives the sound warmth, and can give a professional quality to your otamatone playing.
 
-The technique is really hard to explain over text, but I've heard it described as "turning a doorknob, but smaller, and faster".
+The technique is kind of hard to explain over text, but I've heard it described as "turning a doorknob, but smaller, and faster".
 
 Yeah.
 
