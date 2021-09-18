@@ -11,7 +11,7 @@ pub fn base(head_title: Option<String>, main: Markup) -> Markup {
         title {
             @if let Some(head_title) = head_title {
                 (head_title)
-                " « "
+                " 〜 "
             }
             "lambda fairy"
         }
