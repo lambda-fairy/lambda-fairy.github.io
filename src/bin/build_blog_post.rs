@@ -10,7 +10,7 @@ use lambda_fairy::{
     page::Page,
     views::{self, Comrak},
 };
-use maud::{html, Markup};
+use maud::{html, Markup, Render};
 use std::{
     env, io,
     io::Write,
@@ -88,18 +88,9 @@ fn expand_images<'a>(root: &'a AstNode<'a>) -> Result<()> {
         let html = if_chain! {
             if let NodeValue::Paragraph = node.data.borrow().value;
             if let Some(child_node) = only_child(node);
-            if let mut child_data = child_node.data.borrow_mut();
-            if let NodeValue::Image(link) = &mut child_data.value;
+            if let Some(image_box) = ImageBox::extract_from(child_node)?;
             then {
-                let url = String::from_utf8(mem::take(&mut link.url))?;
-                let title = String::from_utf8(mem::take(&mut link.title))?;
-
-                child_node.detach();
-                child_data.value = NodeValue::Paragraph;
-                drop(child_data);
-                let alt = views::comrak_to_text(child_node);
-
-                Some(image_box(&url, &alt, &title))
+                Some(image_box.render())
             } else {
                 None
             }
@@ -120,10 +111,63 @@ fn only_child<'a>(parent: &'a AstNode<'a>) -> Option<&'a AstNode<'a>> {
         .filter(|first_child| first_child.same_node(parent.last_child().unwrap()))
 }
 
-fn image_box(src: &str, alt: &str, title: &str) -> Markup {
-    html! {
-        a.image-box href=(src) {
-            img src=(src) alt=(alt) title=(title);
+struct ImageBox {
+    href: Option<String>,
+    src: String,
+    alt: String,
+    title: String,
+}
+
+impl Render for ImageBox {
+    fn render(&self) -> Markup {
+        html! {
+            a.image-box href=(self.href.as_deref().unwrap_or(&self.src)) {
+                img src=(self.src) alt=(self.alt) title=(self.title);
+            }
+        }
+    }
+}
+
+impl ImageBox {
+    fn extract_from<'a>(node: &'a AstNode<'a>) -> Result<Option<Self>> {
+        let mut data = node.data.borrow_mut();
+        if let NodeValue::Link(link) = &mut data.value {
+            if_chain! {
+                if let Some(child_node) = only_child(node);
+                if let Some(inner_image_box @ Self { href: None, .. }) =
+                    Self::extract_from_image(child_node)?;
+                then {
+                    let href = String::from_utf8(mem::take(&mut link.url))?;
+                    Ok(Some(Self { href: Some(href), ..inner_image_box }))
+                } else {
+                    Ok(None)
+                }
+            }
+        } else {
+            drop(data);
+            Self::extract_from_image(node)
+        }
+    }
+
+    fn extract_from_image<'a>(node: &'a AstNode<'a>) -> Result<Option<Self>> {
+        let mut data = node.data.borrow_mut();
+        if let NodeValue::Image(link) = &mut data.value {
+            let src = String::from_utf8(mem::take(&mut link.url))?;
+            let title = String::from_utf8(mem::take(&mut link.title))?;
+
+            node.detach();
+            data.value = NodeValue::Paragraph;
+            drop(data);
+            let alt = views::comrak_to_text(node);
+
+            Ok(Some(Self {
+                href: None,
+                src,
+                title,
+                alt,
+            }))
+        } else {
+            Ok(None)
         }
     }
 }

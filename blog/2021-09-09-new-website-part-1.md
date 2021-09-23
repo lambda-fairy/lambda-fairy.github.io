@@ -66,8 +66,6 @@ Daisy chains and amethyst rings.
 They're never in the spotlight, but everyone knows who they are.
 The scent of lavender fills the room.
 
-<a class="image-box" href="https://commons.wikimedia.org/wiki/File:Snowshil-Lavender.jpg">
-<img src="/images/2021/750px-Snowshil-Lavender.jpg" alt="A field of lavender.">
-</a>
+[![A field of lavender.](/images/2021/750px-Snowshil-Lavender.jpg)](https://commons.wikimedia.org/wiki/File:Snowshil-Lavender.jpg)
 
 In my next post, I'll talk about the features of this new site.
