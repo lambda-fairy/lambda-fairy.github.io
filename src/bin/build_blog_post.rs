@@ -5,6 +5,7 @@ use comrak::{
     nodes::{AstNode, NodeCodeBlock, NodeHtmlBlock, NodeValue},
     Arena,
 };
+use if_chain::if_chain;
 use lambda_fairy::{
     page::Page,
     views::{self, Comrak},
@@ -36,6 +37,7 @@ fn build(publish_date: &str, input_path: &str) -> Result<()> {
     let arena = Arena::new();
     let page = Page::load(&arena, input_path)?;
     highlight_code(page.content)?;
+    expand_images(page.content)?;
 
     let markup = blog_post(publish_date, page);
 
@@ -79,6 +81,51 @@ fn highlight_code<'a>(root: &'a AstNode<'a>) -> Result<()> {
         }
     }
     Ok(())
+}
+
+fn expand_images<'a>(root: &'a AstNode<'a>) -> Result<()> {
+    for node in root.children() {
+        let html = if_chain! {
+            if let NodeValue::Paragraph = node.data.borrow().value;
+            if let Some(child_node) = only_child(node);
+            if let mut child_data = child_node.data.borrow_mut();
+            if let NodeValue::Image(link) = &mut child_data.value;
+            then {
+                let url = String::from_utf8(mem::take(&mut link.url))?;
+                let title = String::from_utf8(mem::take(&mut link.title))?;
+
+                child_node.detach();
+                child_data.value = NodeValue::Paragraph;
+                drop(child_data);
+                let alt = views::comrak_to_text(child_node);
+
+                Some(image_box(&url, &alt, &title))
+            } else {
+                None
+            }
+        };
+
+        if let Some(html) = html {
+            let mut html_block = NodeHtmlBlock::default();
+            html_block.literal = html.into_string().into_bytes();
+            node.data.borrow_mut().value = NodeValue::HtmlBlock(html_block);
+        }
+    }
+    Ok(())
+}
+
+fn only_child<'a>(parent: &'a AstNode<'a>) -> Option<&'a AstNode<'a>> {
+    parent
+        .first_child()
+        .filter(|first_child| first_child.same_node(parent.last_child().unwrap()))
+}
+
+fn image_box(src: &str, alt: &str, title: &str) -> Markup {
+    html! {
+        a.image-box href=(src) {
+            img src=(src) alt=(alt) title=(title);
+        }
+    }
 }
 
 fn blog_post(publish_date: PublishDate, page: Page<'_>) -> Markup {

@@ -6,6 +6,7 @@ edition = "2018"
 [dependencies]
 anyhow = "*"
 chrono = "*"
+if_chain = "*"
 itertools = "*"
 once_cell = "*"
 maud = "*"

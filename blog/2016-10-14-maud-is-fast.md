@@ -4,7 +4,7 @@ Lately I've been working on [Maud], an HTML template library for Rust. One of th
 
 Among other benefits, this design makes the library *fast*. Like, really, really fast. To get an idea of how fast it is, take a look at this graph:
 
-[![Graph of render times for different template engines](/images/2016/maud-is-fast.svg)](/images/2016/maud-is-fast.svg)
+![Graph of render times for different template engines](/images/2016/maud-is-fast.svg)
 
 That's right. Maud is 69 times faster than Handlebars.[^1]
 

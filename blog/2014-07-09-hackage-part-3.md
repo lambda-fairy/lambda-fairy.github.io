@@ -28,11 +28,11 @@ The next feature I worked on was build reporting. The Hackage build bot leaves l
 
 My contribution had two parts -- a fancy build status indicator (click to enlarge):
 
-![](/images/2014/br-status.png)
+![Hooray!](/images/2014/br-status.png)
 
 and a pretty build reports view:
 
-![](/images/2014/br-report.png)
+![Build status... useful metadata... and a full log!](/images/2014/br-report.png)
 
 This part of the project ended up a bit broader than expected, as there was plenty of information to summarize. The gory details are on the [wiki][bikeshed], for the curious.
 
