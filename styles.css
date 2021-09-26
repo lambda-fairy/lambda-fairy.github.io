@@ -10,6 +10,7 @@
   --width: min(40rem, 100vw - 2rem);
   --black: #222;
   --lavender: rgb(183, 128, 255, .25);
+  --lavender-light: rgb(183, 128, 255, .1);
   --orange: rgba(255, 187, 61, .25);
 }
 
@@ -92,7 +93,7 @@ aside {
 }
 
 pre {
-  background: var(--lavender);
+  background: var(--lavender-light);
   padding: 1rem;
   overflow: auto;
 }
