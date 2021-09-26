@@ -87,7 +87,7 @@ With viewport units and the `clamp` function, you can [interpolate] between the 
 
 My website uses this technique extensively.
 If you're on desktop, resize the browser window.
-Watch the body text, margins, and header all adapt to the available space.
+Watch the layout shrink and grow to the available space.
 
 ## Keyboard accessibility
 
