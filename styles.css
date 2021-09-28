@@ -12,6 +12,7 @@
   --lavender: rgb(183, 128, 255, .25);
   --lavender-light: rgb(183, 128, 255, .1);
   --orange: rgba(255, 187, 61, .25);
+  --purple: #9859a8;
 }
 
 * {
@@ -111,7 +112,7 @@ small {
 main :any-link {
   text-decoration: none;
   font-weight: 500;
-  color: #9859a8;
+  color: var(--purple);
   transition: all .1s;
 }
 
@@ -121,6 +122,11 @@ main :any-link:hover, main :any-link:focus, main :any-link:active {
   box-shadow: 0 0 0 .5rem var(--lavender);
   color: var(--black);
   -webkit-tap-highlight-color: transparent;
+}
+
+main :any-link:focus {
+  outline: .1rem solid var(--purple);
+  outline-offset: .5rem;
 }
 
 :target {
