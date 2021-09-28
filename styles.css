@@ -120,6 +120,7 @@ main :any-link:hover, main :any-link:focus, main :any-link:active {
   border-radius: .5rem;
   box-shadow: 0 0 0 .5rem var(--lavender);
   color: var(--black);
+  -webkit-tap-highlight-color: transparent;
 }
 
 :target {
