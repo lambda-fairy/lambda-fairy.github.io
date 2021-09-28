@@ -124,7 +124,7 @@ main :any-link:hover, main :any-link:focus, main :any-link:active {
   -webkit-tap-highlight-color: transparent;
 }
 
-main :any-link:focus {
+main :any-link:focus-visible {
   outline: .1rem solid var(--purple);
   outline-offset: .5rem;
 }
