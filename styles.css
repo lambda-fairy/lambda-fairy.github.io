@@ -67,7 +67,7 @@ main h1 {
   padding: .05em calc((100% - var(--width)) / 2);
 }
 
-main h2 {
+main h2, main h3:not(h2 + *) {
   margin-top: 2rem;
 }
 
