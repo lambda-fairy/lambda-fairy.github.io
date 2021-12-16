@@ -144,6 +144,7 @@ a.image-box {
 a.image-box img {
   width: 100%;
   vertical-align: bottom;
+  border-radius: .5rem;
 }
 
 table {
