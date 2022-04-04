@@ -6,11 +6,11 @@ It's great for beginners because:
 - It introduces **T-spin triples** and **counter-clockwise rotation** -- two concepts that a beginner might otherwise not be exposed to.
 
 - It **guarantees 11 attack**.
-  For beginners, usually the biggest problem is in building enough attack power to knock the opponent out.
+  For beginners, usually the biggest problem is building enough attack power to knock the opponent out.
   DT Cannon gives them a head start.
 
 - Unlike more powerful openers, it's **not an instant KO**.
-  So you still have an opportunity to develop fundamental stacking skills, and not fall on the opener as a crutch.
+  So you still have an opportunity to develop fundamental stacking skills, and not use the opener as a crutch.
 
 [DT Cannon]: https://four.lol/methods/dt-cannon#dt-cannon-as-an-opener
 
@@ -20,7 +20,7 @@ I hope to fill in this gap so you can DT Cannon like a pro 🙂
 ## Stack it on the left
 
 Most openers have a mirror image that works in a similar way.
-DT Cannon is no exception -- you could build the Cannon on the right-hand side, if you wanted to.
+DT Cannon is no exception -- you could build it on the right if you wanted to.
 
 However, it's always a better idea to build DT Cannon on the left.
 This is because you can hard drop the first three pieces from their starting positions, without having to move or rotate them:
@@ -50,6 +50,7 @@ This is important because:
   Moreover, to fix that bumpiness, you'll often have to waste another T piece as well -- further delaying your attack.
 
 [^parity]: The technical term is *[checkerboard parity]*.
+
 [checkerboard parity]: https://harddrop.com/wiki/Parity
 
 ## Send both T-spins at once (if you can)
@@ -76,7 +77,7 @@ In general, if you know that your opponent has access to a big early attack (PCO
 [^wellactually]:
     Technically, if you build the DT Cannon fast enough, you can cancel out the PCO and survive.
     And if your stack is clean and flat enough, it's possible to tank the Perfect Clear and still end up below the top of the board.
-    But these tricks are hard to pull off and I wouldn't count on them to a beginner.
+    But these tricks are hard to pull off and I wouldn't count on them as a beginner.
 
 ## Ignore the continuations
 
