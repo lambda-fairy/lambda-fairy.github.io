@@ -1,4 +1,4 @@
-# DT Cannon tips!
+# DT Cannon tips
 
 In modern Tetris, the [DT Cannon] opener is a popular way to start the game.
 It's great for beginners because:
