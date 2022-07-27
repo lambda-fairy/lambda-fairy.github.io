@@ -75,9 +75,10 @@ fn highlight_code<'a>(root: &'a AstNode<'a>) -> Result<()> {
             assert!(html.starts_with("<pre "));
             html.replace_range(..html.find('>').unwrap() + 1, "<pre>");
 
-            let mut html_block = NodeHtmlBlock::default();
-            html_block.literal = html.into_bytes();
-            data.value = NodeValue::HtmlBlock(html_block);
+            data.value = NodeValue::HtmlBlock(NodeHtmlBlock {
+                literal: html.into_bytes(),
+                ..Default::default()
+            });
         }
     }
     Ok(())
@@ -97,9 +98,10 @@ fn expand_images<'a>(root: &'a AstNode<'a>) -> Result<()> {
         };
 
         if let Some(html) = html {
-            let mut html_block = NodeHtmlBlock::default();
-            html_block.literal = html.into_string().into_bytes();
-            node.data.borrow_mut().value = NodeValue::HtmlBlock(html_block);
+            node.data.borrow_mut().value = NodeValue::HtmlBlock(NodeHtmlBlock {
+                literal: html.into_string().into_bytes(),
+                ..Default::default()
+            });
         }
     }
     Ok(())
