@@ -147,6 +147,12 @@ a.image-box img {
   border-radius: .5rem;
 }
 
+main > iframe {
+  display: block;
+  width: var(--width);
+  height: calc(var(--width) / (16 / 9));
+}
+
 table {
   border-collapse: collapse;
   border: 0 double var(--black);
