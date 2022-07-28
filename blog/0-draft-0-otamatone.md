@@ -1,5 +1,7 @@
 # Otamatone: A Musician's Guide
 
+![A row of purple otamatones (but one of them's green).](/images/2022/otamatone/banner.jpg)
+
 The *otamatone* (portmanteau of *[otamajakushi]* and *tone*) is a fretless synthesizer.
 Though marketed as a toy, its larger models have potential as musical instruments.
 Some YouTubers, such as [mklachu] and [TheRealSullyG], are popular for their otamatone covers.
@@ -45,6 +47,8 @@ The remaining models are novelties:
 
 ### Ribbon
 
+![The long, touch-sensitive neck of an otamatone.](/images/2022/otamatone/ribbon.jpg)
+
 Triggers a sound when pressed.
 
 The ribbon makes the otamatone *fretless*: rather than being fixed to the 12 notes of mainstream Western music, it's a continuous strip where every pitch is available.
@@ -53,13 +57,15 @@ But it can take a bit of practice to use well.
 
 [microtonality]: https://youtu.be/fBeP3Nhtpxg
 
-Moreover, like a string instrument, the pitches get closer together as you go down the neck.
+Moreover, like a string instrument, the pitches get closer together as you go down the neck:
 
 TODO image
 
 It's a little detail that I appreciate.
 
 ### Octave switch
+
+![The back side of an otamatone, with a low-mid-high slider switch highlighted.](/images/2022/otamatone/octave-switch.jpg)
 
 Switches between low, medium, and high notes.
 I've found little use in low and high, but in theory it could be useful for ensembles.
