@@ -5,6 +5,8 @@ on:
     branches:
     - main
   pull_request:
+  schedule:
+    - cron: '22 22 * * SAT'
 
 jobs:
   main:
