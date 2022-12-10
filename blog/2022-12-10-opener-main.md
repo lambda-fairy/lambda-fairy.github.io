@@ -3,7 +3,7 @@
 You've had this happen before.
 
 You join Tetra League, and match with someone the same rank as you.
-You start stacking a side well like [those beginner videos told you to][orz].
+You start stacking a side well like [those beginner videos told you][orz].
 
 [orz]: https://www.youtube.com/watch?v=yvHxPAsZuvI
 
@@ -18,11 +18,11 @@ That was probably an *opener main*.
 An *opener* is a set arrangement of pieces that can be built at the beginning of the game.
 Here are some examples:
 
-TODO image
+![Perfect Clear Opener, TKI Fonzie](/images/2022/opener-main/opener-examples.svg)
 
 Most people use openers as just a way to get started, and transition to freestyle stacking (also called *midgame*) afterward.
 But some people focus solely on openers, and depend on them alone to win.
-They learn complex setups like stickspin and SDPC that send a full board's worth of garbage up front.
+They learn complex setups like "stickspin" and "SDPC" that send a full board's worth of garbage up front.
 While they can be countered at higher ranks, they're effectively an *instant KO* against anyone else.
 
 ## Why not opener main?
@@ -41,15 +41,15 @@ This makes one easy to learn and build.
 But this also means that the only way to get better is to *do it faster*.
 The attack you put out is proportional to how fast you can move your fingers -- nothing else.
 
-TODO graph
+![Graph of effectiveness against skill. Opener starts more effective, but at higher skill levels, midgame surges past it.](/images/2022/opener-main/skill-trend.svg)
 
 On the other hand, midgame can be improved on two axes.
 Yes, you can place the pieces faster.
 But you can also improve *where* you place those pieces.
-As you develop your midgame skills, and stack more clean and flat, you might find your attack increasing without getting any faster at all.
+As you develop your midgame skills, stack clean and flat, and make use of garbage lines, you might find your attack increasing without getting any faster at all.
 This is **efficiency**.
 
-TODO graph pps against tr
+![Graph of speed against ranking. My data point is](/images/2022/opener-main/speed-vs-ranking.svg)
 
 Indeed, yours truly is one of the slowest players in their rank, but their efficiency brings them toe-to-toe with players twice their speed.
 There are many such players, at all ranks, and their gameplay is always [fun to watch][keej].
@@ -59,7 +59,7 @@ There are many such players, at all ranks, and their gameplay is always [fun to 
 ### Fundamentals are... fundamental
 
 You can learn any opener by copying a pattern off [four.lol].
-But freestyle stacking takes deliberate, thoughtful practice to learn.
+But midgame stacking takes deliberate, thoughtful practice to learn.
 
 If you have strong midgame, your openers will get better as well.
 But the reverse is not true.
@@ -71,7 +71,7 @@ They're truly fundamental to the game!
 
 ## How do I defeat opener mains?
 
-TODO meme: GO DOWN
+![Yuuko Aioi from Nichijou in an aggressive pose, making "OK" signs with both her hands. Caption: GO DOWN!](/images/2022/opener-main/yuuko.jpg)
 
 The one weakness of openers is... they're *openers*.
 They only tell you what to do at the start of the game.
