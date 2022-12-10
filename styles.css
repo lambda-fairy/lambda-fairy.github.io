@@ -141,7 +141,7 @@ a.image-box {
   margin-bottom: 1.6rem;
 }
 
-a.image-box img {
+a.image-box > * {
   width: 100%;
   vertical-align: bottom;
   border-radius: .5rem;
