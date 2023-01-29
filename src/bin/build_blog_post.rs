@@ -182,7 +182,7 @@ fn blog_post(publish_date: PublishDate, page: Page<'_>) -> Markup {
     };
 
     views::base(
-        Some(format!("{}{}", draft_prefix, head_title)),
+        Some(format!("{draft_prefix}{head_title}")),
         html! {
             h1 {
                 (Comrak(page.title))
