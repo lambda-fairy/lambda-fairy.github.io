@@ -52,9 +52,9 @@ This is **efficiency**.
 ![Graph of speed against ranking. My data point is](/images/2022/opener-main/speed-vs-ranking.svg)
 
 Indeed, yours truly is one of the slowest players in their rank, but their efficiency brings them toe-to-toe with players twice their speed.
-There are many such players, at all ranks, and their gameplay is always [fun to watch][keej].
+There are many such players, at all ranks, and their gameplay is always [fun to watch][gaming].
 
-[keej]: https://www.youtube.com/watch?v=ZPjurN1JWHo
+[gaming]: https://www.youtube.com/watch?v=1wyR_MmGrMw
 
 ### Fundamentals are... fundamental
 
