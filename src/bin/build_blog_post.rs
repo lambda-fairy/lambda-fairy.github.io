@@ -36,8 +36,8 @@ fn build(publish_date: &str, input_path: &str) -> Result<()> {
 
     let arena = Arena::new();
     let page = Page::load(&arena, input_path)?;
-    highlight_code(page.content)?;
-    expand_images(page.content)?;
+    highlight_code(page.content);
+    expand_images(page.content);
 
     let markup = blog_post(publish_date, page);
 
@@ -48,14 +48,13 @@ fn build(publish_date: &str, input_path: &str) -> Result<()> {
     Ok(())
 }
 
-fn highlight_code<'a>(root: &'a AstNode<'a>) -> Result<()> {
+fn highlight_code<'a>(root: &'a AstNode<'a>) {
     let ss = SyntaxSet::load_defaults_newlines();
     let ts = ThemeSet::load_defaults();
     let theme = &ts.themes["InspiredGitHub"];
     for node in root.descendants() {
         let mut data = node.data.borrow_mut();
         if let NodeValue::CodeBlock(NodeCodeBlock { info, literal, .. }) = &mut data.value {
-            let info = str::from_utf8(info)?;
             let syntax = info
                 .split(',')
                 .map(str::trim)
@@ -63,7 +62,7 @@ fn highlight_code<'a>(root: &'a AstNode<'a>) -> Result<()> {
                 .next()
                 .unwrap_or_else(|| ss.find_syntax_plain_text());
 
-            let mut literal = String::from_utf8(mem::take(literal))?;
+            let mut literal = mem::take(literal);
             if !literal.ends_with('\n') {
                 // Syntect expects a trailing newline
                 literal.push('\n');
@@ -76,20 +75,19 @@ fn highlight_code<'a>(root: &'a AstNode<'a>) -> Result<()> {
             html.replace_range(..html.find('>').unwrap() + 1, "<pre>");
 
             data.value = NodeValue::HtmlBlock(NodeHtmlBlock {
-                literal: html.into_bytes(),
+                literal: html,
                 ..Default::default()
             });
         }
     }
-    Ok(())
 }
 
-fn expand_images<'a>(root: &'a AstNode<'a>) -> Result<()> {
+fn expand_images<'a>(root: &'a AstNode<'a>) {
     for node in root.children() {
         let html = if_chain! {
             if let NodeValue::Paragraph = node.data.borrow().value;
             if let Some(child_node) = only_child(node);
-            if let Some(image_box) = ImageBox::extract_from(child_node)?;
+            if let Some(image_box) = ImageBox::extract_from(child_node);
             then {
                 Some(image_box.render())
             } else {
@@ -99,12 +97,11 @@ fn expand_images<'a>(root: &'a AstNode<'a>) -> Result<()> {
 
         if let Some(html) = html {
             node.data.borrow_mut().value = NodeValue::HtmlBlock(NodeHtmlBlock {
-                literal: html.into_string().into_bytes(),
+                literal: html.into_string(),
                 ..Default::default()
             });
         }
     }
-    Ok(())
 }
 
 fn only_child<'a>(parent: &'a AstNode<'a>) -> Option<&'a AstNode<'a>> {
@@ -131,18 +128,18 @@ impl Render for ImageBox {
 }
 
 impl ImageBox {
-    fn extract_from<'a>(node: &'a AstNode<'a>) -> Result<Option<Self>> {
+    fn extract_from<'a>(node: &'a AstNode<'a>) -> Option<Self> {
         let mut data = node.data.borrow_mut();
         if let NodeValue::Link(link) = &mut data.value {
             if_chain! {
                 if let Some(child_node) = only_child(node);
                 if let Some(inner_image_box @ Self { href: None, .. }) =
-                    Self::extract_from_image(child_node)?;
+                    Self::extract_from_image(child_node);
                 then {
-                    let href = String::from_utf8(mem::take(&mut link.url))?;
-                    Ok(Some(Self { href: Some(href), ..inner_image_box }))
+                    let href = mem::take(&mut link.url);
+                    Some(Self { href: Some(href), ..inner_image_box })
                 } else {
-                    Ok(None)
+                    None
                 }
             }
         } else {
@@ -151,25 +148,25 @@ impl ImageBox {
         }
     }
 
-    fn extract_from_image<'a>(node: &'a AstNode<'a>) -> Result<Option<Self>> {
+    fn extract_from_image<'a>(node: &'a AstNode<'a>) -> Option<Self> {
         let mut data = node.data.borrow_mut();
         if let NodeValue::Image(link) = &mut data.value {
-            let src = String::from_utf8(mem::take(&mut link.url))?;
-            let title = String::from_utf8(mem::take(&mut link.title))?;
+            let src = mem::take(&mut link.url);
+            let title = mem::take(&mut link.title);
 
             node.detach();
             data.value = NodeValue::Paragraph;
             drop(data);
             let alt = views::comrak_to_text(node);
 
-            Ok(Some(Self {
+            Some(Self {
                 href: None,
                 src,
                 title,
                 alt,
-            }))
+            })
         } else {
-            Ok(None)
+            None
         }
     }
 }
