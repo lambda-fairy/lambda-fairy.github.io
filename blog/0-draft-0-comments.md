@@ -10,7 +10,9 @@ if !literal.ends_with('\n') {
 Comments are great.
 When there's a bit of context that isn't obvious from the code, comments can fill in the gaps.
 
-But, like anything related to computers, they are a little cursed.
+But, like anything related to computers, they can be a little cursed.
+
+![A blue-haired girl swallowing a cat.](/images/2023/comments/mio.jpg)
 
 Let me elaborate.
 
@@ -40,7 +42,7 @@ For simplicity, the tokenizer uses a regular grammar.
 I won't go into the details here, but in short, this means **no nesting**.
 
 But Haskell is not a traditional language.
-Many of its design choices -- from its custom operators to its lazy evaluation -- favor expressiveness over making it easy to compile.
+Many of its design choices -- from its custom operators to its lazy evaluation -- favor expressiveness over being easy to compile.
 
 And that's why C, which trades off in the opposite direction, does _not_ support nested comments.
 
@@ -53,7 +55,7 @@ And that's why C, which trades off in the opposite direction, does _not_ support
 ```
 
 Whether a language supports nested comments speaks to this fundamental trade-off.
-Do the designers care more about being easy to use, or easy to implement?
+Do the designers care more about being *easy to use*, or *easy to implement*?
 
 ## Comments are control flow
 
