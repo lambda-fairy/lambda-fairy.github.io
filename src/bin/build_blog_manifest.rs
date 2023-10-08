@@ -57,7 +57,6 @@ fn build(entries: &[(&str, &str, &str)]) -> Result<()> {
 }
 
 fn blog_manifest(entries: &[BlogEntry<'_>]) -> Markup {
-    let entries = entries;
     views::base(
         None,
         html! {
