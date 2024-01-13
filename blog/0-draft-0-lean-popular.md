@@ -66,3 +66,5 @@ Perhaps a better, more friendly theorem prover will appear and take over.
 
 But Lean's approach has worked well so far.
 Whether it holds up or not, the community has done a lot to advance formalized mathematics as a whole.
+
+[![Jacaranda tree](/images/2024/jacaranda.jpg)](https://commons.wikimedia.org/wiki/File:Jacaranda_mimosifolia_3994.jpg)
