@@ -34,7 +34,7 @@ It's an open question how we can balance those needs while allowing mathlib to g
 
 [monorepo]: https://en.wikipedia.org/wiki/Monorepo
 
-## Lean caters to mathematicians, not type theorists
+## Lean isn't just for type theorists
 
 Lean's narrative presents itself as a tool for *all* mathematicians, not only those interested in formalization.
 You can see this in Kevin Buzzard's blog, where he talks about various formalization concepts (like [filters] or [division by zero]) in general mathematical terms, with no mention of type theory at all.
