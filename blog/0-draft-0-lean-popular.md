@@ -47,7 +47,7 @@ They spend much time exploring systems, like [homotopy type theory], that extend
 
 On the other hand, Lean users see the type system merely as a tool to formalize mathematics.
 They're willing to compromise any type theoretic properties (except [soundness]) if it lets them code faster.
-Coq's approach might be cleaner in the long run, but Lean's compromises let us show results now.
+Coq's approach might be cleaner in the long run, but Lean's compromises let us do mathematics now.
 
 [filters]: https://xenaproject.wordpress.com/2021/02/18/formalising-mathematics-workshop-5-filters/
 [division by zero]: https://xenaproject.wordpress.com/2020/07/05/division-by-zero-in-type-theory-a-faq/
