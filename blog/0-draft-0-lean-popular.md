@@ -43,7 +43,7 @@ This contrasts with the approach taken by other proof assistants, like Coq.
 While Coq and Lean have similar foundations in type theory, they are [completely different in culture][culture].
 
 Coq users care a lot about type system properties such as how every expression has a unique normal form ("canonicity").
-They spend much time exploring systems, like [homotopy type theory (HoTT)], that extend what's possible while respecting these properties.
+They spend much time exploring systems, like [homotopy type theory], that extend what's possible while respecting these properties.
 
 On the other hand, Lean users see the type system merely as a tool to formalize mathematics.
 They're willing to compromise any type theoretic properties (except [soundness]) if it lets them code faster.
@@ -52,7 +52,7 @@ Coq's approach might be cleaner in the long run, but Lean's compromises let us s
 [filters]: https://xenaproject.wordpress.com/2021/02/18/formalising-mathematics-workshop-5-filters/
 [division by zero]: https://xenaproject.wordpress.com/2020/07/05/division-by-zero-in-type-theory-a-faq/
 [culture]: https://artagnon.com/computing/coq/leancoq
-[homotopy type theory (HoTT)]: https://homotopytypetheory.org/coq/
+[homotopy type theory]: https://homotopytypetheory.org/coq/
 [soundness]: https://en.wikipedia.org/wiki/Soundness
 
 ## Lean has a supportive community
