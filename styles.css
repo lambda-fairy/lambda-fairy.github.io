@@ -83,13 +83,18 @@ main > section.footnotes {
   padding: 0 1rem;
 }
 
-aside, pre {
+aside, blockquote, pre {
   contain: content;
   border-radius: .5rem;
 }
 
 aside {
   background: var(--orange);
+  padding: 0 1rem;
+}
+
+blockquote {
+  background: #0c02;
   padding: 0 1rem;
 }
 
