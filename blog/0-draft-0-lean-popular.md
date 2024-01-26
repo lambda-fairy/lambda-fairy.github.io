@@ -16,7 +16,7 @@ Above all else, mathlib's development process is optimized for *speed*.
 (Lean itself doesn't move as quickly, but it's comfortable with breaking changes too.)
 
 One factor that enables this speed is that Lean and mathlib are relatively new.
-Coq is much older, and has many external users that depend on it.
+Agda, Coq, and Isabelle are much older, and have many external users that depend on them.
 They don't have permission to change as much as Lean does.
 
 Another factor is that mathlib is a [monorepo].
