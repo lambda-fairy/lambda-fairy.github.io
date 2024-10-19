@@ -1,0 +1,78 @@
+<!DOCTYPE html><meta charset="utf-8"><title>Hackage update, part 2
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Hackage update, part 2</h1><p><small><time datetime="2014-05-13">May 13, 2014</time></small></p><p>Hello, everyone!</p>
+<p>There’s still a few weeks before the Summer begins, so I’m taking the time to prepare. Among other things, this involves setting up a development server to test the code I write.</p>
+<p>Building and running the Hackage server went mostly without a hitch. Here are the issues I encountered:</p>
+<ul>
+<li>
+<p>The first time I ran the server, it displayed this error:</p>
+<pre>
+<span style="color:#323232;">  hackage-server: It looks like you are running the server without installing
+</span><span style="color:#323232;">  it. That is fine but you will have to give the location of the static html
+</span><span style="color:#323232;">  files with the --static-dir flag.
+</span></pre>
+<p>Passing in <code>--static-dir=datafiles</code> seemed to stop the whining.</p>
+</li>
+<li>
+<p>By default, the <code>admin</code> account could not upload packages. Fortunately, this issue was easy to fix: simply add the account to the “uploaders” group.</p>
+</li>
+<li>
+<p>When I uploaded a package, the documentation did not appear. This is because building packages is handled by a separate program, <code>hackage-build</code>. Running it solved the problem:</p>
+<pre>
+<span style="color:#323232;">  dist/build/hackage-build/hackage-build init http://localhost:8080
+</span><span style="color:#323232;">  dist/build/hackage-build/hackage-build build
+</span></pre>
+<p>Alternatively, one could upload documentation manually, which is what I tried first.</p>
+</li>
+</ul>
+<p>Here’s what it looks like:</p>
+<a class="image-box" href="/images/2014/hello.png"><img src="/images/2014/hello.png" alt="Screenshot of Hackage instance, displaying the package “hello”
+" title=""></a>
+<p>Beautiful, isn’t it?</p>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>
