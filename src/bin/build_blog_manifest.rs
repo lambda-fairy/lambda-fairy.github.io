@@ -4,7 +4,7 @@ use comrak::{nodes::AstNode, Arena};
 use itertools::Itertools;
 use lambda_fairy::{
     page::Page,
-    views::{self, Comrak},
+    views::{self, ComrakRemovePTags},
 };
 use maud::{html, Markup};
 use std::{
@@ -65,7 +65,7 @@ fn blog_manifest(entries: &[BlogEntry<'_>]) -> Markup {
                 @for entry in entries {
                     li {
                         a href={ "/blog/" (entry.slug) "/" } {
-                            (Comrak(entry.title))
+                            (ComrakRemovePTags(entry.title))
                         }
                         " "
                         (views::small_date(entry.date))

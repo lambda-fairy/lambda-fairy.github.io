@@ -109,6 +109,24 @@ impl Render for Comrak<'_> {
     }
 }
 
+/// Hack! The page title is wrapped in a `Paragraph` node, which introduces an
+/// extra `<p>` tag that we don't want most of the time.
+pub struct ComrakRemovePTags<'a>(pub &'a AstNode<'a>);
+
+impl Render for ComrakRemovePTags<'_> {
+    fn render(&self) -> Markup {
+        let mut buffer = String::new();
+        comrak::format_html(self.0, &COMRAK_OPTIONS, &mut StringWriter(&mut buffer)).unwrap();
+        assert!(buffer.starts_with("<p>") && buffer.ends_with("</p>\n"));
+        PreEscaped(
+            buffer
+                .trim_start_matches("<p>")
+                .trim_end_matches("</p>\n")
+                .to_string(),
+        )
+    }
+}
+
 pub fn comrak_to_text<'a>(content: &'a AstNode<'a>) -> String {
     let mut buffer = String::new();
     comrak::format_commonmark(content, &COMRAK_OPTIONS, &mut StringWriter(&mut buffer)).unwrap();

@@ -8,7 +8,7 @@ use comrak::{
 use if_chain::if_chain;
 use lambda_fairy::{
     page::Page,
-    views::{self, Comrak},
+    views::{self, Comrak, ComrakRemovePTags},
 };
 use maud::{html, Markup, Render};
 use std::{
@@ -182,7 +182,7 @@ fn blog_post(publish_date: PublishDate, page: Page<'_>) -> Markup {
         Some(format!("{draft_prefix}{head_title}")),
         html! {
             h1 {
-                (Comrak(page.title))
+                (ComrakRemovePTags(page.title))
             }
             p {
                 @match publish_date {
