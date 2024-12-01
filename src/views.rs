@@ -103,7 +103,7 @@ pub fn small_date(date: NaiveDate) -> Markup {
 
 pub struct Comrak<'a>(pub &'a AstNode<'a>);
 
-impl<'a> Render for Comrak<'a> {
+impl Render for Comrak<'_> {
     fn render_to(&self, buffer: &mut String) {
         comrak::format_html(self.0, &COMRAK_OPTIONS, &mut StringWriter(buffer)).unwrap();
     }
