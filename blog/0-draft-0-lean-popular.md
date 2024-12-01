@@ -10,27 +10,24 @@ Why has it caught so much attention where its peers---Agda, Coq, Isabelle, and o
 [Lean theorem prover]: https://lean-lang.org/
 [mathlib]: https://leanprover-community.github.io/
 
-## Lean moves fast
+## Lean is new
 
-Above all else, mathlib's development process is optimized for *speed*.
-(Lean itself doesn't move as quickly, but it's comfortable with breaking changes too.)
-
-One factor that enables this speed is that Lean and mathlib are relatively new.
+Lean and mathlib are relatively new.
 Agda, Coq, and Isabelle are much older, and have many external users that depend on them.
-They don't have permission to change as much as Lean does.
+This means that Lean maintainers can experiment, and make sweeping changes, in a way that these other systems cannot.
 
-Another factor is that mathlib is a [monorepo].
-By developing the entire library in a single repository, we:
+This approach is not without drawbacks.
+In particular, it can be difficult to work on projects depending on Lean and mathlib, since they change so often.
+It's an open question how we can balance those needs while allowing Lean to improve.
 
--   **Encourage collaboration.**
-    Most modern mathematics depends on a wide range of disciplines.
-    With a monorepo, contributors are encouraged to reuse what others have built instead of creating it themselves.
+## Mathlib is a monorepo
 
--   **Enable sweeping changes.**
-    A maintainer can change a core definition and update all its usages at once, without having to coördinate between repositories.
+Another factor is that mathlib is a [monorepo]---that is, everyone collaborates on one big repository.
 
-This velocity is not without drawbacks---it can be difficult to work on projects depending on Lean and mathlib, since they change so often.
-It's an open question how we can balance those needs while allowing mathlib to grow.
+For formalization, the biggest benefit of a monorepo is **reuse**.
+A typical proof depends on a web of definitions and lemmas.
+In contemporary mathematics, which often bridges many disciplines, this web can be very broad.
+With a monorepo, it's easy to draw upon (and contribute to) the code that others have built, instead of having to dig through GitHub---or worse, re-coding it all ourselves.
 
 [monorepo]: https://en.wikipedia.org/wiki/Monorepo
 
