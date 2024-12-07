@@ -1,0 +1,121 @@
+<!DOCTYPE html><meta charset="utf-8"><title>[DRAFT] Is HTML a programming language?
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Is HTML a programming language?</h1><p><small>Draft – please do not share</small></p><p><a href="https://www.youtube.com/watch?v=bubFg390wZY">Are fish wet?</a>
+Is <a href="https://steven-universe.fandom.com/wiki/Stevonnie">Stevonnie</a> a boy or a girl?</p>
+<p>Is HTML a programming language?</p>
+<p>People love to argue about taxonomy.
+It’s right up there, along with the weather, the latest Netflix series, and whatever Josh has gotten up to this time.<sup class="footnote-ref"><a href="#fn-josh" id="fnref-josh" data-footnote-ref>1</a></sup>
+And like most arguments, they’re driven more by knee-jerk reactions than truth.
+Any reasonable person would recognize that such “debates” are a waste of time, and refuse to get sucked in.</p>
+<p>But I’m not a reasonable person.
+And if you’re still reading this article, you aren’t either.</p>
+<p>So let’s dive head first into this mess, and explore this trashfire together!</p>
+<h2><a href="#its-not-turing-complete" aria-hidden="true" class="anchor" id="its-not-turing-complete"></a>“It’s not Turing complete!”</h2>
+<p>Indeed, it’s impossible to simulate a Turing machine using HTML markup alone.
+But does that make it not a programming language?</p>
+<p><a href="https://en.wikipedia.org/wiki/Coq">Coq</a> is not Turing complete.
+But it’s powerful enough to build a <a href="https://compcert.org/">C compiler</a>.</p>
+<p>On the other side, the TeX typesetting system isn’t usually considered a programming language.
+But <a href="https://pbelmans.ncag.info/blog/2010/12/12/a-turing-machine-in-latex-follow-u/">it <em>is</em> Turing complete</a>.</p>
+<p>And if that’s not enough—C, everyone’s favorite programming language, is <em>not</em> Turing complete!<sup class="footnote-ref"><a href="#fn-c" id="fnref-c" data-footnote-ref>2</a></sup></p>
+<p>From these examples, it’s clear that Turing completeness and programming language-ness aren’t the same thing.
+But if Turing completeness doesn’t make a programming language, then what does?</p>
+<h2><a href="#you-can-extract-meaning-from-it-without-running-arbitrary-code" aria-hidden="true" class="anchor" id="you-can-extract-meaning-from-it-without-running-arbitrary-code"></a>“You can extract meaning from it without running arbitrary code!”</h2>
+<p>This is what the “Turing complete” people <em>actually</em> mean, and unlike that other claim, is actually relevant.</p>
+<p>For most web pages, the bulk of their meaning is in their text, which can be extracted with little effort.
+This is the idea behind <a href="https://en.wikipedia.org/wiki/Web_scraping">web scraping</a>, and—to a first approximation—how search engines like Google work.</p>
+<p>So there we have it.
+HTML is not a programming language.</p>
+<p>Right?</p>
+<h2><a href="#html-isnt-just-a-markup-language-its-an-application-platform" aria-hidden="true" class="anchor" id="html-isnt-just-a-markup-language-its-an-application-platform"></a>“HTML isn’t just a markup language, it’s an application platform!”</h2>
+<ul>
+<li>HTML standard recognizes the web as a platform for publishing documents <em>and</em> apps, and places equal weight on both.</li>
+</ul>
+<h2><a href="#nobody-writes-only-html" aria-hidden="true" class="anchor" id="nobody-writes-only-html"></a>“Nobody writes <em>only</em> HTML!”</h2>
+<p>One of the most popular static site frameworks, <a href="https://www.gatsbyjs.com/">Gatsby</a>, is built upon JavaScript and React.
+Feel free to form your own opinion on this—but the reality is that contemporary web design is not restricted to HTML and CSS, but requires programming skills as well.</p>
+<p>But of course…</p>
+<h2><a href="#it-doesnt-matter" aria-hidden="true" class="anchor" id="it-doesnt-matter"></a>“It doesn’t matter.”</h2>
+<p>And to an extent, it doesn’t.
+Whether HTML is a programming language or not has no relevance to the work that professional designers, developers, and browser vendors do.
+They’ll keep making cool shit regardless.</p>
+<!--
+Where is *does* matter is how it looks to beginners.
+For many people, their first exposure to code is through HTML.
+I have fond memories of uploading my first site to some dodgy free web host, and showing it with pride to my middle-school friends.
+I'm sure many of you have similar memories with Geocities, Myspace, or Tumblr.
+The web has a low barrier to entry, and that is its greatest strength.
+
+When we, as experts, see a statement like "HTML is not a programming language", we take it at face value---as a statement of fact.
+But to a beginner, that sounds a lot like "HTML isn't programming".
+-->
+<p>But here’s the thing.
+The term “programming language” is too vague to define in its own right.
+Unlike more precise attributes, like “has syntax highlighting on GitHub” or “Turing complete” or “can run Doom”, there is no single criterion that captures what everyone thinks a programming language should be.
+So when someone says that HTML is or isn’t a programming language, it’s not a technical statement—it’s a <em>political</em> one.
+They are expressing their opinion on what programming <em>means</em>, and by implication, excluding anyone who doesn’t fit.</p>
+<p>This gets a bit suspicious when you realize that frontend development is <a href="https://www.theguardian.com/technology/2017/mar/14/tech-women-code-workshops-developer-jobs">both lower paid <em>and</em> has more women</a>.
+The idea that “HTML isn’t programming” feeds into the disparity between frontend and backend roles, and widens the gender pay gap.</p>
+<h2><a href="#the-moral-of-the-story" aria-hidden="true" class="anchor" id="the-moral-of-the-story"></a>The moral of the story</h2>
+<p>And to answer the question?</p>
+<p>It depends.
+But probably yes.</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-josh">
+<p>Ah, Josh. <a href="#fnref-josh" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-c">
+<p>A Turing machine has infinite memory.
+But in C, since any memory location can be referenced by a pointer, this limits the available memory to 2<sup>POINTER_SIZE</sup> bytes.
+Hence standard C cannot be Turing complete. <a href="#fnref-c" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+</ol>
+</section>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>
