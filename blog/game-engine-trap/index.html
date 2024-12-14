@@ -1,0 +1,76 @@
+<!DOCTYPE html><meta charset="utf-8"><title>The game engine trap
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>The game engine trap</h1><p><small><time datetime="2021-12-15">December 15, 2021</time></small></p><p><em>This is part 3 of a trilogy.
+You might like to read <a href="/blog/new-website-part-1/">part 1</a>.</em></p>
+<p>There’s a bit of a meme going ’round in the gamedev community.</p>
+<p>A beginner dev has a great idea for a game.
+But instead of using a preëxisting game engine, they decide to build one themselves.
+Months pass.
+Thousands of lines of code are written.
+They still don’t have a game.</p>
+<p>This is the <em><a href="https://www.reddit.com/r/gamedev/wiki/engine_faq/#wiki_so...why_do_i_need_one_of_these.3F">game engine trap</a></em>.</p>
+<p>When I started building my new website, I thought I’d create the perfect static site generator for it.
+It would boast incremental and parallel builds, have a built-in preview server with hot reload, and above all—be 100% written in Rust.</p>
+<p>It took a couple weekends before I realized my mistake.</p>
+<p>The <a href="https://github.com/lambda-fairy/lambda-fairy.github.io">final setup</a> is a lot less ambitious:</p>
+<ul>
+<li>The build is orchestrated via a <a href="https://github.com/lambda-fairy/lambda-fairy.github.io/blob/main/Makefile">Makefile</a>.
+Since Make is already incremental and parallel, I don’t have to implement those features myself.</li>
+<li>The preview server is <code>python3 -m http.server</code>.</li>
+<li>I rebuild on changes with <a href="https://eradman.com/entrproject/">entr</a>.</li>
+<li>There is no hot reload.
+When I make a change, I tab to the browser and press F5.</li>
+</ul>
+<p>The only bespoke component is a small Rust binary that processes each individual page.
+Even then, most of that code is copied from <a href="https://github.com/lambda-fairy/maud/blob/main/docs/">another project</a>, so it isn’t that bespoke after all.</p>
+<h2><a href="#the-moral-of-the-story" aria-hidden="true" class="anchor" id="the-moral-of-the-story"></a>The moral of the story</h2>
+<p>If there’s any conclusion that could be had from this, it’s: <strong>know what you want!</strong></p>
+<p>I realized early on that I didn’t care about how the website was built.
+By minimizing that part of the project, I could focus on what I really wanted to do: <a href="/blog/new-website-part-2/">fuck around with CSS 😎</a></p>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

@@ -1,0 +1,60 @@
+<!DOCTYPE html><meta charset="utf-8"><title>The Crystal Caves
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>The Crystal Caves</h1><p><small><time datetime="2014-05-20">May 20, 2014</time></small></p><p><em>One day, I decided to write a story about ponies and plants. This is the result.</em></p>
+<hr />
+<p>Not many ponies know this, but right below the city of Canterlot is a vast, winding network of crystal caves. They were dug out by the unicorns who first came to the mountain, seeking their fortunes in gems. Over the years the caves have been picked clean of stones, but their expansiveness and isolation still make them a great place for secret, or dangerous, experiments.</p>
+<p>You see, after the plunderseed invasion, the Celestial administration was shocked to find close to no existing literature on the plant. So it came to us, the Universities of Equestria. We, a loose federation of researchers from Vanhoover to Baltimare, were tasked with finding out all we could about this seed of chaos, in return for vast amounts of money. If you noticed a tenfold leap in funding to the Research Council a few moons ago, now you know why.</p>
+<p>Anyway, where was I? Oh yes, the incident.</p>
+<p>It was early evening, and I was sitting in my office (Observatory second floor, third door on the left) going over the data Sylocat collected, looking for patterns. My mind started to wander… <em>that cress sandwich I had for lunch was amazing</em>, I thought; <em>I forgot to pay rent this week, didn’t I?</em> <em>Sure hope Daisy Leaf didn’t—</em></p>
+<p>I stood up, and stared at the clock above my desk. It was a pretty well-made clock actually, mahogany with silver trim; found it at Rainbow Falls last year. Anyway, it was 9 pm. Daisy promised to be back at 6. Something was wrong.</p>
+<p>I put down the papers, and dashed out of the room, down seven flights of stairs, into the caves. I’ll admit I’m not a good runner and never was, but desperation does funny things to a pony. Luckily, she’d told me where she was going: cavern 055, “Virtue”. Not that it mattered anyway, since I could hear the piercing screams from the entrance.</p>
+<p>And then I saw her. Daisy Leaf’s body hung limp in mid-air, one black branch of many wound around her waist. Purple light sparked from her horn, enveloping her captor; her eyes, half-open, were black holes. Her contented smile turned into one of surprise, then embarrassment when she saw my figure, frozen, a look of pure horror plastered over my face.</p>
+<p>“T-t-this isn’t what it looks like,” she stammered.</p>
+<p>I didn’t sleep that night.</p>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

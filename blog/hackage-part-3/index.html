@@ -1,0 +1,67 @@
+<!DOCTYPE html><meta charset="utf-8"><title>Hackage update, part 3
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Hackage update, part 3</h1><p><small><time datetime="2014-07-09">July 9, 2014</time></small></p><p>Over the last few months, I’ve been working on <a href="https://github.com/haskell/hackage-server/wiki/GSoC-2014">various improvements</a> to <a href="https://hackage.haskell.org/">Hackage</a> under the supervision of Duncan Coutts, as part of the <a href="https://www.google-melange.com/gsoc/homepage/google/gsoc2014">Google Summer of Code</a>. As it’s been a while since my last post, I thought I’d give a short summary of what I’ve done so far.</p>
+<h2><a href="#documentation-upload" aria-hidden="true" class="anchor" id="documentation-upload"></a>Documentation upload</h2>
+<p>Hackage has supported <a href="https://github.com/haskell/hackage-server/issues/56">manual documentation uploads</a> for quite some time, albeit through a rather obscure API. This is an important feature for packages which cannot be built automatically on the server.</p>
+<p>My contribution was a simple HTML interface, which allowed for uploading and deleting documentation at the click of a button. Here’s how it looks (click to enlarge):</p>
+<a class="image-box" href="/images/2014/doc-upload.png"><img src="/images/2014/doc-upload.png" alt="" title=""></a>
+<p>There is still one pain point, however. Building the documentation archive in the first place is quite error-prone; it would be nice if Cabal could automate the process. As that is a Cabal issue, not a Hackage one, it is out of scope for now – but would make a good project to tackle next.</p>
+<h2><a href="#build-reports" aria-hidden="true" class="anchor" id="build-reports"></a>Build reports</h2>
+<p>The next feature I worked on was build reporting. The Hackage build bot leaves logs for every package it builds, and it is often helpful to view them. Users can submit their own reports as well, though this is rare in practice. Unfortunately, as with documentation uploads, while the functionality was there, it was <a href="http://web.archive.org/web/20160929095712/http://fuuzetsu.co.uk/blog/posts/2014-01-06-Fix-your-Hackage-documentation.html">difficult to discover and use</a>.</p>
+<p>My contribution had two parts – a fancy build status indicator (click to enlarge):</p>
+<a class="image-box" href="/images/2014/br-status.png"><img src="/images/2014/br-status.png" alt="Hooray\!
+" title=""></a>
+<p>and a pretty build reports view:</p>
+<a class="image-box" href="/images/2014/br-report.png"><img src="/images/2014/br-report.png" alt="Build status… useful metadata… and a full log\!
+" title=""></a>
+<p>This part of the project ended up a bit broader than expected, as there was plenty of information to summarize. The gory details are on the <a href="https://github.com/haskell/hackage-server/wiki/Bikeshed:-build-reports">wiki</a>, for the curious.</p>
+<h2><a href="#next-steps" aria-hidden="true" class="anchor" id="next-steps"></a>Next steps</h2>
+<p>Overall, I’m happy with the work I’ve done so far, especially given that it’s my first time working on a project of this scale.</p>
+<p>Next up would most likely be either <a href="https://github.com/haskell/hackage-server/issues/41">package candidates</a> or the tag system.</p>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

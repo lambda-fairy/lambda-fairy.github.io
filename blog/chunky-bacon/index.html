@@ -1,0 +1,77 @@
+<!DOCTYPE html><meta charset="utf-8"><title>Splitting a list into chunks with unfoldr
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Splitting a list into chunks with unfoldr</h1><p><small><time datetime="2017-03-13">March 13, 2017</time></small></p><p>I’m quite fond of the <a href="https://hackage.haskell.org/package/base-4.9.1.0/docs/Data-List.html#v:unfoldr"><code>unfoldr</code></a> function in Haskell. It doesn’t seem well known, which is a shame because I’ve often found it useful.</p>
+<p>One of these uses is in splitting a list into chunks of a specified length. Here are some examples of what I’m going for:</p>
+<pre>
+<span style="font-weight:bold;color:#a71d5d;">&gt;&gt;&gt;</span><span style="color:#323232;"> chunks </span><span style="color:#0086b3;">1</span><span style="color:#323232;"> [</span><span style="color:#183691;">&#39;a&#39;</span><span style="font-weight:bold;color:#a71d5d;">..</span><span style="color:#183691;">&#39;l&#39;</span><span style="color:#323232;">]
+</span><span style="color:#323232;">[</span><span style="color:#183691;">&quot;a&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;b&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;c&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;d&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;e&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;f&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;g&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;h&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;i&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;j&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;k&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;l&quot;</span><span style="color:#323232;">]
+</span><span style="color:#323232;">
+</span><span style="font-weight:bold;color:#a71d5d;">&gt;&gt;&gt;</span><span style="color:#323232;"> chunks </span><span style="color:#0086b3;">2</span><span style="color:#323232;"> [</span><span style="color:#183691;">&#39;a&#39;</span><span style="font-weight:bold;color:#a71d5d;">..</span><span style="color:#183691;">&#39;l&#39;</span><span style="color:#323232;">]
+</span><span style="color:#323232;">[</span><span style="color:#183691;">&quot;ab&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;cd&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;ef&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;gh&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;ij&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;kl&quot;</span><span style="color:#323232;">]
+</span><span style="color:#323232;">
+</span><span style="font-weight:bold;color:#a71d5d;">&gt;&gt;&gt;</span><span style="color:#323232;"> chunks </span><span style="color:#0086b3;">3</span><span style="color:#323232;"> [</span><span style="color:#183691;">&#39;a&#39;</span><span style="font-weight:bold;color:#a71d5d;">..</span><span style="color:#183691;">&#39;l&#39;</span><span style="color:#323232;">]
+</span><span style="color:#323232;">[</span><span style="color:#183691;">&quot;abc&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;def&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;ghi&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;jkl&quot;</span><span style="color:#323232;">]
+</span><span style="color:#323232;">
+</span><span style="font-weight:bold;color:#a71d5d;">&gt;&gt;&gt;</span><span style="color:#323232;"> chunks </span><span style="color:#0086b3;">4</span><span style="color:#323232;"> [</span><span style="color:#183691;">&#39;a&#39;</span><span style="font-weight:bold;color:#a71d5d;">..</span><span style="color:#183691;">&#39;l&#39;</span><span style="color:#323232;">]
+</span><span style="color:#323232;">[</span><span style="color:#183691;">&quot;abcd&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;efgh&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;ijkl&quot;</span><span style="color:#323232;">]
+</span><span style="color:#323232;">
+</span><span style="font-weight:bold;color:#a71d5d;">&gt;&gt;&gt;</span><span style="color:#323232;"> chunks </span><span style="color:#0086b3;">5</span><span style="color:#323232;"> [</span><span style="color:#183691;">&#39;a&#39;</span><span style="font-weight:bold;color:#a71d5d;">..</span><span style="color:#183691;">&#39;l&#39;</span><span style="color:#323232;">]
+</span><span style="color:#323232;">[</span><span style="color:#183691;">&quot;abcde&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;fghij&quot;</span><span style="color:#323232;">,</span><span style="color:#183691;">&quot;kl&quot;</span><span style="color:#323232;">]
+</span></pre>
+<p>And here’s the definition:</p>
+<pre>
+<span style="font-weight:bold;color:#795da3;">chunks </span><span style="font-weight:bold;color:#a71d5d;">:: Int -&gt;</span><span style="color:#323232;"> [a] </span><span style="font-weight:bold;color:#a71d5d;">-&gt;</span><span style="color:#323232;"> [[a]]
+</span><span style="color:#323232;">chunks </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">unfoldr </span><span style="font-weight:bold;color:#a71d5d;">$ \</span><span style="color:#323232;">xs </span><span style="font-weight:bold;color:#a71d5d;">-&gt;
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">case</span><span style="color:#323232;"> xs </span><span style="font-weight:bold;color:#a71d5d;">of
+</span><span style="color:#323232;">        </span><span style="font-style:italic;color:#969896;">-- If there are no elements left, stop iteration
+</span><span style="color:#323232;">        </span><span style="color:#0086b3;">[] </span><span style="font-weight:bold;color:#a71d5d;">-&gt; </span><span style="color:#0086b3;">Nothing
+</span><span style="color:#323232;">        </span><span style="font-style:italic;color:#969896;">-- Otherwise, split off n elements and yield them
+</span><span style="color:#323232;">        _ </span><span style="font-weight:bold;color:#a71d5d;">-&gt; </span><span style="color:#0086b3;">Just </span><span style="font-weight:bold;color:#a71d5d;">$</span><span style="color:#323232;"> splitAt n xs
+</span></pre>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

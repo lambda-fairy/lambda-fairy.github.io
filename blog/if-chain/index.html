@@ -1,0 +1,132 @@
+<!DOCTYPE html><meta charset="utf-8"><title>Announcing `if_chain`
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Announcing <code>if_chain</code></h1><p><small><time datetime="2016-12-29">December 29, 2016</time></small></p><p>Today I published <a href="https://github.com/lambda-fairy/if_chain"><code>if_chain</code></a>, a macro for writing nested <code>if let</code> expressions. The <a href="https://docs.rs/if_chain">documentation</a> does a good job of showing how to use the crate, and I recommend taking a look through it. This article will instead go more into the background behind this macro and how it helped with my own projects.</p>
+<h2><a href="#the-problem" aria-hidden="true" class="anchor" id="the-problem"></a>The problem</h2>
+<p>As part of <a href="https://github.com/lambda-fairy/maud/issues/66">another project</a>, I was working on a <a href="http://web.archive.org/web/20170127145953/https://doc.rust-lang.org/book/compiler-plugins.html#lint-plugins">lint plugin</a> that catches common mistakes and suggests ways to fix them. Unfortunately, the code I wrote would often look like this:</p>
+<pre>
+<span style="font-weight:bold;color:#a71d5d;">if let</span><span style="color:#323232;"> ExprCall(</span><span style="font-weight:bold;color:#a71d5d;">ref</span><span style="color:#323232;"> path_expr, </span><span style="font-weight:bold;color:#a71d5d;">ref</span><span style="color:#323232;"> args) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> expr.node {
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">if let </span><span style="color:#0086b3;">Some</span><span style="color:#323232;">(first_arg) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> args.</span><span style="color:#62a35c;">first</span><span style="color:#323232;">() {
+</span><span style="color:#323232;">        </span><span style="font-weight:bold;color:#a71d5d;">if let</span><span style="color:#323232;"> ExprLit(</span><span style="font-weight:bold;color:#a71d5d;">ref</span><span style="color:#323232;"> lit) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> first_arg.node {
+</span><span style="color:#323232;">            </span><span style="font-weight:bold;color:#a71d5d;">if let </span><span style="color:#323232;">LitKind::Str(s, </span><span style="font-weight:bold;color:#a71d5d;">_</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> lit.node {
+</span><span style="color:#323232;">                </span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> s.</span><span style="color:#62a35c;">as_str</span><span style="color:#323232;">().</span><span style="color:#62a35c;">eq_ignore_ascii_case</span><span style="color:#323232;">(</span><span style="color:#183691;">&quot;&lt;!doctype html&gt;&quot;</span><span style="color:#323232;">) {
+</span><span style="color:#323232;">                    </span><span style="font-style:italic;color:#969896;">// ...
+</span></pre>
+<p>As you can see, a common issue was <em>rightward drift</em>. Every <code>if</code> statement would indent the code by one more step, such that the actual message ended up off the page!</p>
+<p>Now, Rust does provide tools for tackling this issue; and in most cases it would be enough to use them. But for my use case—writing lints—they are not enough:</p>
+<ul>
+<li>
+<p>We can rewrite each check to yield an <code>Option</code>, and use <code>.and_then()</code> or the <code>?</code> operator to chain them. But when writing a lint, the interfaces involved are so broad and irregular that wrapping everything is not practical.</p>
+</li>
+<li>
+<p>We can try to merge all these checks into a single pattern. But in this case, the intermediate nodes are wrapped in smart pointers (the <a href="https://github.com/rust-lang/rust/blob/1.15.1/src/libsyntax/ptr.rs#L46-L50"><code>P</code></a> type), and current Rust doesn’t have a way to dereference a smart pointer from within a pattern.</p>
+</li>
+</ul>
+<h2><a href="#existing-solutions" aria-hidden="true" class="anchor" id="existing-solutions"></a>Existing solutions</h2>
+<p>I wasn’t the first to run into this problem. <a href="https://github.com/rust-lang/rust-clippy">Clippy</a>, a collection of general-purpose lints, has a utility macro called <a href="https://github.com/rust-lang/rust-clippy/blob/5d78485a81c06a621f607f3e772add628c892b13/clippy_lints/src/utils/mod.rs#L36-L91"><code>if_let_chain!</code></a> for this purpose. Using this macro, the example above would be written like this instead:</p>
+<pre>
+<span style="color:#323232;">if_let_chain! {[
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">let</span><span style="color:#323232;"> ExprCall(</span><span style="font-weight:bold;color:#a71d5d;">ref</span><span style="color:#323232;"> path_expr, </span><span style="font-weight:bold;color:#a71d5d;">ref</span><span style="color:#323232;"> args) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> expr.node,
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">let </span><span style="color:#0086b3;">Some</span><span style="color:#323232;">(first_arg) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> args.</span><span style="color:#62a35c;">first</span><span style="color:#323232;">(),
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">let</span><span style="color:#323232;"> ExprLit(</span><span style="font-weight:bold;color:#a71d5d;">ref</span><span style="color:#323232;"> lit) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> first_arg.node,
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">let </span><span style="color:#323232;">LitKind::Str(s, </span><span style="font-weight:bold;color:#a71d5d;">_</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> lit.node,
+</span><span style="color:#323232;">    s.</span><span style="color:#62a35c;">as_str</span><span style="color:#323232;">().</span><span style="color:#62a35c;">eq_ignore_ascii_case</span><span style="color:#323232;">(</span><span style="color:#183691;">&quot;&lt;!doctype html&gt;&quot;</span><span style="color:#323232;">),
+</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;">// ...
+</span><span style="color:#323232;">], {
+</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;">// ...
+</span><span style="color:#323232;">}}
+</span></pre>
+<p>This solved the rightward drift problem at hand. But as I used the macro, I found a few flaws in the implementation:</p>
+<ul>
+<li>
+<p>Since <code>if_let_chain!</code> is a part of Clippy, I would have to either copy-and-paste the macro, or depend on the whole of Clippy. It would be better if the macro was in its own crate.</p>
+</li>
+<li>
+<p>When inspecting the type of an expression, for example, the code involved can be quite long. One would use intermediate variables (<code>let</code> statements) to keep the code easy to read. But since <code>if_let_chain!</code> expects every line to be an <code>if</code> or <code>if let</code>, there’s no good way of doing this refactoring.</p>
+</li>
+<li>
+<p>Some of the syntax choices, like omitting the <code>if</code> from each check and the use of square brackets, seem arbitrary to me. I’d prefer it if the macro looks more like the generated code.</p>
+</li>
+</ul>
+<h2><a href="#introducing-if_chain" aria-hidden="true" class="anchor" id="introducing-if_chain"></a>Introducing <code>if_chain</code></h2>
+<p>Here’s where <code>if_chain</code> comes in. It addresses the points raised above, and adds some features of its own:</p>
+<ul>
+<li>
+<p><em>Fallback values</em>. <code>if_chain!</code> lets you give an <code>else</code> clause, which is evaluated when any of the checks fail to match.</p>
+</li>
+<li>
+<p><em>Multiple patterns</em>. Rust allows for matching multiple patterns at once in a <code>match</code> expression. For example, this code:</p>
+<pre>
+<span style="font-weight:bold;color:#a71d5d;">let</span><span style="color:#323232;"> x </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">1</span><span style="color:#323232;">;
+</span><span style="font-weight:bold;color:#a71d5d;">match</span><span style="color:#323232;"> x {
+</span><span style="color:#323232;">    </span><span style="color:#0086b3;">1 </span><span style="font-weight:bold;color:#a71d5d;">| </span><span style="color:#0086b3;">2 </span><span style="font-weight:bold;color:#a71d5d;">=&gt; </span><span style="color:#323232;">println!(</span><span style="color:#183691;">&quot;one or two&quot;</span><span style="color:#323232;">),
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">_ =&gt; </span><span style="color:#323232;">println!(</span><span style="color:#183691;">&quot;something else&quot;</span><span style="color:#323232;">),
+</span><span style="color:#323232;">}
+</span></pre>
+<p>prints “one or two.” <code>if_chain!</code> supports this syntax in <code>if let</code> as well.</p>
+</li>
+</ul>
+<p>Our example now <a href="https://github.com/lambda-fairy/maud/blob/c849d9efdfa40565b4b0710036fa0da75b688f46/maud_macros/src/lints/doctype_html.rs#L23-L38">looks like this</a>:</p>
+<pre>
+<span style="color:#323232;">if_chain! {
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">if let</span><span style="color:#323232;"> ExprCall(</span><span style="font-weight:bold;color:#a71d5d;">ref</span><span style="color:#323232;"> path_expr, </span><span style="font-weight:bold;color:#a71d5d;">ref</span><span style="color:#323232;"> args) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> expr.node;
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">if let </span><span style="color:#0086b3;">Some</span><span style="color:#323232;">(first_arg) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> args.</span><span style="color:#62a35c;">first</span><span style="color:#323232;">();
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">if let</span><span style="color:#323232;"> ExprLit(</span><span style="font-weight:bold;color:#a71d5d;">ref</span><span style="color:#323232;"> lit) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> first_arg.node;
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">if let </span><span style="color:#323232;">LitKind::Str(s, </span><span style="font-weight:bold;color:#a71d5d;">_</span><span style="color:#323232;">) </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> lit.node;
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">if</span><span style="color:#323232;"> s.</span><span style="color:#62a35c;">as_str</span><span style="color:#323232;">().</span><span style="color:#62a35c;">eq_ignore_ascii_case</span><span style="color:#323232;">(</span><span style="color:#183691;">&quot;&lt;!doctype html&gt;&quot;</span><span style="color:#323232;">);
+</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;">// ...
+</span><span style="color:#323232;">    then {
+</span><span style="color:#323232;">        </span><span style="font-style:italic;color:#969896;">// ...
+</span><span style="color:#323232;">    }
+</span><span style="color:#323232;">}
+</span></pre>
+<a class="image-box" href="https://www.youtube.com/watch?v=fp5CkR5qSt0"><img src="/images/2016/delicious.jpg" alt="Yuuko Aioi raises a pair of chopsticks over her head
+" title=""></a>
+<a href=""></a>
+<p>Delicious!</p>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

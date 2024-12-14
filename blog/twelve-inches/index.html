@@ -1,0 +1,90 @@
+<!DOCTYPE html><meta charset="utf-8"><title>Shooting yourself in the foot
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Shooting yourself in the foot</h1><p><small><time datetime="2013-07-24">July 24, 2013</time></small></p><p>I’ve come up with a few <a href="http://m5p.com/~pravn/foot.html">“shooting yourself in the foot”</a> jokes over the years. I hope you can get a decent chuckle out of these ☺</p>
+<h2><a href="#go" aria-hidden="true" class="anchor" id="go"></a>Go</h2>
+<p>You shoot many feet, all at the same time, very, very, quickly.</p>
+<h2><a href="#python" aria-hidden="true" class="anchor" id="python"></a>Python</h2>
+<p>You take out your gun, aim it at your foot, and pull the trigger. It creates a perfectly round hole in the middle of its target.</p>
+<p>You pat yourself on the back and limp out of the office, proud of a job well done.</p>
+<h2><a href="#cobol" aria-hidden="true" class="anchor" id="cobol"></a>COBOL</h2>
+<p>You try to shoot yourself in the foot, but the compiler notices you’re already dead inside and optimizes it away.</p>
+<h2><a href="#eiffel" aria-hidden="true" class="anchor" id="eiffel"></a>Eiffel</h2>
+<p>You can’t.</p>
+<h2><a href="#ocaml" aria-hidden="true" class="anchor" id="ocaml"></a>OCaml</h2>
+<p>You create a new foot that is already shot, and treat that as the original. Your old foot eventually disappears.</p>
+<h2><a href="#haskell" aria-hidden="true" class="anchor" id="haskell"></a>Haskell</h2>
+<p>You try to shoot yourself in the foot, but can’t figure out how. So you post your problem on StackOverflow.</p>
+<p>A few minutes later, you receive five replies: all of them different, none of which you understand, and at least one of which uses a library <a href="https://cokmett.github.io/cokmett/">Edward Kmett</a> wrote last week.</p>
+<h2><a href="#php" aria-hidden="true" class="anchor" id="php"></a>PHP</h2>
+<p>I was just thinking… you know about gun accidents?</p>
+<blockquote>
+<p>Yeah, what about them—</p>
+</blockquote>
+<p>So many people get hurt —killed, even— by guns, every single day. And you know how they get hurt? Because SOMEONE ELSE IS POINTING THE GUN AT THEM.</p>
+<blockquote>
+<p>Obviously—</p>
+</blockquote>
+<p>Don’t interrupt, Rasmus. You’re breaking my flow.</p>
+<blockquote>
+<p>Sorry.</p>
+</blockquote>
+<p>Anyway, I was thinking — why not fix the problem right at the beginning? Why don’t we plug the hole <em>right at its source</em>?</p>
+<blockquote>
+<p>You mean, like improved education, tougher licensing laws—</p>
+</blockquote>
+<p>No, Rasmus, don’t you see? Accidents happen only when people point their gun <em>away</em> from themselves.</p>
+<blockquote>
+<p>You’ve lost me now. Go on.</p>
+</blockquote>
+<p>Rasmus, I want every gun made from now on changed… <em>to <a href="https://en.wikipedia.org/wiki/Magic_quotes">fire backwards</a>.</em></p>
+<hr />
+<p>You aim the gun at your foot, and pull the trigger. Your head explodes.</p>
+<h2><a href="#coq" aria-hidden="true" class="anchor" id="coq"></a>Coq</h2>
+<p>What’s a foot?</p>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

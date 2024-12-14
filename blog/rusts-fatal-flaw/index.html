@@ -1,0 +1,114 @@
+<!DOCTYPE html><meta charset="utf-8"><title>Rust’s fatal flaw
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Rust’s fatal flaw</h1><p><small><time datetime="2017-04-01">April 1, 2017</time></small></p><p>I like <a href="https://www.rust-lang.org">Rust</a>. It’s named after an awesome parasitic fungus, it’s developed by a non-profit (Mozilla), and its logo gives it a nice steampunk aesthetic. It’s also great fodder for deep, thoughtful think pieces. Like this one.</p>
+<p>Despite these advantages, Rust does have a fatal flaw. Now, having fatal flaws isn’t a deal breaker in itself. After all, Haskell still has no way to declare two structs with the same field name, and yet it regularly hits the front page of Hacker News.</p>
+<p>But this time, it’s different. This flaw touches on a feature much more fundamental than struct declarations. If left unfixed, it threatens to lock out all but the most dedicated users from the language.</p>
+<p>The flaw involves Rust’s distinction between <em>owned</em> and <em>borrowed</em> types. Owned values wrap a resource; this resource is deällocated automatically when the value falls out of scope. Compare this to a borrowed value, which may point to a resource but does not take responsibility for deällocating it.</p>
+<p>Borrowed values often have fewer capabilities than their owned counterparts, but are in turn easier to pass around. For example, both an owned <code>String</code> and a borrowed <code>&amp;str</code> point to UTF-8–encoded text, but only <code>String</code> lets you mutate and grow the underlying buffer. On the other hand, since <code>&amp;str</code> handles do not manage the buffer themselves, they can be copied cheaply without risking a <a href="https://www.owasp.org/index.php/Double_Free">double free</a>.</p>
+<p>This structure is intuitive and obvious, and a clear improvement over that of other systems languages like C++ or JavaScript. The flaw, then, is not in the basic idea, nor the execution, but in the names of the types themselves.</p>
+<p>As mentioned above, we have the owned <code>String</code> and the borrowed <code>&amp;str</code>. But with arrays, the developers have opted for the confusing <code>Vec&lt;T&gt;</code> and <code>&amp;[T]</code> instead. Going through the names for common owned and borrowed types, we realize that they do not follow a consistent pattern:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Borrowed</th>
+<th align="left">Owned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>str</code></td>
+<td align="left"><code>String</code></td>
+</tr>
+<tr>
+<td align="left"><code>Path</code></td>
+<td align="left"><code>PathBuf</code></td>
+</tr>
+<tr>
+<td align="left"><code>OsStr</code></td>
+<td align="left"><code>OsString</code></td>
+</tr>
+<tr>
+<td align="left"><code>[T]</code></td>
+<td align="left"><code>Vec&lt;T&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>Uppercase vs lowercase, two different suffixes, and a different set of symbols altogether. How can a newcomer be expected to learn this naming scheme? If the Rust developers really <a href="https://blog.rust-lang.org/2017/03/02/lang-ergonomics.html">care about ergonomics</a>, then this is a good place to start.</p>
+<p>Luckily, the author has a solution. Suppose that the names of these types were changed to the following:</p>
+<table>
+<thead>
+<tr>
+<th align="left">Borrowed</th>
+<th align="left">Owned</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="left"><code>Str</code></td>
+<td align="left"><code>String</code></td>
+</tr>
+<tr>
+<td align="left"><code>Path</code></td>
+<td align="left"><code>Pathing</code></td>
+</tr>
+<tr>
+<td align="left"><code>OsStr</code></td>
+<td align="left"><code>OsString</code></td>
+</tr>
+<tr>
+<td align="left"><code>Slic&lt;T&gt;</code></td>
+<td align="left"><code>Slicing&lt;T&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p>This scheme is easy to learn: just add <code>-ing</code> for the owned type. (We shall refer to this as <em>Dutch notation</em>, for reasons elaborated on later.) As an added benefit, the <code>Slic</code> name alludes to the efficiency of Rust’s zero-cost abstractions. Very <em>slic</em>.</p>
+<p>That raises the question, though: why the choice of an <code>-ing</code> suffix to represent ownership? The answer should be familiar to anyone with a passing interest in finance. The International Netherlands Group, or <a href="https://en.wikipedia.org/wiki/ING_Group">ING</a> for short, is a multinational banking and financial services corporation headquartered in Amsterdam. Since a bank is in the business of tracking ownership, it feels appropriate to use the name of one in the context of Rust.</p>
+<p>Funnily enough, this idea provides us with an explanation for the original naming scheme. String is produced by the textile industry, which is largely in private hands. It would make sense for ING to invest in its production. Most (foot)paths, however, are maintained by the state; they are shielded—or <em>buffered</em>—from market forces. And vectors are a concept from mathematics, a field known for its use of arcane symbols.</p>
+<p>If neither Dutch notation nor desperate post-hoc rationalizing appeal to you, then there is one final alternative. Perhaps, when the workers of the world rise up and seize the means of production, we can abolish the idea of ownership altogether. I think that would be a great time to release Rust 2.0.</p>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

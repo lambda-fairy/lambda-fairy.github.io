@@ -1,0 +1,217 @@
+:root {
+  font: clamp(16px, 4vw, 20px) / var(--line-height) "Libre Franklin", sans-serif;
+  color: var(--black);
+  box-sizing: border-box;
+
+  /* Gimme some space! Yeah!! */
+  padding-bottom: 10rem;
+
+  --line-height: 1.5;
+  --width: min(40rem, 100vw - 2rem);
+  --black: #222;
+  --lavender: rgb(183, 128, 255, .25);
+  --lavender-light: rgb(183, 128, 255, .1);
+  --orange: rgba(255, 187, 61, .25);
+  --purple: #9859a8;
+}
+
+* {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+}
+
+header {
+  contain: content;
+  background: center / auto 100% url(/images/lavender.jpg), #6b5391;
+}
+
+header h1 {
+  width: var(--width);
+  font-size: calc(var(--width) / 6.25);
+  font-weight: 900;
+  line-height: 1;
+  margin: .5em auto 0;
+  color: white;
+}
+
+header h1 a {
+  color: inherit;
+  text-decoration: inherit;
+  position: relative;
+  bottom: -.45em;
+  transition: bottom .5s;
+}
+
+header h1 a:hover, header h1 a:focus, header h1 a:active {
+  bottom: -.25em;
+}
+
+main {
+  contain: content;
+}
+
+main > *, main > section.footnotes > ol {
+  width: var(--width);
+  margin: 1rem auto;
+}
+
+main h1 {
+  width: 100%;
+  background: bottom .15em center linear-gradient(to top, #0c06, .15em, transparent 0);
+  font-size: 3rem;
+  line-height: .9;
+  margin: 2.5rem 0 1rem;
+  padding: .05em calc((100% - var(--width)) / 2);
+}
+
+main h2, main h3:not(h2 + *) {
+  margin-top: 2rem;
+}
+
+main h3 {
+  font-weight: 500;
+}
+
+main > section.footnotes {
+  width: 100%;
+  border-top: 1px solid var(--black);
+  font-size: smaller;
+  margin: 10rem 0 0;
+  padding: 0 1rem;
+}
+
+aside, blockquote, pre {
+  contain: content;
+  border-radius: .5rem;
+}
+
+aside {
+  background: var(--orange);
+  padding: 0 1rem;
+}
+
+blockquote {
+  background: #0c02;
+  padding: 0 1rem;
+}
+
+pre {
+  background: var(--lavender-light);
+  padding: 1rem;
+  overflow: auto;
+}
+
+pre, code, kbd {
+  font-size: .95em;
+}
+
+small {
+  font-size: .7em;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+main :any-link {
+  text-decoration: none;
+  font-weight: 500;
+  color: var(--purple);
+  transition: all .1s;
+}
+
+main :any-link:hover, main :any-link:focus, main :any-link:active {
+  background: var(--lavender);
+  border-radius: .5rem;
+  box-shadow: 0 0 0 .5rem var(--lavender);
+  color: var(--black);
+  -webkit-tap-highlight-color: transparent;
+}
+
+main :any-link:focus-visible {
+  outline: .1rem solid var(--purple);
+  outline-offset: .5rem;
+}
+
+:target {
+  background: var(--orange);
+  border-radius: .5rem;
+  box-shadow: 0 0 0 .5rem var(--orange);
+}
+
+a.image-box {
+  display: block;
+  margin-top: 1.6rem;
+  margin-bottom: 1.6rem;
+}
+
+a.image-box > * {
+  width: 100%;
+  vertical-align: bottom;
+  border-radius: .5rem;
+}
+
+main > iframe {
+  display: block;
+  width: var(--width);
+  height: calc(var(--width) / (16 / 9));
+}
+
+table {
+  border-collapse: collapse;
+  border: 0 double var(--black);
+  border-width: 3px 0;
+  margin-top: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+td, th {
+  padding: .5rem 1rem 0;
+}
+
+tr:last-child td, tr:last-child th {
+  padding-bottom: .5rem;
+}
+
+thead th {
+  border-bottom: 1px solid var(--black);
+}
+
+sup, sub {
+  line-height: 1;
+}
+
+ul.blog-manifest {
+  list-style: none;
+  padding-left: 0;
+  margin-top: 2rem;
+}
+
+ul.blog-manifest li {
+  margin-top: 1rem;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+}
+
+ul.blog-manifest li > a {
+  order: 1;
+}
+
+ul.blog-manifest li > small {
+  order: 3;
+  text-align: right;
+}
+
+/* Based on a solution by Rúnar Berg: https://stackoverflow.com/a/28097029/617159 */
+ul.blog-manifest li::after {
+  background: radial-gradient(circle, currentcolor 1px, transparent 1px);
+  background-position: center bottom calc((var(--line-height) - 1) / 2 * 100%);
+  background-size: 1ex 4.5px;
+  background-repeat: space no-repeat;
+  content: "\200b";
+  flex-grow: 1;
+  height: calc(var(--line-height) * 1em);
+  order: 2;
+}
