@@ -1,0 +1,103 @@
+<!DOCTYPE html><meta charset="utf-8"><title>Monads in 300 words
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Monads in 300 words</h1><p><small><time datetime="2022-11-04">November 4, 2022</time></small></p><p>Many contemporary languages have one or more of these features:</p>
+<ul>
+<li>Null propagation;</li>
+<li>Async/await;</li>
+<li>List comprehensions.</li>
+</ul>
+<p>In the 90s, programmers observed that all of these can be modeled by a single interface.
+They called the interface <strong>“monad”</strong> after a mathematical concept that looked similar.
+With this interface, they could define a single <a href="https://en.wikibooks.org/wiki/Haskell/do_notation">syntax</a> and <a href="https://hackage.haskell.org/package/base-4.17.0.0/docs/Control-Monad.html#g:4">utility library</a> that covers all three.</p>
+<p>Cute!</p>
+<a class="image-box" href="/images/2022/monad/moe.jpg"><img src="/images/2022/monad/moe.jpg" alt="Nano, a robot girl from the anime Nichijou, saying: “I think that’s moe\!”
+" title=""></a>
+<h2><a href="#why-dont-other-languages-have-monads" aria-hidden="true" class="anchor" id="why-dont-other-languages-have-monads"></a>Why don’t other languages have monads?</h2>
+<p>Good question.</p>
+<ul>
+<li>
+<p><strong>The language cannot express the concept.</strong>
+The monad interface is generic <em>over generic types</em> – the <code>List</code> in <code>List&lt;T&gt;</code>.
+Most languages can’t be generic like this, and the languages that can run into <a href="https://twitter.com/withoutboats/status/1027702531361857536">further problems</a> down the line.</p>
+</li>
+<li>
+<p><strong>The language can already do it some other way.</strong>
+For example, Scheme has <a href="https://courses.cs.washington.edu/courses/cse341/04wi/lectures/15-scheme-continuations.html">first-class continuations</a> that let the user override control flow in a similar way.
+Building monads on top of that would be redundant.</p>
+</li>
+<li>
+<p><strong>The simplification isn’t that large in practice.</strong>
+Most code only deals with a handful of monads.
+So we can just define N syntaxes and call it a day.
+Sure, there might be some duplication here and there – consider <a href="https://doc.rust-lang.org/std/option/enum.Option.html#method.flatten"><code>Option::flatten</code></a> vs <a href="https://doc.rust-lang.org/std/result/enum.Result.html#method.flatten"><code>Result::flatten</code></a> vs <a href="https://doc.rust-lang.org/core/iter/trait.Iterator.html#method.flatten"><code>Iterator::flatten</code></a> – but who cares?</p>
+</li>
+</ul>
+<p>Haskell, a pure functional language with fancy types and a heavy runtime system, is in a perfect position to support monads.
+But other languages have different goals in mind, and those goals might not align in the same way.</p>
+<h2><a href="#should-i-care-about-monads" aria-hidden="true" class="anchor" id="should-i-care-about-monads"></a>Should I care about monads?</h2>
+<p>If you are learning Haskell, or a similar statically-typed functional language, then understanding monads is a necessity.
+(If you’re not, then I recommend it.
+Functional programming is cool!)</p>
+<p>But I don’t think reading tutorials is a good idea.<sup class="footnote-ref"><a href="#fn-hypocrisy" id="fnref-hypocrisy" data-footnote-ref>1</a></sup>
+“Monad” is but a small part of Haskell as a whole.
+Studying it in isolation, and expecting to understand anything, makes as much sense as learning Python through its <a href="https://docs.python.org/3/glossary.html#term-descriptor">descriptor system</a>.</p>
+<p>Instead, <em>write code</em>.</p>
+<p>Play with async I/O.</p>
+<p>Implement some type classes.</p>
+<p>And at some point it’ll all make sense.</p>
+<a class="image-box" href="/images/2022/monad/nya.jpg"><img src="/images/2022/monad/nya.jpg" alt="Hakase, a small girl from the anime Nichijou, in a cat costume.
+" title=""></a>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-hypocrisy">
+<p>No, this article doesn’t count 🙂 <a href="#fnref-hypocrisy" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+</ol>
+</section>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

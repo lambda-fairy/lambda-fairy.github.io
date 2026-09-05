@@ -1,0 +1,126 @@
+<!DOCTYPE html><meta charset="utf-8"><title>[DRAFT] DT Cannon tips
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>DT Cannon tips</h1><p><small>Draft – please do not share</small></p><p>In modern Tetris, the <a href="https://four.lol/methods/dt-cannon#dt-cannon-as-an-opener">DT Cannon</a> opener is a popular way to start the game.
+It’s great for beginners because:</p>
+<ul>
+<li>
+<p>It introduces <strong>T-spin triples</strong> and <strong>counter-clockwise rotation</strong> – two concepts that a beginner might otherwise not be exposed to.</p>
+</li>
+<li>
+<p>It <strong>guarantees 11 attack</strong>.
+For beginners, usually the biggest problem is building enough attack power to knock the opponent out.
+DT Cannon gives them a head start.</p>
+</li>
+<li>
+<p>Unlike more powerful openers, it’s <strong>not an instant KO</strong>.
+So you still have an opportunity to develop fundamental stacking skills, and not use the opener as a crutch.</p>
+</li>
+</ul>
+<p>That said, many resources out there only focus on building the basic shape, and don’t discuss how to apply it in a real game.
+I hope to fill in this gap so you can DT Cannon like a pro 🙂</p>
+<h2><a href="#stack-it-on-the-left" aria-hidden="true" class="anchor" id="stack-it-on-the-left"></a>Stack it on the left</h2>
+<p>Most openers have a mirror image that works in a similar way.
+DT Cannon is no exception – you could build it on the right if you wanted to.</p>
+<p>However, it’s always a better idea to build DT Cannon on the left.
+This is because you can hard drop the first three pieces from their starting positions, without having to move or rotate them:</p>
+<p>TODO image</p>
+<p>(Image courtesy of four.lol.)</p>
+<p>These saved key presses are what make DT Cannon so fast to build, and you’ll lose this benefit if you mirror it.</p>
+<h2><a href="#dont-waste-your-t-pieces" aria-hidden="true" class="anchor" id="dont-waste-your-t-pieces"></a>Don’t waste your T pieces</h2>
+<p>You’ll need to use your first T piece to stack the DT Cannon.
+This is unavoidable – while there is a build that avoids this, it’s rare and not worth learning.</p>
+<p>But there’s no need to waste the second or third T pieces as well.
+You should aim to spin both these pieces into the cannon, and <em>not</em> use them to stack up.
+This is important because:</p>
+<ul>
+<li>
+<p>It will make the <strong>stack too high</strong>.
+DT Cannon is risky to build, as you have to stack quite high before sending the attack.
+If you waste your T pieces – your only way down – you’ll force yourself to stack even higher, and increase the risk of your opponent knocking you out first.</p>
+</li>
+<li>
+<p>It will make it <strong>hard to stack</strong>.
+T pieces tend to make the stack bumpy.<sup class="footnote-ref"><a href="#fn-parity" id="fnref-parity" data-footnote-ref>1</a></sup>
+This is fine when stacking normally, as you have 9 columns of space to work with, but the DT Cannon doesn’t have that much room.
+Moreover, to fix that bumpiness, you’ll often have to waste another T piece as well – further delaying your attack.</p>
+</li>
+</ul>
+<h2><a href="#send-both-t-spins-at-once-if-you-can" aria-hidden="true" class="anchor" id="send-both-t-spins-at-once-if-you-can"></a>Send both T-spins at once (if you can)</h2>
+<p>If you can, consider holding your T piece and sending both the Double and Triple in one go.</p>
+<p>TODO video</p>
+<p>By sending the two attacks consecutively, you increase your 11 attack to 12.</p>
+<p>But don’t insist too hard on this combo.
+If T-spinning early will let you build a flatter stack, then go ahead and do that instead.
+Keeping a clean board is much more important than the 1 extra attack.</p>
+<h2><a href="#watch-out-for-early-spikes" aria-hidden="true" class="anchor" id="watch-out-for-early-spikes"></a>Watch out for early spikes</h2>
+<p>DT Cannon isn’t the only opener out there.
+The <a href="https://four.lol/perfect-clears/opener">Perfect Clear Opener (PCO)</a> is common at beginner ranks as well, and if your opponent hits that 61% success rate, they’ll knock you out before you can send anything back.</p>
+<p>In general, if you know that your opponent has access to a big early attack (PCO or otherwise), avoid DT Cannon.<sup class="footnote-ref"><a href="#fn-wellactually" id="fnref-wellactually" data-footnote-ref>2</a></sup></p>
+<h2><a href="#ignore-the-continuations" aria-hidden="true" class="anchor" id="ignore-the-continuations"></a>Ignore the continuations</h2>
+<p>You might encounter many different ways to keep going after the DT Cannon: “Amemiya Cannon”, “C-Spin”, “Side 4-Wide”…</p>
+<p>However, these continuations are intended for slower games that give you enough time to build them.
+In TETR.IO, where speed is uncapped, you probably won’t get a chance to do any of these before your opponent counterattacks.</p>
+<p>For practical purposes, the only continuation you need to know is:</p>
+<ul>
+<li>Tuck an L piece under the overhang;</li>
+<li>Stack for a Tetris.</li>
+</ul>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-parity">
+<p>The technical term is <em><a href="https://harddrop.com/wiki/Parity">checkerboard parity</a></em>. <a href="#fnref-parity" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-wellactually">
+<p>Technically, if you build the DT Cannon fast enough, you can cancel out the PCO and survive.
+And if your stack is clean and flat enough, it’s possible to tank the Perfect Clear and still end up below the top of the board.
+But these tricks are hard to pull off and I wouldn’t count on them as a beginner. <a href="#fnref-wellactually" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+</ol>
+</section>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

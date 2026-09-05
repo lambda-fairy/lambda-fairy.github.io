@@ -1,0 +1,152 @@
+<!DOCTYPE html><meta charset="utf-8"><title>[DRAFT] Maud: Beyond 1.0
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Maud: Beyond 1.0</h1><p><small>Draft – please do not share</small></p><aside>
+<p>
+<a href="https://maud.lambda.xyz">Maud</a> is a macro for writing HTML.
+Compared to other template engines, Maud offers better type checking and lower runtime overhead.
+</p>
+</aside>
+<p>Maud is old.</p>
+<p><em>Very</em> old.</p>
+<p>When Maud 0.1 was released, over 6 years ago, Rust itself was still in alpha.
+Procedural macros were unstable—not that it mattered, because <em>everything</em> was unstable.</p>
+<p>Each <code>rustup update</code> was filled with anticipation.
+What’s going to break this time?
+Import syntax?
+The <code>Writer</code> trait renamed to <code>Write</code>?<sup class="footnote-ref"><a href="#fn-strange" id="fnref-strange" data-footnote-ref>1</a></sup></p>
+<p>I didn’t realize it back then, but that was a great time to get started.
+Rust was new and exciting.<sup class="footnote-ref"><a href="#fn-exciting" id="fnref-exciting" data-footnote-ref>2</a></sup>
+I could say “blazing fast” and not feel like an idiot.
+Maud could be the most efficient and ergonomic and easy-to-learn compile-time template engine, because it was the <em>only</em> compile-time template engine.
+It was a whole new design space, and I was first.</p>
+<p>But it’s not 2015 anymore.
+Proc macros are stable and easy now, and people have realized that!
+There are <a href="https://crates.io/crates/askama">many</a> <a href="https://sailfish.netlify.app/en/">many</a> <a href="https://crates.io/crates/horrorshow">many</a> great choices around, all with their own particular strengths.
+Even with my bias, I don’t know if I’d recommend Maud today.</p>
+<p>And, to be honest, I’m not sure if the <em>concept</em> of “compile-time template engine” is that valuable anymore.
+Macro magic might <a href="/blog/maud-is-fast/">look great on benchmarks</a>, but at what cost?
+Generating HTML is not your bottleneck.
+But compile times, and the cost of learning new syntax, may very well be.</p>
+<p>Quoth Martin Odersky, the creator of Scala:</p>
+<blockquote>
+<p>bla bla</p>
+</blockquote>
+<p>He’s talking about Scala’s type system, but that complaint could apply just as well to macros.</p>
+<h2><a href="#business-time" aria-hidden="true" class="anchor" id="business-time"></a>Business time</h2>
+<p>But not all hope is lost.</p>
+<p>In business strategy, there’s a technique called <a href="https://en.wikipedia.org/wiki/SWOT_analysis">SWOT analysis</a>: Strengths, Weaknesses, Opportunities, and Threats.
+We’ve discussed at length the Weaknesses and Threats; what about the other two?</p>
+<h3><a href="#strength-small-scale-development" aria-hidden="true" class="anchor" id="strength-small-scale-development"></a><strong>Strength:</strong> Small-scale development</h3>
+<p>This is a complete Maud (and Rouille) app:</p>
+<pre>
+<span style="font-weight:bold;color:#a71d5d;">use </span><span style="color:#323232;">maud::html;
+</span><span style="font-weight:bold;color:#a71d5d;">use </span><span style="color:#323232;">rouille::Response;
+</span><span style="color:#323232;">
+</span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style="font-weight:bold;color:#795da3;">main</span><span style="color:#323232;">() {
+</span><span style="color:#323232;">    rouille::start_server(</span><span style="color:#183691;">&quot;0.0.0.0:80&quot;</span><span style="color:#323232;">, </span><span style="font-weight:bold;color:#a71d5d;">move |</span><span style="color:#323232;">request</span><span style="font-weight:bold;color:#a71d5d;">| </span><span style="color:#323232;">{
+</span><span style="color:#323232;">        Response::html(html! {
+</span><span style="color:#323232;">            p { </span><span style="color:#183691;">&quot;Hello, world!&quot; </span><span style="color:#323232;">}
+</span><span style="color:#323232;">        })
+</span><span style="color:#323232;">    });
+</span><span style="color:#323232;">}
+</span></pre>
+<p>None of the other libraries are this short.
+Askama and Sailfish need a <code>struct</code> declaration and a separate template file.
+Even Horrorshow needs an <code>.into_string()</code> call!</p>
+<p>I found this comment on Reddit:</p>
+<blockquote>
+<p>TODO</p>
+</blockquote>
+<p>I think this captures why people like the library.
+At some point, you’re going to split code into modules, you’re going to bring in other people, and the magic might wear off then.
+But until that happens, you can inline everything and have it fit in a single screen.
+And if your app never gets big—it can stay that way.</p>
+<h3><a href="#opportunity-security-by-design" aria-hidden="true" class="anchor" id="opportunity-security-by-design"></a><strong>Opportunity:</strong> Security by design</h3>
+<p>Rust is known for its commitment to security by design.
+After all, its primary goal is to fix memory safety: the cause of 2 in 3 zero-days in large C and C++ apps.
+And it does that not by layering mitigations, but through a type system that enforces it upfront.</p>
+<p>But this doesn’t have to stop at memory.
+In particular, with web apps, there’s another big security problem: <em>cross-site scripting</em>, or <em>XSS</em>.</p>
+<p>Here’s an example.
+Suppose that your site has a guest book where visitors can leave a friendly message:</p>
+<p>TODO image</p>
+<p>Whatever text they submit would show up on the page:</p>
+<p>TODO image</p>
+<pre>
+<span style="color:#323232;">&lt;</span><span style="color:#63a35c;">p</span><span style="color:#323232;">&gt;What a nice website!&lt;/</span><span style="color:#63a35c;">p</span><span style="color:#323232;">&gt;
+</span></pre>
+<p>But what if someone submits this instead?</p>
+<p>TODO image</p>
+<pre>
+<span style="color:#323232;">&lt;</span><span style="color:#63a35c;">p</span><span style="color:#323232;">&gt;&lt;</span><span style="color:#63a35c;">script</span><span style="color:#323232;">&gt;alert(</span><span style="color:#183691;">&quot;haha! imma steal all your data :3&quot;</span><span style="color:#323232;">);&lt;/</span><span style="color:#63a35c;">script</span><span style="color:#323232;">&gt;&lt;/</span><span style="color:#63a35c;">p</span><span style="color:#323232;">&gt;
+</span></pre>
+<p>Oh no!</p>
+<p>The problem is that HTML doesn’t distinguish between code the <em>developer</em> wrote and code the <em>user</em> wrote.
+If we mix the two, then malicious users can take the role of the developer, and change the page to their liking.</p>
+<p>To mitigate this, most template engines have a basic form of escaping: they defang <code>&lt;</code> into <code>&amp;lt;</code>, <code>&amp;</code> into <code>&amp;amp;</code>, and so on, for every piece of text substituted into the page.</p>
+<p>But while this works most of the time, it doesn’t work everywhere.</p>
+<ul>
+<li></li>
+</ul>
+<p>We can argue that people who make these mistakes just “don’t know web security”, and that they should read the <a href="https://cheatsheetseries.owasp.org/cheatsheets/Cross_Site_Scripting_Prevention_Cheat_Sheet.html">OWASP guide</a> or something.
+But that’s precisely the argument that C and C++ fans use to disparage Rust.
+It shouldn’t take learning 4500 words of rules to write an <abbr title="cross-site-scripting">XSS</abbr>-safe app, just as it shouldn’t take learning <a href="https://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines">100,000 words</a> to write a memory-safe one.
+And while context-aware escaping can be complex, it’s a lot easier than the borrow checker; and like Rust itself, there’s a lot we can do to make it easier to learn.</p>
+<h2><a href="#security-in-the-small" aria-hidden="true" class="anchor" id="security-in-the-small"></a>Security in the small</h2>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-strange">
+<p>I was a strange kid. <a href="#fnref-strange" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-exciting">
+<p>It’s still exciting, but it’s no longer new 🙂 <a href="#fnref-exciting" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+</ol>
+</section>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

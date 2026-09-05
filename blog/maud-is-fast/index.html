@@ -1,0 +1,95 @@
+<!DOCTYPE html><meta charset="utf-8"><title>The fastest template engine in the West
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>The fastest template engine in the West</h1><p><small><time datetime="2016-10-14">October 14, 2016</time></small></p><p>Lately I’ve been working on <a href="https://github.com/lambda-fairy/maud">Maud</a>, an HTML template library for Rust. One of the features that make it special is that it works at <em>compile time</em>. That is, your templates are compiled to plain Rust code, and type-checked and optimized with the rest of your app.</p>
+<p>Among other benefits, this design makes the library <em>fast</em>. Like, really, really fast. To get an idea of how fast it is, take a look at this graph:</p>
+<a class="image-box" href="/images/2016/maud-is-fast.svg"><img src="/images/2016/maud-is-fast.svg" alt="Graph of render times for different template engines
+" title=""></a>
+<p>That’s right. Maud is 69 times faster than Handlebars.<sup class="footnote-ref"><a href="#fn-1" id="fnref-1" data-footnote-ref>1</a></sup></p>
+<p>I know what you’re thinking:</p>
+<ul>
+<li>“Wow… Lambda-san is so attractive, I feel dizzy just thinking about them.”</li>
+<li>“Why is Maud so much faster than the other engines?”</li>
+<li>“Nice.”</li>
+</ul>
+<p>For the sake of professionalism, I will only answer the second question.</p>
+<p>Maud is fast because it <strong>does as little work as possible at runtime</strong>. For example, the following template:</p>
+<pre>
+<span style="color:#323232;">html! {
+</span><span style="color:#323232;">    p { </span><span style="color:#183691;">&quot;Hi, &quot; </span><span style="color:#323232;">(name) </span><span style="color:#183691;">&quot;!&quot; </span><span style="color:#323232;">}
+</span><span style="color:#323232;">}
+</span></pre>
+<p>expands to this Rust code:</p>
+<pre>
+<span style="color:#323232;">{
+</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;">// Allocate a `String` to hold the resulting markup
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">let mut</span><span style="color:#323232;"> __maud_writer </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">::std::string::String::with_capacity(</span><span style="color:#0086b3;">25</span><span style="font-weight:bold;color:#a71d5d;">usize</span><span style="color:#323232;">);
+</span><span style="color:#323232;">    __maud_writer.</span><span style="color:#62a35c;">push_str</span><span style="color:#323232;">(</span><span style="color:#183691;">&quot;&lt;p&gt;Hi, &quot;</span><span style="color:#323232;">);
+</span><span style="color:#323232;">    {
+</span><span style="color:#323232;">        </span><span style="font-style:italic;color:#969896;">// Append the value of `name` to the result, while escaping any
+</span><span style="color:#323232;">        </span><span style="font-style:italic;color:#969896;">// HTML special characters (e.g. `&lt;` → `&amp;lt;`)
+</span><span style="color:#323232;">        </span><span style="font-weight:bold;color:#a71d5d;">use </span><span style="color:#323232;">::maud::RenderOnce;
+</span><span style="color:#323232;">        name.</span><span style="color:#62a35c;">render_once</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">&amp;mut</span><span style="color:#323232;"> __maud_writer)
+</span><span style="color:#323232;">    };
+</span><span style="color:#323232;">    __maud_writer.</span><span style="color:#62a35c;">push_str</span><span style="color:#323232;">(</span><span style="color:#183691;">&quot;!&lt;/p&gt;&quot;</span><span style="color:#323232;">);
+</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;">// Mark the result as valid HTML, so we don&#39;t escape it again
+</span><span style="color:#323232;">    ::maud::PreEscaped(__maud_writer)
+</span><span style="color:#323232;">}
+</span></pre>
+<p>In other words, the resulting code does little more than building a string.</p>
+<p>Compare this to other—more dynamic—template engines, which may encode the input data as JSON, or look up the name of the template in a global registry, or do a variety of other things. These engines are effectively language <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)">interpreters</a>, with all the pros and cons of working that way. And as the benchmark above shows, one of these cons is reduced performance.</p>
+<p>That’s not to say that these dynamic approaches aren’t useful. Speed isn’t the only factor in choosing a template engine; and to be fair, when an average request takes hundreds of milliseconds already, a <em>micro</em>second difference doesn’t matter that much. Other engines also let you edit a template without re-compiling the app, and their syntax can feel more familiar to users of other languages.</p>
+<p>What I do want to show, then, is how design decisions that seem minor at first can have a big impact down the road. I’ve added a bunch of optimizations over the years (some of them stolen from <a href="https://github.com/Stebalien/horrorshow-rs">Horrorshow</a>), but none of them have affected performance that much. The largest difference is in static vs dynamic; the rest is details.</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-1">
+<p>The benchmark code can be found on <a href="https://github.com/lambda-fairy/maud/tree/1bdf6ea06adf4e62cf3b4fe65d1cd086db7ed190/benchmarks">GitHub</a>. <a href="#fnref-1" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+</ol>
+</section>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

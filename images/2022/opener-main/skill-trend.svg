@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800" height="400" version="1.1" viewBox="0 0 211.67 105.83" xmlns="http://www.w3.org/2000/svg">
+  <g stroke-linecap="round" stroke-linejoin="round">
+    <g transform="translate(0,6.3501)" stroke-width="1.0583">
+      <path d="m37.042 19.05v66.41h111.39" fill="none" stop-color="#000000" stroke="#222"/>
+      <text transform="rotate(-90)" x="-52.848938" y="32.361729" fill="#222222" font-family="'Libre Franklin'" font-size="6.35px" font-weight="500" stop-color="#000000" text-align="center" text-anchor="middle">Effectiveness</text>
+      <text x="92.818817" y="94.191666" fill="#222222" font-family="'Libre Franklin'" font-size="6.35px" font-weight="500" stop-color="#000000" text-align="center" text-anchor="middle">Skill</text>
+    </g>
+    <path d="m37.042 87.023 110.33-22.627" fill="none" stop-color="#000000" stroke="#b780ff" stroke-dasharray="4.232, 2.116" stroke-width="1.058"/>
+    <path d="m37.042 91.81c98.747-4.1819 107.14-47.882 110.86-78.461" fill="none" stop-color="#000000" stroke="#0c0" stroke-width="1.058"/>
+    <text x="152.18835" y="65.893311" fill="#b780ff" font-family="'Libre Franklin'" font-size="6.35px" font-weight="bold" stop-color="#000000" stroke-width="1.0583">Opener</text>
+    <text x="152.18835" y="14.034409" fill="#00aa00" font-family="'Libre Franklin'" font-size="6.35px" font-weight="bold" stop-color="#000000" stroke-width="1.0583">Midgame</text>
+  </g>
+</svg>
