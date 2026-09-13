@@ -1,0 +1,109 @@
+<!DOCTYPE html><meta charset="utf-8"><title>[DRAFT] Comments
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Comments</h1><p><small>Draft – please do not share</small></p><pre>
+<span style="font-weight:bold;color:#a71d5d;">if !</span><span style="color:#323232;">literal.</span><span style="color:#62a35c;">ends_with</span><span style="color:#323232;">(</span><span style="color:#183691;">&#39;</span><span style="color:#0086b3;">\n</span><span style="color:#183691;">&#39;</span><span style="color:#323232;">) {
+</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;">// Syntect expects a trailing newline
+</span><span style="color:#323232;">    literal.</span><span style="color:#62a35c;">push</span><span style="color:#323232;">(</span><span style="color:#183691;">&#39;</span><span style="color:#0086b3;">\n</span><span style="color:#183691;">&#39;</span><span style="color:#323232;">);
+</span><span style="color:#323232;">}
+</span></pre>
+<p>Comments are great.
+When there’s a bit of context that isn’t obvious from the code, comments can fill in the gaps.</p>
+<p>But, like anything related to computers, they can be a little cursed.</p>
+<a class="image-box" href="/images/2023/comments/mio.jpg"><img src="/images/2023/comments/mio.jpg" alt="A blue-haired girl swallowing a cat.
+" title=""></a>
+<p>Let me elaborate.</p>
+<h2><a href="#comments-can-be-nested" aria-hidden="true" class="anchor" id="comments-can-be-nested"></a>Comments can be nested</h2>
+<p>In Haskell, a multi-line comment starts with <code>{-</code> and ends with <code>-}</code>.</p>
+<pre>
+<span style="font-style:italic;color:#969896;">{- This is a comment. -}
+</span></pre>
+<p>This syntax can be nested.</p>
+<pre>
+<span style="font-style:italic;color:#969896;">{-
+</span><span style="font-style:italic;color:#969896;">    This is a comment.
+</span><span style="font-style:italic;color:#969896;">        {- This is also a comment. -}
+</span><span style="font-style:italic;color:#969896;">    This is still a comment.
+</span><span style="font-style:italic;color:#969896;">-}
+</span></pre>
+<p>If you don’t consider this surprising, congrats!
+Run away while you still can.</p>
+<p>See, in a traditional language, comments are handled in the <em>tokenizer</em>: a simple, initial pass which splits the source code into little pieces (tokens).
+For simplicity, the tokenizer uses a regular grammar.
+I won’t go into the details here, but in short, this means <strong>no nesting</strong>.</p>
+<p>But Haskell is not a traditional language.
+Many of its design choices – from its custom operators to its lazy evaluation – favor expressiveness over being easy to compile.</p>
+<p>And that’s why C, which trades off in the opposite direction, does <em>not</em> support nested comments.</p>
+<pre>
+<span style="font-style:italic;color:#969896;">/*
+</span><span style="font-style:italic;color:#969896;">    This is a comment.
+</span><span style="font-style:italic;color:#969896;">        /* This is also a comment. */
+</span><span style="color:#323232;">    This is no longer part of a comment, and will cause a syntax error.
+</span><span style="background-color:#f5f5f5;font-weight:bold;color:#b52a1d;">*/</span><span style="color:#323232;">
+</span></pre>
+<p>Whether a language supports nested comments speaks to this fundamental trade-off.
+Do the designers care more about being <em>easy to use</em>, or <em>easy to implement</em>?</p>
+<h2><a href="#comments-are-control-flow" aria-hidden="true" class="anchor" id="comments-are-control-flow"></a>Comments are control flow</h2>
+<h2><a href="#comments-might-not-actually-exist" aria-hidden="true" class="anchor" id="comments-might-not-actually-exist"></a>Comments might not actually exist</h2>
+<p>Enter <a href="https://en.wikipedia.org/wiki/M4_(computer_language)">m4</a>.</p>
+<p>m4, like all old Unix tools, is based on the manipulation of byte streams.
+(<em>Not</em> text, mind you.
+Unix knows nothing about that.)</p>
+<p>Its fundamental – and only – operation is to replace one byte sequence with another.</p>
+<p>If all you have is a hammer, everything looks like a nail.
+If all you have is find-and-replace, then a “comment” is simply a macro that replaces its argument with nothing.</p>
+<p>While m4 does have a built-in <a href="https://www.gnu.org/software/m4/manual/html_node/Dnl.html"><code>dnl</code> (Discard to Next Line)</a>, it’s not fundamental.
+You can define your own macro that does the same thing:</p>
+<pre>
+<span style="color:#323232;">define(mycomment,)
+</span><span style="color:#323232;">
+</span><span style="color:#323232;">mycomment(This is a comment! This is removed from the output!)
+</span><span style="color:#323232;">
+</span><span style="color:#323232;">This is not a comment. This is included in the output.
+</span></pre>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

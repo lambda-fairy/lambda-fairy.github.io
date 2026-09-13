@@ -1,0 +1,110 @@
+<!DOCTYPE html><meta charset="utf-8"><title>New website: Why?
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>New website: Why?</h1><p><small><time datetime="2021-09-09">September 9, 2021</time></small></p><p>I launched my new website this week.
+It’s simpler, nicer to work on, and—in the words of <a href="https://twitter.com/crombird">smlt</a>—“hot”.</p>
+<p>But my <a href="https://web.archive.org/web/20210304054348/https://lambda.xyz/">original website</a> had served me for a long time; and to be honest, it still holds up today.
+Why rewrite it?</p>
+<h2><a href="#technical-reasons" aria-hidden="true" class="anchor" id="technical-reasons"></a>Technical reasons</h2>
+<p>When I built my website in 2013, I used the best tools that I knew of at the time.</p>
+<ul>
+<li>The <a href="https://sass-lang.com/">Sass CSS preprocessor</a> gave me variables and mixins, which let me enforce a consistent color scheme and organize my clearfix hacks.</li>
+</ul>
+<ul>
+<li>The <a href="https://jaspervdj.be/hakyll/">Hakyll static site generator</a> gave me unfettered control over every aspect of the site.
+It was also written in Haskell, which (to my teenage self) was really cool.</li>
+</ul>
+<p>But these value propositions don’t really hold today.</p>
+<ul>
+<li>
+<p>Modern CSS is powerful.
+I can use CSS variables to share colors and fonts.
+Flexbox and Grid let me express the layout I want without resorting to hacks.
+Sass might still be useful for larger sites, but my personal website can thrive on CSS alone.</p>
+</li>
+<li>
+<p>Hakyll isn’t as practical as it used to be.
+With most of my work being in Dart or Rust these days, I’m finding it harder to justify maintaining a Haskell environment just for this one project.</p>
+<p>Moreover, Haskell builds are <em>slow</em>—an order of magnitude slower than C++ or Rust.
+My GitHub Action took <a href="https://github.com/lambda-fairy/lambda-fairy.github.io/actions/runs/1153509822"><em>forty minutes</em></a> to run.
+I expect those build times for an enterprise monolith, not a blog.<sup class="footnote-ref"><a href="#fn-cache" id="fnref-cache" data-footnote-ref>1</a></sup></p>
+<p>Also, I’m old.
+I don’t care about being cool.</p>
+</li>
+</ul>
+<h2><a href="#design-reasons" aria-hidden="true" class="anchor" id="design-reasons"></a>Design reasons</h2>
+<p>But what really got me was the visual design.</p>
+<p>First, the <strong>color scheme</strong>.
+I love purple as much as I did back then, but I’m more picky now.
+The reddish hue felt too bloody, too <em>puce</em>.
+I hate puce.<sup class="footnote-ref"><a href="#fn-puce" id="fnref-puce" data-footnote-ref>2</a></sup></p>
+<p>It was <strong>too minimal</strong>.
+When skeuomorphism was all the rage, that restraint was a breath of fresh air.
+But today, everyone is the same, Lighthouse-optimized, flat color drop shadow neo-grotesque box.
+Apple went from Garamond to Myriad to Helvetica.
+Monochrome just isn’t cool anymore.</p>
+<p>But most importantly, that design <strong>doesn’t represent the person I am now</strong>.
+The 2021 me is quiet confidence.
+Daisy chains and amethyst rings.
+They’re never in the spotlight, but everyone knows who they are.
+The scent of lavender fills the room.</p>
+<a class="image-box" href="https://commons.wikimedia.org/wiki/File:Snowshil-Lavender.jpg"><img src="/images/2021/750px-Snowshil-Lavender.jpg" alt="A field of lavender.
+" title=""></a>
+<a href=""></a>
+<p>In my next post, I’ll talk about the features of this new site.</p>
+<section class="footnotes" data-footnotes>
+<ol>
+<li id="fn-cache">
+<p>Before you suggest a cache: I update this blog so infrequently that by the time I get to use a cached build, it would be out of date. <a href="#fnref-cache" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="1" aria-label="Back to reference 1">↩</a></p>
+</li>
+<li id="fn-puce">
+<p>Who names a color after flea vomit? Seriously. <a href="#fnref-puce" class="footnote-backref" data-footnote-backref data-footnote-backref-idx="2" aria-label="Back to reference 2">↩</a></p>
+</li>
+</ol>
+</section>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

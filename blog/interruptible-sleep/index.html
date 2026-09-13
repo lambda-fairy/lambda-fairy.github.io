@@ -1,0 +1,88 @@
+<!DOCTYPE html><meta charset="utf-8"><title>Interruptible sleep in Rust
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Interruptible sleep in Rust</h1><p><small><time datetime="2017-03-12">March 12, 2017</time></small></p><p>In my projects, I’ve often wanted to put a thread to sleep for some fixed duration, such that it can be woken up early by another thread.</p>
+<p>My first instinct was to raise a Unix signal and catch the resulting <code>EINTR</code> in the receiving thread. But the <code>sleep()</code> function in Rust loops on <code>EINTR</code> by default; and even if it didn’t, this solution still wouldn’t be portable.</p>
+<p>The solution I settled on uses <a href="https://doc.rust-lang.org/std/thread/fn.park_timeout.html"><code>std::thread::park_timeout()</code></a>. This function blocks until another thread unblocks it, or some amount of time has passed, whichever comes first. This behavior is perfect for my use case.</p>
+<p>Here’s an example that uses <code>park_timeout()</code> to implement a polling loop. Along with an atomic “keep going” flag, this allows for stopping a worker thread in a controlled way.</p>
+<pre>
+<span style="font-weight:bold;color:#a71d5d;">use </span><span style="color:#323232;">std::sync::Arc;
+</span><span style="font-weight:bold;color:#a71d5d;">use </span><span style="color:#323232;">std::sync::atomic::{AtomicBool, Ordering};
+</span><span style="font-weight:bold;color:#a71d5d;">use </span><span style="color:#323232;">std::thread;
+</span><span style="font-weight:bold;color:#a71d5d;">use </span><span style="color:#323232;">std::time::Duration;
+</span><span style="color:#323232;">
+</span><span style="font-weight:bold;color:#a71d5d;">fn </span><span style="font-weight:bold;color:#795da3;">main</span><span style="color:#323232;">() {
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">let</span><span style="color:#323232;"> keep_going </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">Arc::new(AtomicBool::new(</span><span style="color:#0086b3;">true</span><span style="color:#323232;">));
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">let</span><span style="color:#323232;"> worker </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#323232;">{
+</span><span style="color:#323232;">        </span><span style="font-weight:bold;color:#a71d5d;">let</span><span style="color:#323232;"> keep_going </span><span style="font-weight:bold;color:#a71d5d;">=</span><span style="color:#323232;"> keep_going.</span><span style="color:#62a35c;">clone</span><span style="color:#323232;">();
+</span><span style="color:#323232;">        thread::spawn(</span><span style="font-weight:bold;color:#a71d5d;">move || loop </span><span style="color:#323232;">{
+</span><span style="color:#323232;">            </span><span style="font-weight:bold;color:#a71d5d;">if !</span><span style="color:#323232;">keep_going.</span><span style="color:#62a35c;">load</span><span style="color:#323232;">(Ordering::SeqCst) { </span><span style="font-weight:bold;color:#a71d5d;">break</span><span style="color:#323232;">; }
+</span><span style="color:#323232;">            thread::park_timeout(Duration::from_secs(</span><span style="color:#0086b3;">5</span><span style="color:#323232;">));
+</span><span style="color:#323232;">            </span><span style="font-weight:bold;color:#a71d5d;">if !</span><span style="color:#323232;">keep_going.</span><span style="color:#62a35c;">load</span><span style="color:#323232;">(Ordering::SeqCst) { </span><span style="font-weight:bold;color:#a71d5d;">break</span><span style="color:#323232;">; }
+</span><span style="color:#323232;">            println!(</span><span style="color:#183691;">&quot;expensive processing begin!!&quot;</span><span style="color:#323232;">);
+</span><span style="color:#323232;">            </span><span style="font-style:italic;color:#969896;">// An expensive operation that can&#39;t be cancelled
+</span><span style="color:#323232;">            thread::sleep(Duration::from_secs(</span><span style="color:#0086b3;">2</span><span style="color:#323232;">));
+</span><span style="color:#323232;">            println!(</span><span style="color:#183691;">&quot;expensive processing finish!!!&quot;</span><span style="color:#323232;">);
+</span><span style="color:#323232;">        })
+</span><span style="color:#323232;">    };
+</span><span style="color:#323232;">
+</span><span style="color:#323232;">    println!(</span><span style="color:#183691;">&quot;press &lt;enter&gt; to stop&quot;</span><span style="color:#323232;">);
+</span><span style="color:#323232;">    </span><span style="font-weight:bold;color:#a71d5d;">let mut</span><span style="color:#323232;"> dummy </span><span style="font-weight:bold;color:#a71d5d;">= </span><span style="color:#0086b3;">String</span><span style="color:#323232;">::new();
+</span><span style="color:#323232;">    std::io::stdin().</span><span style="color:#62a35c;">read_line</span><span style="color:#323232;">(</span><span style="font-weight:bold;color:#a71d5d;">&amp;mut</span><span style="color:#323232;"> dummy).</span><span style="color:#62a35c;">unwrap</span><span style="color:#323232;">();
+</span><span style="color:#323232;">
+</span><span style="color:#323232;">    keep_going.</span><span style="color:#62a35c;">store</span><span style="color:#323232;">(</span><span style="color:#0086b3;">false</span><span style="color:#323232;">, Ordering::SeqCst);
+</span><span style="color:#323232;">    worker.</span><span style="color:#62a35c;">thread</span><span style="color:#323232;">().</span><span style="color:#62a35c;">unpark</span><span style="color:#323232;">();
+</span><span style="color:#323232;">
+</span><span style="color:#323232;">    println!(</span><span style="color:#183691;">&quot;waiting for worker to finish&quot;</span><span style="color:#323232;">);
+</span><span style="color:#323232;">    worker.</span><span style="color:#62a35c;">join</span><span style="color:#323232;">().</span><span style="color:#62a35c;">unwrap</span><span style="color:#323232;">();
+</span><span style="color:#323232;">
+</span><span style="color:#323232;">    println!(</span><span style="color:#183691;">&quot;bye!!! ^_^&quot;</span><span style="color:#323232;">);
+</span><span style="color:#323232;">}
+</span><span style="color:#323232;">
+</span></pre>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

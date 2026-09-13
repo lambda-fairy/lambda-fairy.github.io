@@ -1,0 +1,48 @@
+<!DOCTYPE html><meta charset="utf-8"><title>lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Blog</h1><ul class="blog-manifest"><li><a href="/blog/casino/">At the casino</a> <small><time datetime="2023-07-29">July 29, 2023</time></small></li><li><a href="/blog/opener-main/">Opener mains considered harmful</a> <small><time datetime="2022-12-10">December 10, 2022</time></small></li><li><a href="/blog/monads/">Monads in 300 words</a> <small><time datetime="2022-11-04">November 4, 2022</time></small></li><li><a href="/blog/game-engine-trap/">The game engine trap</a> <small><time datetime="2021-12-15">December 15, 2021</time></small></li><li><a href="/blog/new-website-part-2/">New website: Frontend</a> <small><time datetime="2021-09-26">September 26, 2021</time></small></li><li><a href="/blog/new-website-part-1/">New website: Why?</a> <small><time datetime="2021-09-09">September 9, 2021</time></small></li><li><a href="/blog/rusts-fatal-flaw/">Rust’s fatal flaw</a> <small><time datetime="2017-04-01">April 1, 2017</time></small></li><li><a href="/blog/chunky-bacon/">Splitting a list into chunks with unfoldr</a> <small><time datetime="2017-03-13">March 13, 2017</time></small></li><li><a href="/blog/interruptible-sleep/">Interruptible sleep in Rust</a> <small><time datetime="2017-03-12">March 12, 2017</time></small></li><li><a href="/blog/if-chain/">Announcing <code>if_chain</code></a> <small><time datetime="2016-12-29">December 29, 2016</time></small></li><li><a href="/blog/poles/">Poles</a> <small><time datetime="2016-10-28">October 28, 2016</time></small></li><li><a href="/blog/maud-is-fast/">The fastest template engine in the West</a> <small><time datetime="2016-10-14">October 14, 2016</time></small></li><li><a href="/blog/https/">HTTPS!</a> <small><time datetime="2014-10-05">October 5, 2014</time></small></li><li><a href="/blog/hackage-part-4/">Hackage update, part 4</a> <small><time datetime="2014-08-30">August 30, 2014</time></small></li><li><a href="/blog/hackage-part-3/">Hackage update, part 3</a> <small><time datetime="2014-07-09">July 9, 2014</time></small></li><li><a href="/blog/crystal-caves/">The Crystal Caves</a> <small><time datetime="2014-05-20">May 20, 2014</time></small></li><li><a href="/blog/hackage-part-2/">Hackage update, part 2</a> <small><time datetime="2014-05-13">May 13, 2014</time></small></li><li><a href="/blog/hello-gsoc/">Hello, GSoC!</a> <small><time datetime="2014-04-26">April 26, 2014</time></small></li><li><a href="/blog/twelve-inches/">Shooting yourself in the foot</a> <small><time datetime="2013-07-24">July 24, 2013</time></small></li><li><a href="/blog/first-post/">First post</a> <small><time datetime="2013-06-12">June 12, 2013</time></small></li></ul></main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>

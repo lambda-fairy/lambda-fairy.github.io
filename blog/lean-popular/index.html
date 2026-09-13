@@ -1,0 +1,89 @@
+<!DOCTYPE html><meta charset="utf-8"><title>[DRAFT] Why is Lean popular?
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Why is Lean popular?</h1><p><small>Draft – please do not share</small></p><p>In recent years, the <a href="https://lean-lang.org/">Lean theorem prover</a>, and its flagship mathematics library <a href="https://leanprover-community.github.io/">mathlib</a>, have seen tremendous growth:</p>
+<a class="image-box" href="https://leanprover-community.github.io/mathlib_stats.html"><img src="/images/2024/lean-popular/lean-number-of-files.png" alt="Number of files in mathlib, showing a steady upward trend, ending at over 4000 in January 2024.
+" title=""></a>
+<a href=""></a>
+<p>But Lean is not the only theorem prover out there.
+Why has it caught so much attention where its peers—Agda, Coq, Isabelle, and others—have not?</p>
+<h2><a href="#lean-is-new" aria-hidden="true" class="anchor" id="lean-is-new"></a>Lean is new</h2>
+<p>Lean and mathlib are relatively new.
+Agda, Coq, and Isabelle are much older, and have many external users that depend on them.
+This means that Lean maintainers can experiment, and make sweeping changes, in a way that these other systems cannot.</p>
+<p>This approach is not without drawbacks.
+In particular, it can be difficult to work on projects depending on Lean and mathlib, since they change so often.
+It’s an open question how we can balance those needs while allowing Lean to improve.</p>
+<h2><a href="#mathlib-is-a-monorepo" aria-hidden="true" class="anchor" id="mathlib-is-a-monorepo"></a>Mathlib is a monorepo</h2>
+<p>Another factor is that mathlib is a <a href="https://en.wikipedia.org/wiki/Monorepo">monorepo</a>—that is, everyone collaborates on one big repository.</p>
+<p>For formalization, the biggest benefit of a monorepo is <strong>reuse</strong>.
+A typical proof depends on a web of definitions and lemmas.
+In contemporary mathematics, which often bridges many disciplines, this web can be very broad.
+With a monorepo, it’s easy to draw upon (and contribute to) the code that others have built, instead of having to dig through GitHub—or worse, re-coding it all ourselves.</p>
+<h2><a href="#lean-isnt-just-for-type-theorists" aria-hidden="true" class="anchor" id="lean-isnt-just-for-type-theorists"></a>Lean isn’t just for type theorists</h2>
+<p>Lean’s narrative presents itself as a tool for <em>all</em> mathematicians, not only those interested in formalization.
+You can see this in Kevin Buzzard’s blog, where he talks about various formalization concepts (like <a href="https://xenaproject.wordpress.com/2021/02/18/formalising-mathematics-workshop-5-filters/">filters</a> or <a href="https://xenaproject.wordpress.com/2020/07/05/division-by-zero-in-type-theory-a-faq/">division by zero</a>) in general mathematical terms, with no mention of type theory at all.</p>
+<p>This contrasts with the approach taken by other proof assistants, like Coq.
+While Coq and Lean have similar foundations in type theory, they are <a href="https://artagnon.com/computing/coq/leancoq">completely different in culture</a>.</p>
+<p>Coq users care a lot about type system properties such as how every expression has a unique normal form (“canonicity”).
+They spend much time exploring systems, like <a href="https://homotopytypetheory.org/coq/">homotopy type theory</a>, that extend what’s possible while respecting these properties.</p>
+<p>On the other hand, Lean users see the type system merely as a tool to formalize mathematics.
+They’re willing to compromise any type theoretic properties (except <a href="https://en.wikipedia.org/wiki/Soundness">soundness</a>) if it lets them code faster.
+Coq’s approach might be cleaner in the long run, but Lean’s compromises let us do mathematics now.</p>
+<h2><a href="#lean-has-a-supportive-community" aria-hidden="true" class="anchor" id="lean-has-a-supportive-community"></a>Lean has a supportive community</h2>
+<p>But perhaps the most important factor is how Lean welcomes beginners.</p>
+<p>Its <a href="https://leanprover.zulipchat.com/">community chat room</a> is very active, and experienced members take the time to answer questions from newbies.
+Indeed, maintainer Patrick Massot calls this out as a strength:</p>
+<blockquote>
+<p>We can spend ages describing everything that is nice in Lean, and compare it to what we think we know about the other proof assistants.
+But the actual reason why Kevin and I are here is that we came to Gitter (that we used to chat before Zulip) and Johannes Hölzl and especially Mario Carneiro spent days answering all our dumb questions until we started to understand something.
+<a href="https://leanprover.zulipchat.com/#narrow/stream/113488-general/topic/CICM.202020/near/206517172">We both tried Coq before, and it lacked a Mario.</a></p>
+</blockquote>
+<a class="image-box" href="https://commons.wikimedia.org/wiki/File:Jacaranda_mimosifolia_3994.jpg"><img src="/images/2024/jacaranda.jpg" alt="Jacaranda tree
+" title=""></a>
+<a href=""></a></main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>
