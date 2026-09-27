@@ -1,0 +1,122 @@
+<!DOCTYPE html><meta charset="utf-8"><title>New website: Frontend
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>New website: Frontend</h1><p><small><time datetime="2021-09-26">September 26, 2021</time></small></p><p><em>This is part 2 of a trilogy.
+You might like to read <a href="/blog/new-website-part-1/">part 1</a>.</em></p>
+<p>In this blog post, I’ll point out some of the features—both visible and less visible—in the user-facing part of the redesign.</p>
+<h2><a href="#black-is-the-new-black" aria-hidden="true" class="anchor" id="black-is-the-new-black"></a>Black is the new black</h2>
+<p>This text might appear black, but it’s actually a very dark gray.
+The tweak helps take the edge off the extreme contrast that black-on-white would otherwise have.
+You can see the <a href="https://material.io/design/color/text-legibility.html#text-backgrounds">Material Design</a> guidelines make the same suggestion.</p>
+<p>Accessibility advocates might raise concerns about the readability of such grays.
+A <a href="https://www.wired.com/2016/10/how-the-web-became-unreadable/">2016 WIRED article</a> bemoans the rise of gray text, and how it has made the web unusable for its author.</p>
+<p>But those concerns are for sites which take the idea too far.
+A pinch of gray is unlikely to make the text unreadable.
+Indeed, the “87% black” used here has a contrast ratio of <a href="https://webaim.org/resources/contrastchecker/?fcolor=222222&amp;bcolor=FFFFFF">15.9:1</a>—much higher than the 7:1 set by WCAG AAA.</p>
+<h2><a href="#a-variety-of-weights" aria-hidden="true" class="anchor" id="a-variety-of-weights"></a>A variety of weights</h2>
+<p>I use <a href="https://fonts.google.com/specimen/Libre+Franklin">Libre Franklin</a> for the font, which provides many options for weight, or thickness.
+The design makes good use of this flexibility:</p>
+<ul>
+<li>For the <strong>header</strong>, a thick black establishes hierarchy.</li>
+<li><strong>Inline links</strong> are given medium weight, so that they stand out from surrounding text but not as much as bold.</li>
+<li>Similarly, the <strong>date indicator</strong> has medium weight to compensate for its smaller size.</li>
+</ul>
+<p>Libre Franklin is a <a href="https://web.dev/variable-fonts/">variable font</a>, so it offers hundreds of weights beyond the standard nine.
+I haven’t found a use for these “in-between” weights yet, but it’s definitely something worth exploring in the future.</p>
+<h2><a href="#sexy-dots" aria-hidden="true" class="anchor" id="sexy-dots"></a>Sexy dots</h2>
+<p>On the <a href="/">home page</a>, each title is connected to its post date by a row of dots.
+These are not images; they’re built from pure CSS.</p>
+<p>Thank you to Rúnar Berg, from whose <a href="https://stackoverflow.com/a/28097029/617159">Stack Overflow answer</a> I drew heavily.</p>
+<h2><a href="#responsive-design-without-media-queries" aria-hidden="true" class="anchor" id="responsive-design-without-media-queries"></a>Responsive design without <code>@media</code> queries</h2>
+<p>Traditionally, to support both mobile and desktop form factors, designers would write two versions of the stylesheet—one for large screens, and one for small:</p>
+<pre>
+<span style="color:#323232;">:root {
+</span><span style="color:#323232;">    </span><span style="color:#0086b3;">font-size</span><span style="color:#323232;">: </span><span style="color:#0086b3;">20</span><span style="font-weight:bold;color:#a71d5d;">px</span><span style="color:#323232;">;
+</span><span style="color:#323232;">}
+</span><span style="color:#323232;">
+</span><span style="font-weight:bold;color:#a71d5d;">@media </span><span style="color:#323232;">(</span><span style="color:#0086b3;">max-width</span><span style="color:#323232;">: </span><span style="color:#0086b3;">800</span><span style="font-weight:bold;color:#a71d5d;">px</span><span style="color:#323232;">) {
+</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;">/* Use a smaller font on mobile */
+</span><span style="color:#323232;">    :root {
+</span><span style="color:#323232;">        </span><span style="color:#0086b3;">font-size</span><span style="color:#323232;">: </span><span style="color:#0086b3;">16</span><span style="font-weight:bold;color:#a71d5d;">px</span><span style="color:#323232;">;
+</span><span style="color:#323232;">    }
+</span><span style="color:#323232;">}
+</span></pre>
+<p>While this works, it creates a sudden jump in the boundary between the two sizes.
+It’s also more effort to keep the two versions in sync.</p>
+<p>Modern CSS provides an alternative approach.
+With viewport units and the <code>clamp</code> function, you can <a href="https://css-tricks.com/min-max-and-clamp-are-css-magic/">interpolate</a> between the large and small designs, creating a seamless transition between them:</p>
+<pre>
+<span style="color:#323232;">:root {
+</span><span style="color:#323232;">    </span><span style="font-style:italic;color:#969896;">/* Set font size to 4% of screen width, with a minimum
+</span><span style="font-style:italic;color:#969896;">       of 16px and maximum of 20px */
+</span><span style="color:#323232;">    </span><span style="color:#0086b3;">font-size</span><span style="color:#323232;">: clamp(</span><span style="color:#0086b3;">16</span><span style="font-weight:bold;color:#a71d5d;">px</span><span style="color:#323232;">, </span><span style="color:#0086b3;">4</span><span style="font-weight:bold;color:#a71d5d;">vw</span><span style="color:#323232;">, </span><span style="color:#0086b3;">20</span><span style="font-weight:bold;color:#a71d5d;">px</span><span style="color:#323232;">);
+</span><span style="color:#323232;">}
+</span></pre>
+<p>My website uses this technique extensively.
+If you’re on desktop, resize the browser window.
+Watch the layout shrink and grow to the available space.</p>
+<h2><a href="#keyboard-accessibility" aria-hidden="true" class="anchor" id="keyboard-accessibility"></a>Keyboard accessibility</h2>
+<p>When you use <kbd>Tab</kbd> to navigate through the page, the links will pop out as though selected via mouse.
+This is implemented by the CSS <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/:focus"><code>:focus</code></a> selector.</p>
+<p>It’s a minor detail, but one that many designers overlook.</p>
+<h2><a href="#peek-a-boo" aria-hidden="true" class="anchor" id="peek-a-boo"></a>Peek-a-boo!</h2>
+<p>Hover (or long-press) on the “lambda fairy” at the top of the page.
+Surprise!</p>
+<p>This was my favorite feature of my old site, and I’m proud to have it on the redesign too 🙂</p>
+<h2><a href="#-and-many-more" aria-hidden="true" class="anchor" id="-and-many-more"></a>… and many more</h2>
+<p>This is far from an extensive list.
+There are many other details that I don’t have space to cover, such as:</p>
+<ul>
+<li>Using <code>contain</code> to disable margin collapse;</li>
+<li>Setting a fallback background color behind the main image;</li>
+<li>Reducing the <code>line-height</code> of super- and subscripts;</li>
+<li>Footnote styles.</li>
+</ul>
+<p>Please let me know if you’d like me to deep dive into any of these!</p>
+<p>In my next—and hopefully final—post, I’ll walk through how the site is built and deployed.</p>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>
