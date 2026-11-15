@@ -1,7 +1,7 @@
 use anyhow::{Context, Result};
 use comrak::{
     nodes::{AstNode, NodeHeading, NodeValue},
-    Arena, ComrakOptions,
+    Arena, Options,
 };
 use once_cell::sync::Lazy;
 use std::{fs, path::Path};
@@ -13,7 +13,7 @@ pub struct Page<'a> {
 }
 
 impl<'a> Page<'a> {
-    pub fn load(arena: &'a Arena<AstNode<'a>>, path: impl AsRef<Path>) -> Result<Self> {
+    pub fn load(arena: &'a Arena<'a>, path: impl AsRef<Path>) -> Result<Self> {
         let path = path.as_ref();
         let buffer = fs::read_to_string(path)?;
         let content = comrak::parse_document(arena, &buffer, &COMRAK_OPTIONS);
@@ -38,12 +38,12 @@ impl<'a> Page<'a> {
     }
 }
 
-pub static COMRAK_OPTIONS: Lazy<ComrakOptions> = Lazy::new(|| {
-    let mut options = ComrakOptions::default();
+pub static COMRAK_OPTIONS: Lazy<Options> = Lazy::new(|| {
+    let mut options = Options::default();
     options.extension.table = true;
-    options.extension.header_ids = Some("".to_string());
+    options.extension.header_id_prefix = Some("".to_string());
     options.extension.footnotes = true;
     options.parse.smart = true;
-    options.render.unsafe_ = true;
+    options.render.r#unsafe = true;
     options
 });

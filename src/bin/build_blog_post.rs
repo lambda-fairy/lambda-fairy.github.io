@@ -54,7 +54,8 @@ fn highlight_code<'a>(root: &'a AstNode<'a>) {
     let theme = &ts.themes["InspiredGitHub"];
     for node in root.descendants() {
         let mut data = node.data.borrow_mut();
-        if let NodeValue::CodeBlock(NodeCodeBlock { info, literal, .. }) = &mut data.value {
+        if let NodeValue::CodeBlock(code_block) = &mut data.value {
+            let NodeCodeBlock { info, literal, .. } = &mut **code_block;
             let syntax = info
                 .split(',')
                 .map(str::trim)
@@ -100,6 +101,7 @@ fn expand_images<'a>(root: &'a AstNode<'a>) {
                 literal: html.into_string(),
                 ..Default::default()
             });
+            node.children().for_each(|child| child.detach());
         }
     }
 }

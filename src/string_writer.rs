@@ -1,6 +1,13 @@
-use std::{io, str};
+use std::{fmt, io, str};
 
 pub struct StringWriter<'a>(pub &'a mut String);
+
+impl fmt::Write for StringWriter<'_> {
+    fn write_str(&mut self, s: &str) -> fmt::Result {
+        self.0.push_str(s);
+        Ok(())
+    }
+}
 
 impl io::Write for StringWriter<'_> {
     fn write(&mut self, buf: &[u8]) -> io::Result<usize> {
