@@ -2,7 +2,7 @@ use chrono::NaiveDate;
 use comrak::nodes::AstNode;
 use maud::{html, Markup, PreEscaped, Render, DOCTYPE};
 
-use crate::{page::COMRAK_OPTIONS, string_writer::StringWriter};
+use crate::page::COMRAK_OPTIONS;
 
 pub fn base(head_title: Option<String>, main: Markup) -> Markup {
     html! {
@@ -105,7 +105,7 @@ pub struct Comrak<'a>(pub &'a AstNode<'a>);
 
 impl Render for Comrak<'_> {
     fn render_to(&self, buffer: &mut String) {
-        comrak::format_html(self.0, &COMRAK_OPTIONS, &mut StringWriter(buffer)).unwrap();
+        comrak::format_html(self.0, &COMRAK_OPTIONS, buffer).unwrap();
     }
 }
 
@@ -116,7 +116,7 @@ pub struct ComrakRemovePTags<'a>(pub &'a AstNode<'a>);
 impl Render for ComrakRemovePTags<'_> {
     fn render(&self) -> Markup {
         let mut buffer = String::new();
-        comrak::format_html(self.0, &COMRAK_OPTIONS, &mut StringWriter(&mut buffer)).unwrap();
+        comrak::format_html(self.0, &COMRAK_OPTIONS, &mut buffer).unwrap();
         assert!(buffer.starts_with("<p>") && buffer.ends_with("</p>\n"));
         PreEscaped(
             buffer
@@ -129,7 +129,7 @@ impl Render for ComrakRemovePTags<'_> {
 
 pub fn comrak_to_text<'a>(content: &'a AstNode<'a>) -> String {
     let mut buffer = String::new();
-    comrak::format_commonmark(content, &COMRAK_OPTIONS, &mut StringWriter(&mut buffer)).unwrap();
+    comrak::format_commonmark(content, &COMRAK_OPTIONS, &mut buffer).unwrap();
     buffer
 }
 
