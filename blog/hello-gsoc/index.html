@@ -1,0 +1,53 @@
+<!DOCTYPE html><meta charset="utf-8"><title>Hello, GSoC\!
+ 〜 lambda fairy</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Libre+Franklin:ital,wght@0,400;0,500;0,700;0,900;1,400;1,500;1,700"><link rel="stylesheet" href="/styles.css"><meta name="theme-color" content="#6b5391"><meta name="viewport" content="width=device-width"><header><h1><a href="/">lambda fairy</a><script>
+                        const headerLink = document.currentScript.previousElementSibling;
+                        headerLink.addEventListener('click', () => {
+                            const bottom = window.getComputedStyle(headerLink).getPropertyValue('bottom');
+                            headerLink.style.bottom = bottom;
+                            sessionStorage.setItem('headerClicked', bottom);
+                        });
+                        const previousBottom = sessionStorage.getItem('headerClicked');
+                        if (previousBottom) {
+                            sessionStorage.removeItem('headerClicked');
+                            headerLink.style.bottom = previousBottom;
+                            headerLink.style.transition = 'none';
+                            setTimeout(() => {
+                                headerLink.style.bottom = '';
+                                headerLink.style.transition = '';
+                            });
+                        }
+                    </script></h1></header><main><h1>Hello, GSoC!</h1><p><small><time datetime="2014-04-26">April 26, 2014</time></small></p><p>A few days ago, my proposal, <a href="https://docs.google.com/document/d/1bcDiudULtaz3NFCqTHXD2WU6Ighsm199D7ojfS8quVI/edit">“Flesh out features of Hackage 2.0”</a>, was accepted into this year’s <a href="https://www.google-melange.com/gsoc/homepage/google/gsoc2014">Google Summer of Code</a> – hooray!</p>
+<p>In case you’re wondering: <em>Hackage</em> is a repository of software for the <em>Haskell</em> programming language. My project aims to improve parts of the Hackage interface, to make various features easier to use.</p>
+<p>I’ll post updates semi-regularly to <a href="https://lambda.xyz/blog/">this very blog</a>, so stay tuned!</p>
+<p><a href="https://www.youtube.com/watch?v=MU4HMhic6AU"><em>*squee*</em></a></p>
+</main><script>
+                async function inlineSVG(imgElement) {
+                    const altText = imgElement.alt;
+                    const placeholder = document.createElement('div');
+                    imgElement.replaceWith(placeholder);
+                    try {
+                        const text = await (await fetch(imgElement.src)).text();
+                        const svgElement = new DOMParser().parseFromString(text, 'image/svg+xml').rootElement;
+                        svgElement.removeAttribute('width');
+                        svgElement.removeAttribute('height');
+                        svgElement.prepend(createSVGTitle(altText));
+                        placeholder.replaceWith(svgElement);
+                    } catch (e) {
+                        console.error(e);
+                        placeholder.replaceWith(imgElement);
+                    }
+                }
+                function createSVGTitle(text) {
+                    const element = document.createElementNS('http://www.w3.org/2000/svg', 'title');
+                    element.textContent = text;
+                    return element;
+                }
+                for (const imgElement of [...document.getElementsByTagName('img')]) {
+                    const src = imgElement.src;
+                    if (!src.endsWith('.svg')) continue;
+                    if (new URL(src).host !== location.host) continue;
+                    inlineSVG(imgElement);
+                }
+            </script>
+<script src="//static.getclicky.com/js"></script><script>try{ clicky.init(100874553); }catch(e){}</script>
+<noscript><p><img alt="" width="1" height="1" src="//in.getclicky.com/100874553ns.gif"></p></noscript>
